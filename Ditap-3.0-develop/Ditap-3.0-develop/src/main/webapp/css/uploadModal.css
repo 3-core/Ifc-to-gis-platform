@@ -1,0 +1,141 @@
+#upload_modal_button {
+    background-color: #dbe0e2;
+    cursor: pointer margin: 20px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#upload_modal_button:hover {
+    background-color: #efeded;
+}
+
+.upload_modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.upload_modal_content {
+    background-color: #141C26;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#file_input {
+    display: none;
+}
+
+#upload_file_input {
+    margin: 10px 0;
+    font-size: 13px;
+    padding: 10px;
+    background-color: #dbe0e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#upload_file_input:hover {
+    background-color: #efeded;
+}
+
+#file_name {
+    margin-top: 10px;
+}
+
+#upload_button {
+    margin: 10px 0;
+    font-size: 13px;
+    padding: 10px;
+    background-color: #dbe0e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#upload_button:hover {
+    background-color: #efeded;
+}
+
+.upload_modal_close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.upload_modal_close:hover,
+.upload_modal_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.file_input_div {
+    color: white;
+    font-size: 15px;
+    margin: 8px;
+    padding-top: 5px;
+    padding-left: 3px;
+    min-height: 28px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(128, 128, 128, 0.5);
+}
+
+#uploading-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#uploading-text {
+    color: white;
+    font-size: 17px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

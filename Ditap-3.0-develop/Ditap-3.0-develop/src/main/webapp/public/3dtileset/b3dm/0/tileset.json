@@ -1,0 +1,20 @@
+{
+  "asset": {
+    "version": "0.0",
+    "gltfUpAxis": "Z"
+  },
+  "geometricError": 500,
+  "root": {
+    "boundingVolume": { "region": [ 2.2499786450519688, 0.6131714881834069, 2.2499873632464884, 0.6131783575687607, -0.000005, 9.529995 ] },
+    "refine": "ADD",
+    "geometricError": 500,
+    "children": [
+      {
+        "boundingVolume": { "region": [ 2.2499786450519688, 0.6131714881834069, 2.2499873632464884, 0.6131783575687607, -0.000005, 9.529995 ] },
+        "geometricError": 500,
+        "refine": "REPLACE",
+        "content": { "uri": "0-0/tileset.json" }
+      }
+    ]
+  }
+}

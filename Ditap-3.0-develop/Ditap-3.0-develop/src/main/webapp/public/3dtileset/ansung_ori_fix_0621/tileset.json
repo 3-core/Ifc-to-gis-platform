@@ -1,0 +1,245 @@
+{
+    "asset": {
+        "version": "0.0",
+        "tilesetVersion": "1.0.0-heliosen",
+        "gltfUpAxis": "Z"
+    },
+    "geometricError": 500,
+    "root": {
+        "boundingVolume": {
+            "region": [
+                2.221687490159303,
+                0.6468931672552684,
+                2.221788397179906,
+                0.6469750649563532,
+                56.999939,
+                89.999847
+            ]
+        },
+        "refine": "ADD",
+        "geometricError": 500,
+        "children": [
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.2217301819957664,
+                        0.6468957655904432,
+                        2.221752284659519,
+                        0.6469748461962584,
+                        64.07991,
+                        89.999809
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "0/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221706524186864,
+                        0.6469274853481757,
+                        2.221731763729618,
+                        0.6469356976266173,
+                        60.645023,
+                        64.779137
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "1/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221731654309614,
+                        0.646919530092822,
+                        2.2217370297194905,
+                        0.6469520793938622,
+                        63.199959,
+                        73.566055
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "3/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221729965348152,
+                        0.6469150578726012,
+                        2.2217445492866976,
+                        0.6469750649563532,
+                        61.846878,
+                        76.347046
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "2/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.2217317152944642,
+                        0.6468956062444396,
+                        2.22175241355337,
+                        0.6469750603568036,
+                        64.519989,
+                        76.482605
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "4/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.2217317176841,
+                        0.6468961243090084,
+                        2.2217527501852454,
+                        0.646974983756062,
+                        64.5,
+                        76.431107
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "5/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221732985512786,
+                        0.6468931672552684,
+                        2.2217502617229776,
+                        0.6469747592343743,
+                        67.89357,
+                        83.090614
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "6/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.2217330025922184,
+                        0.6468961340066718,
+                        2.221749595012411,
+                        0.6469750573539405,
+                        69.360138,
+                        82.137543
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "7/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221733005658907,
+                        0.646896134006747,
+                        2.2217495919453327,
+                        0.6469750573539405,
+                        67.890152,
+                        83.107544
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "8/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221731053094246,
+                        0.6468956980202537,
+                        2.221752389198731,
+                        0.6469750587581571,
+                        62.801453,
+                        88.488045
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "9/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221687490159303,
+                        0.6468961348789543,
+                        2.221788397179906,
+                        0.6469747682537313,
+                        56.999939,
+                        89.999847
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "10/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.221733587587453,
+                        0.6469328600952475,
+                        2.2217436239443553,
+                        0.6469379221182222,
+                        63.920982,
+                        71.996254
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "11/tileset.json"
+                }
+            },
+            {
+                "boundingVolume": {
+                    "region": [
+                        2.2217336918058406,
+                        0.6469329705427941,
+                        2.221743623905238,
+                        0.6469377917521247,
+                        65.11586,
+                        70.118484
+                    ]
+                },
+                "geometricError": 500,
+                "refine": "ADD",
+                "content": {
+                    "url": "12/tileset.json"
+                }
+            }
+        ]
+    }
+}
