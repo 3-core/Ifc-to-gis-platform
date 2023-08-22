@@ -1,6 +1,6 @@
 # Ifc-to-gis-platform
 ## 프로젝트 환경
-- Tool : Intellij Community
+- Tool : IntelliJ Community
 - Apache Tomcat
 - JDK 17
 - Spring Boot 2.7.4
