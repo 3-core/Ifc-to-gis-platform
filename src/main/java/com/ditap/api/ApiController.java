@@ -1,0 +1,124 @@
+package com.ditap.api;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+@Controller
+@RequestMapping(value = "/api")
+public class ApiController {
+
+    /**
+     * 건물 행정 정보  api (기본사항, 토지대장, 공시지가, 주택가격)
+     * @param apiType
+     * @param pnu
+     * @return JSONArray
+     * @throws IOException
+     * @throws ParseException
+     */
+    @RequestMapping(value = "/getBuildingInfo.do", method = RequestMethod.GET)
+    public JSONArray getBuildingInfo(String apiType,String pnu) throws IOException, ParseException {
+
+        //http://localhost:8080/api/getBuildingInfo.do?apiType=BPrice&pnu=4688025024116610000
+
+        String serviceKey = "V0ZAvitWQ9YxxtM7yba29hXvkveSCQO7RxPUIOgUd9I4nWNpQUeQNERapifNZA04qsl%2F3OvrWaUGMqc4KC0Q3Q%3D%3D";
+        StringBuilder urlBuilder = null;
+        String getKey = "";
+
+        //apiType : Base(건물 기본 정보),Land(토지대장), 공시지가(PPrice), 공동 주택가격(BPrice)
+        if ("Base".equals(apiType)){
+
+            getKey = "buildingUses";
+
+            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/BuildingUseService/attr/getBuildingUse"); /*URL*/
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
+            urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /*한 페이지 결과 수*/
+            urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*응답결과 형식(xml 또는 json)*/
+            urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /*고유번호(8자리 이상)*/
+
+
+        }else if("Land".equals(apiType)){
+
+            getKey = "possessions";
+
+            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/PossessionService/attr/getPossessionAttr"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode("202009", "UTF-8")); /* 기준연월 시작일 (YYYYMM: 6자리) */
+            urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode("209909", "UTF-8")); /* 기준연월 종료일 (YYYYMM: 6자리) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+
+        }else if("PPrice".equals(apiType)){
+
+            getKey = "indvdLandPrices";
+
+            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/IndvdLandPriceService/attr/getIndvdLandPriceAttr"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("80", "UTF-8")); /* 검색건수 */
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
+        }else if("BPrice".equals(apiType)){
+
+            getKey = "apartHousingPrices";
+
+            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/ApartHousingPriceService/attr/getApartHousingPriceAttr"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+
+        }
+
+        URL url = new URL(urlBuilder.toString());
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        System.out.println("Response code: " + conn.getResponseCode());
+
+        BufferedReader rd;
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+
+        rd.close();
+        conn.disconnect();
+
+        JSONParser jsonParser = new JSONParser();
+        JSONObject response = (JSONObject) jsonParser.parse(sb.toString());
+
+        System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
+
+        return (JSONArray) ((JSONObject) response.get(getKey)).get("field");
+    }
+
+}

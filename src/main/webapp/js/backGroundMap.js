@@ -1,9 +1,9 @@
     // base64 를 URL로 변환하는 함수
     const getUrlFromBase64 = (base64Data) => {
       const b64Data = base64Data;
-      console.log(b64Data)
+      //console.log(b64Data)
       const byteCharacters = window.atob(b64Data);
-      console.log(byteCharacters)
+      //console.log(byteCharacters)
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {
         byteNumbers[i] = byteCharacters.charCodeAt(i);

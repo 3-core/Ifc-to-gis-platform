@@ -64,6 +64,7 @@
                 <div style="margin-right: 20px; margin-top: 13px">
                     <button id="upload_modal_button">업로드</button>
                 </div>
+
             </div>
             <div id="ditapContainer">
                 <div id="modal_div" class="modal">
@@ -72,6 +73,7 @@
                         <pre id="modalContent"></pre>
                     </div>
                 </div>
+
                 <div id="upload_modal" class="upload_modal">
                     <div class="upload_modal_content">
                         <span id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">&times;</span>
@@ -84,6 +86,7 @@
                         <button id="upload_button" onclick="fileUpload()">업로드</button>
                     </div>
                 </div>
+
             </div>
             <div id="uploading-overlay" style="display: none;">
                 <div id="spinner" class="loader"></div>
@@ -130,27 +133,62 @@
         <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
         <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
 
+        <!-- Keyboard Event -->
+        <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
+
 
         <script>
-            const viewer = new Ditap.DitapViewer("ditapContainer", {
+        const viewer = new Ditap.DitapViewer("ditapContainer", {
+
+                editingTools: {
+                  createTools: {
+                    point: true,
+                    linestring: true,
+                    polygon: true,
+                  },
+                  select: {
+                    hoverColor: Ditap.Color.fromCssColorString("#BDBDBD"),
+                    selectedColor: Ditap.Color.fromCssColorString("#9DCFFF"),
+                  },
+                  remove: true,
+                },
+                analysisTools: {
+                  visibility: true,
+                  clipping: true,
+                  split: true,
+                },
+                measurementTools: {
+                  altitude: true,
+                  straight: true,
+                  ground: true,
+                  plane: true,
+                  vertical: true,
+                  horizontal: true,
+                  area: true,
+                  volume: true,
+
+                },
+                homeButton: true,
+                navigationHelpButton: true,
+                fullscreenButton: true,
                 baseLayerPicker: true,
                 imageryProviderViewModels: createCustomImageryProviderViewModels(),
                 terrainProviderViewModels: createCustomTerrainProviderViewModels(),
-            });
+        });
 
-            viewer.camera.setView({
+        viewer.camera.setView({
                 destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
                 orientation: {
                     heading: Cesium.Math.toRadians(90.0),
                     pitch: Cesium.Math.toRadians(-90),
                     roll: 0.0
                 }
-            });
+        });
 
-            // Property Click Handler
-            const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
-            handler.setInputAction(async function (event) {
-                const pickObject = viewer.scene.pick(event.position);
+        // Property Click Handler
+        const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
+        handler.setInputAction(async function (event) {
+            const pickObject = viewer.scene.pick(event.position);
                 if (Cesium.defined(pickObject) && pickObject.detail.node) {
                     const guid = pickObject.detail.node._name;
                     const URL = "http://localhost:8000/ifc/properties/" + guid;
@@ -163,11 +201,24 @@
                             console.error(error);
                         });
                 }
-            }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
 
-            // GLB Models
-            viewer.scene.primitives.add(jeonju_model);
-            viewer.scene.primitives.add(subway_siheung_model);
+        }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
+
+        // GLB Models
+        viewer.scene.primitives.add(jeonju_model);
+        viewer.scene.primitives.add(subway_siheung_model);
+
+        // keyboard Event
+        Heliosen.keyboard.initKeyboard(viewer);
+
+        document.addEventListener("keydown",function (e) {
+           Heliosen.keyboard.KeyboardEvent("keydown",e.keyCode);
+        },false);
+
+        document.addEventListener("keyup",function (e) {
+           Heliosen.keyboard.KeyboardEvent("keyup",e.keyCode);
+        },false);
+
         </script>
     </body>
 
