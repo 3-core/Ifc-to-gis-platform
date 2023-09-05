@@ -1497,7 +1497,7 @@ input:focus {
 }
 .ditap-toolbar-top-wrap {
   position: absolute;
-  top: 20px;
+  top: 80px;
   right: 20px;
   z-index: 2;
   display: -webkit-box;
@@ -1711,7 +1711,7 @@ input:focus {
 
 .ditap-toolbar-right-btn-wrap {
   position: absolute;
-  top: 134px;
+  top: 194px;
   right: 20px;
   z-index: 2;
 }
