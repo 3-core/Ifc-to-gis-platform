@@ -52,6 +52,7 @@
     </head>
 
     <body>
+        <%@ include file="./buildingPopup.jsp"%>
         <div id="wrap">
             <div id="header_wrap" style="display:flex; justify-content: space-between; width: 100%">
                 <div>
@@ -135,6 +136,7 @@
 
         <!-- Keyboard Event -->
         <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
+        <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
 
 
         <script>
@@ -189,7 +191,14 @@
         const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
         handler.setInputAction(async function (event) {
             const pickObject = viewer.scene.pick(event.position);
-                if (Cesium.defined(pickObject) && pickObject.detail.node) {
+
+                //건물 정보 보기
+                if (Cesium.defined(pickObject)) {
+
+                    getBuildingInfoPopup(event,viewer,pickObject)
+                }
+
+               if (Cesium.defined(pickObject) && pickObject.detail.node) {
                     const guid = pickObject.detail.node._name;
                     const URL = "http://localhost:8000/ifc/properties/" + guid;
 

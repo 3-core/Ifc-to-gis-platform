@@ -1,9 +1,7 @@
 package com.ditap.api;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -15,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -30,6 +29,7 @@ public class ApiController {
      * @throws ParseException
      */
     @RequestMapping(value = "/getBuildingInfo.do", method = RequestMethod.GET)
+    @ResponseBody
     public JSONArray getBuildingInfo(String apiType,String pnu) throws IOException, ParseException {
 
         //http://localhost:8080/api/getBuildingInfo.do?apiType=BPrice&pnu=4688025024116610000
@@ -119,6 +119,130 @@ public class ApiController {
         System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
 
         return (JSONArray) ((JSONObject) response.get(getKey)).get("field");
+    }
+    /**
+     * coordinate2address2Pnu  api
+     *
+     * @param coords
+     * @return JSONArray
+     * @throws IOException
+     * @throws ParseException
+     */
+    @RequestMapping(value = "/getPnu.do", method = RequestMethod.GET)
+    @ResponseBody
+    public String getAddress(String coords) throws IOException, ParseException {
+
+        String serviceKey = "38B13303-F3F4-38AA-AE9E-D1503CE3A75B";  //인증키 만기(2023.12)
+        StringBuilder urlBuilder = null;
+
+        urlBuilder = new StringBuilder("https://apis.vworld.kr/coord2jibun.do"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + serviceKey); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("x", "UTF-8") + "=" + URLEncoder.encode(coords.split(",")[0], "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("y", "UTF-8") + "=" + URLEncoder.encode(coords.split(",")[1], "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("output", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*응답결과 형식(xml 또는 json)*/
+        urlBuilder.append("&" + URLEncoder.encode("epsg", "UTF-8") + "=" + URLEncoder.encode("epsg:4326", "UTF-8")); /*고유번호(8자리 이상)*/
+
+        URL url = new URL(urlBuilder.toString());
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        System.out.println("Response code: " + conn.getResponseCode());
+
+        BufferedReader rd;
+        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+
+        rd.close();
+        conn.disconnect();
+
+        JSONParser jsonParser = new JSONParser();
+        JSONObject response = (JSONObject) jsonParser.parse(sb.toString());
+
+        String pnu = "";
+
+        //make pnu
+        String addr = (String) response.get("ADDR");
+
+        String keyword = "";
+        String bungieNum = "";
+
+        if (!addr.equals("")) {
+
+            String[] addrA = addr.split(" ");
+
+            for (int i = 0; i < addrA.length - 1; i++) {
+
+                if (i == 0) {
+                    keyword = addrA[i];
+                } else {
+                    keyword += " " + addrA[i];
+                }
+
+            }
+            bungieNum = addrA[addrA.length - 1];
+
+            // make pnu code
+            File file = new File(ApiController.class.getResource("").getPath() + "pnu.txt");
+
+            //read file
+            BufferedReader br = null;
+            br = new BufferedReader(new FileReader(file));
+            String oneLine = "";
+
+            //각 파일의 한 라인씩 읽어들인다.
+            while ((oneLine = br.readLine()) != null) {
+                //키워드 검색
+                if (oneLine.indexOf(keyword) != -1) {
+
+                    pnu = oneLine.trim().split(" ")[0];
+                }
+            }
+            //input stream close.
+            br.close();
+
+        }
+
+        if (!pnu.equals("")){
+
+            String mainBungieNum = "";
+            String subBungieNum = "";
+
+            //번지 구격 맞추기
+            if(bungieNum.split("-").length > 1){
+                //부번호 존재
+                mainBungieNum = String.format("%4s", bungieNum.split("-")[0]).replace(" ", "0");
+
+                subBungieNum = String.format("%4s", bungieNum.split("-")[1]).replace(" ", "0");
+
+            }else{
+                //부번호 미존재
+                mainBungieNum = String.format("%4s", bungieNum).replace(" ", "0");
+
+                subBungieNum = "0000";
+            }
+            pnu = pnu + "1" + mainBungieNum + subBungieNum;
+        }
+
+
+        //System.out.println(keyword);
+        //System.out.println(bungieNum);
+
+        System.out.println(pnu);
+
+        return pnu;
     }
 
 }
