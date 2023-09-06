@@ -12,8 +12,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-        <!-- font -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css">
         <!-- CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
@@ -23,55 +21,51 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
 
         <title>다이탭</title>
-        <style>
-            #citySelect,
-            #custom_button {
-                margin-top: 10px;
-                margin-left: 10px;
-                padding: 10px;
-                font-size: 13px;
-                border: none;
-                border-radius: 5px;
-                box-sizing: border-box;
-            }
-
-            #citySelect {
-                margin-right: 10px;
-                width: 200px;
-            }
-
-            #custom_button {
-                background-color: #dbe0e2;
-                cursor: pointer;
-            }
-
-            #custom_button:hover {
-                background-color: #efeded;
-            }
-        </style>
     </head>
 
     <body>
         <%@ include file="./buildingPopup.jsp"%>
         <div id="wrap">
-            <div id="header_wrap" style="display:flex; justify-content: space-between; width: 100%">
-                <div>
-                    <select id="citySelect">
-                        <option value="jeonju">전주-LX사옥</option>
-                        <option value="siheung">시흥-정류장</option>
-                    </select>
-                    <button id="custom_button" class="btn_move" onclick="moveLocation()">이동하기</button>
-                </div>
-                <div style="margin-right: 20px; margin-top: 13px">
-                    <button id="upload_modal_button">업로드</button>
+            <div id="header_wrap" style="display:flex; justify-content: space-between; align-items: center; width: 100%">
+                <div id="header_logo" style="display: flex;">
+                    <div style="display: flex; align-items: center; margin-right: 10px;">
+                        <img src="${pageContext.request.contextPath}/public/img/lx_logo.png" alt="lx_logo" style="margin-left:10px; width: auto; height: 50px">
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span style="color:white; font-size: 30px; font-weight: bold">한국국토정보공사</span>
+                    </div>
                 </div>
 
             </div>
+            <div style="height: 60px;"></div>
             <div id="ditapContainer">
-                <div id="modal_div" class="modal">
-                    <div id="modal" class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <pre id="modalContent"></pre>
+                <div style="position: absolute; top: 200px; z-index: 300;">
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button>업로드</button>
+                    </div>
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button id="property_modal_button">속성</button>
+                    </div>
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button id="non_property_modal_button">비공간</button>
+                    </div>
+                </div>
+                <div id="property_modal" class="property_modal">
+                    <div id="property_modal_content" class="property_modal_content">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>속성</div>
+                            <div id="property_modal_close" onclick="closeModal()">
+                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="non_property_modal_content" class="non_property_modal_content">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>비공간</div>
+                            <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
+                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -125,7 +119,7 @@
         <!-- GLB Models -->
         <script src="${pageContext.request.contextPath}/js/models.js"></script>
         <!-- ModalFunction -->
-        <script src="${pageContext.request.contextPath}/js/modal.js"></script>
+        <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
         <!-- MoveFunction -->
         <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
         <!-- UploadJS -->
@@ -200,22 +194,12 @@
 
                if (Cesium.defined(pickObject) && pickObject.detail.node) {
                     const guid = pickObject.detail.node._name;
-                    const URL = "http://localhost:8000/ifc/properties/" + guid;
-
-                    axios.get(URL)
-                        .then(function (response) {
-                            openModal(response.data);
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
                 }
 
         }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
 
         // GLB Models
         viewer.scene.primitives.add(jeonju_model);
-        viewer.scene.primitives.add(subway_siheung_model);
 
         // keyboard Event
         Heliosen.keyboard.initKeyboard(viewer);
