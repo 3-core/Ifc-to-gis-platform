@@ -1,14 +1,14 @@
 .property_modal {
-    display: none;
+    display: block;
     position: absolute;
     top: 60px;
     width: 100%;
     height: calc(100% - 60px);
-    z-index: 1;
+    z-index: 3000;
     pointer-events: none;
 }
 
-.property_modal_content {
+.property_modal_content, .non_property_modal_content {
     border-top: 1px solid white;
     font-family: 'Pretendard';
     overflow-y: auto;
@@ -23,4 +23,5 @@
     justify-content: space-between;
     align-items: center;
     pointer-events: all;
+    display: none;
 }

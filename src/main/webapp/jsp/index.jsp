@@ -39,11 +39,32 @@
             </div>
             <div style="height: 60px;"></div>
             <div id="ditapContainer">
+                <div style="position: absolute; top: 200px; z-index: 300;">
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button>업로드</button>
+                    </div>
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button id="property_modal_button">속성</button>
+                    </div>
+                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
+                        <button id="non_property_modal_button">비공간</button>
+                    </div>
+                </div>
                 <div id="property_modal" class="property_modal">
-                    <div class="property_modal_content">
-                        <div>모달창</div>
-                        <div class="property_modal_close" onclick="closeModal()">
-                            <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                    <div id="property_modal_content" class="property_modal_content">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>속성</div>
+                            <div id="property_modal_close" onclick="closeModal()">
+                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="non_property_modal_content" class="non_property_modal_content">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>비공간</div>
+                            <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
+                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +119,7 @@
         <!-- GLB Models -->
         <script src="${pageContext.request.contextPath}/js/models.js"></script>
         <!-- ModalFunction -->
-        <script src="${pageContext.request.contextPath}/js/modal.js"></script>
+        <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
         <!-- MoveFunction -->
         <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
         <!-- UploadJS -->
