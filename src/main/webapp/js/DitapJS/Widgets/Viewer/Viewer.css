@@ -47,6 +47,8 @@
   width: 169px;
   height: 112px;
 }
+
+
 .cesium-viewer-fullscreenContainer {
   position: absolute;
   bottom: 0;
@@ -56,6 +58,7 @@
   height: 29px;
   overflow: hidden;
 }
+
 .cesium-viewer-vrContainer {
   position: absolute;
   bottom: 0;
@@ -112,6 +115,11 @@
   background-color: #272B32;
   z-index: 1;
 }
+
+.cesium-viewer-timelineContainer {
+    display:none;
+ }
+
 .cesium-viewer-timelineShape {
   width: 50px;
   height: 64px;

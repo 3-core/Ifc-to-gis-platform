@@ -1,14 +1,3 @@
-
-
-    //로컬 환경
-    //터레인 호출 함수
-    function requestDemTileMap() {
-        const provider = new Cesium.CesiumTerrainProvider({
-            url: "http://211.47.67.141:8090/tilesets/layer"
-        });
-        return provider;
-    }
-
    //클릭한 이전 건물을 저장하기 위해 사용
    let previousModel;
 
@@ -49,7 +38,8 @@
 
                 previousModel = undefined;
 
-                //팝업 닫기 - 수정
+                //팝업 닫기
+                $(".desc-popup").css("display", "none");
 
             }else{
                 //이전에 선택된 모델과 현재 선택 모델이 다름 : 이전 모델 색상 초기화 및 현재 모델 색상 변경
@@ -111,6 +101,7 @@
         }
    }
 
+
     //getBuildingInfo
     // 1. 좌표 조회 -> 2. pnu값 조회 -> 3.건물 정보 조회 -> 4. 팝업 표출
     function getBuildingInfo(event, viewer, bid) {
@@ -129,27 +120,226 @@
 
         //3.건물 정보 조회
         if(pnu){
-
              let apiDate = getAPIInfo(pnu);
 
-             console.log(apiDate)
+             let resultData = getPopup(apiDate);
+             $("#info-popup").css("display", "block");
+
              $("#loadingDim").hide();
-
-             //4. 팝업 표출
-             //if (showPopup(apiDate)) {
-             //   document.body.append(showPopup(apiDate)[0]);
-             //}
-
         }else{
           //pnu 조회 안됨
-         //정보 없음 팝업 띄우기
+          //정보 없음 팝업 띄우기
+          $("#noInfo-popup").css("display", "block");
+
         }
 
       }else{
       //좌표조회 안됨
       //정보 없음 팝업 띄우기
+      $("#noInfo-popup").css("display", "block");
       }
     }
+
+    //팝업 띄우기
+    function getPopup(data) {
+
+
+
+
+
+       //토지대장
+       let landUl = `<table>`;
+       if (data?.Base) {
+            let tr = undefined;
+            if (data.Land.length > 0) {
+                 tr = `
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">소재지</th>
+                                <td class="desc-table-cont">
+                                    ${data.Land[0]?.ldCodeNm !== undefined? data.Land[0]?.ldCodeNm: "정보없음"}
+                                    ${data.Land[0]?.mnnmSlno !== undefined ? data.Land[0]?.mnnmSlno: "정보없음"}
+                                </td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">지목명</th>
+                                <td class="desc-table-cont" >${data.Land[0]?.lndcgrCodeNm !== null ? data.Land[0]?.lndcgrCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">지목명</th>
+                                <td class="desc-table-cont" >${data.Land[0]?.lndpclAr !== null ? data.Land[0]?.lndpclAr: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">이동일자</th>
+                                <td class="desc-table-cont" > - </td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">이동사유명</th>
+                                <td class="desc-table-cont" >${data.Land[0]?.ownshipChgCauseCodeNm !== null ? data.Land[0]?.ownshipChgCauseCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">소유구분명</th>
+                                <td class="desc-table-cont">${data.Land[0]?.posesnSeCodeNm !== null ? data.Land[0]?.posesnSeCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">변동일자</th>
+                                <td class="desc-table-cont" >${data.Land[0]?.ownshipChgDe !== null ? data.Land[0]?.ownshipChgDe: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">변동원인명</th>
+                                <td class="desc-table-cont">${data.Land[0]?.ownshipChgCauseCodeNm !== null ? data.Land[0]?.ownshipChgCauseCodeNm: "정보없음"}</td>
+                            </tr>
+                            `
+
+
+            }else{
+                tr = `
+                    <tr class="desc-table-item">
+                        <td class="desc-table-cont">조회 결과가 없습니다.</td>
+                    </tr>
+                     `
+            }
+            landUl += tr;
+       }
+
+        document.getElementById('land').innerText = '';
+       $("#land").append(landUl);
+
+        //공시지가
+        let pPriceUl = `<ul>`;
+            if (data?.PPrice) {
+                for (let info of data.PPrice) {
+                    let li = `
+                        <li class="table-item">
+                            <p class="table-cont">${info.stdrYear}</p>
+                            <p class="table-cont">${info.stdrMt}</p>
+                            <p class="table-cont">${convertWonMoneyString(info.pblntfPclnd)}</p>
+                        </li>
+                        `;
+                    pPriceUl += li;
+                }
+            }else {
+                li = `
+                    <li class="table-item">
+                        <p class="table-cont">조회 결과가 없습니다.</p>
+                    </li>
+                    `;
+                pPriceUl += li;
+            }
+
+            document.getElementById('pPrice').innerText = '';
+            $("#pPrice").append(pPriceUl);
+
+      //건물 기본 정보
+       let baseUl = `<table>`;
+       if (data?.Base) {
+            let tr = undefined;
+            if (data.Base.length > 0) {
+                 tr = `
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">소재지</th>
+                                <td class="desc-table-cont">
+                                    ${data.Base[0]?.ldCodeNm !== undefined? data.Base[0]?.ldCodeNm: "정보없음"}
+                                </td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">건물명</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.buldNm !== null ? data.Base[0]?.buldNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">대지면적(m²)</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.buldPlotAr !== null ? data.Base[0]?.buldPlotAr: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">건축면적(m²)</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.buldBildngAr !== null ? data.Base[0]?.buldBildngAr: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">연면적(m²)</th>
+                                <td class="desc-table-cont">${data.Base[0]?.buldTotar !== null ? data.Base[0]?.buldTotar: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">건폐율(%)</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.btlRt !== null ? data.Base[0]?.btlRt: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">용적율(%)</th>
+                                <td class="desc-table-cont">${data.Base[0]?.measrmtRt !== null ? data.Base[0]?.measrmtRt: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">층수(지상/지하)</th>
+                                <td class="desc-table-cont" >
+                                    ${data.Base[0]?.groundFloorCo !== null ? data.Base[0]?.groundFloorCo: "정보없음"}/
+                                    ${data.Base[0]?.undgrndFloorCo !== null ? data.Base[0]?.undgrndFloorCo: "정보없음"}
+                                    </td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">높이</th>
+                                <td class="desc-table-cont">${data.Base[0]?.buldHg !== null ? data.Base[0]?.buldHg: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">구조명</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.strctCodeNm !== null ? data.Base[0]?.strctCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">주용도명</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.buldPrposClCodeNm !== null ? data.Base[0]?.buldPrposClCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">주부속구분명</th>
+                                <td class="desc-table-cont">${data.Base[0]?.mainPrposCodeNm !== null ? data.Base[0]?.mainPrposCodeNm: "정보없음"}</td>
+                            </tr>
+                            <tr class="desc-table-item">
+                                <th class="desc-table-name">사용승인일자</th>
+                                <td class="desc-table-cont" >${data.Base[0]?.useConfmDe !== null ? data.Base[0]?.useConfmDe: "정보없음"}</td>
+                            </tr>
+                             <tr class="desc-table-item">
+                                 <th class="desc-table-name">등록일자</th>
+                                 <td class="desc-table-cont" >${data.Base[0]?.lastUpdtDt !== null ? data.Base[0]?.lastUpdtDt: "정보없음"}</td>
+                             </tr>
+                            `
+            }else{
+                tr = `
+                    <tr class="desc-table-item">
+                        <td class="desc-table-cont">조회 결과가 없습니다.</td>
+                    </tr>
+                     `
+            }
+            baseUl += tr;
+       }
+
+
+        document.getElementById('base').innerText = '';
+        $("#base").append(baseUl);
+
+        //공동 주택 가격
+        let bPriceUl = `<ul>`;
+            if (data?.BPrice) {
+                for (let info of data.BPrice) {
+                    let li = `
+                        <li class="table-item">
+                            <p class="table-cont">${info.stdrYear}</p>
+                            <p class="table-cont">${info.stdrMt}</p>
+                            <p class="table-cont">${convertWonMoneyString(info.pblntfPc)}</p>
+                        </li>
+                        `;
+                    bPriceUl += li;
+                }
+            }else {
+                li = `
+                    <li class="table-item">
+                        <p class="table-cont">조회 결과가 없습니다.</p>
+                    </li>
+                    `;
+                bPriceUl += li;
+            }
+
+            document.getElementById('bPrice').innerText = '';
+
+            $("#bPrice").append(bPriceUl);
+       return;
+
+    }
+
 
    //pnu값 조회
    function getPnuNumber(coords, bid) {
@@ -248,3 +438,49 @@
 
       return data;
    }
+    //부동산 정보 팝업 닫기
+    $(document).on('click', '.close-btn', function(e){
+
+    //기본 색 으로 바꾸기
+
+    //투명화 모델 id 수정
+    let modelList = ["34002"];
+
+    if (previousModel?.tileset) {
+
+         let conditions = [
+                ["(regExp('^46').test(${feature['id']}))", 'color("white", 0.75)'],
+                [
+                  "${feature['id']} === '" + previousModel.getProperty("id") + "'",
+                  'color("white")',
+                ],
+         ]
+
+         //투명도 적용
+          for (let i = 0; i < modelList.length; i++){
+            let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+            conditions.push(obj)
+          }
+
+
+          previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
+            color: {
+              conditions: conditions
+            },
+          });
+        }
+
+     previousModel = undefined;
+     $(".desc-popup").css("display", "none");
+
+    });
+
+
+
+    function convertWonMoneyString(priceString) {
+      if (priceString !== undefined) {
+        return parseInt(priceString).toLocaleString("ko-KR");
+      } else {
+        return "";
+      }
+    }

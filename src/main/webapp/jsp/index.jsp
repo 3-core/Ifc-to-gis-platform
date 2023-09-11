@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/uploadModal.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
         <!-- DitapJS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
 
@@ -25,51 +26,58 @@
 
     <body>
         <%@ include file="./buildingPopup.jsp"%>
-        <div id="wrap">
-            <div id="header_wrap" style="display:flex; justify-content: space-between; align-items: center; width: 100%">
-                <div id="header_logo" style="display: flex;">
-                    <div style="display: flex; align-items: center; margin-right: 10px;">
-                        <img src="${pageContext.request.contextPath}/public/img/lx_logo.png" alt="lx_logo" style="margin-left:10px; width: auto; height: 50px">
+        <div class="wrap">
+            <div class="header-wrap">
+                <div class="header-logo">
+                    <div class="header-logo-img">
+                        <img src="${pageContext.request.contextPath}/public/img/lx_logo.png" alt="lx_logo"/>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <span style="color:white; font-size: 30px; font-weight: bold">한국국토정보공사</span>
+                    <div class="header-logo-txt">
+                        한국국토정보공사
                     </div>
                 </div>
-
             </div>
-            <div style="height: 60px;"></div>
-            <div id="ditapContainer">
-                <div style="position: absolute; top: 200px; z-index: 300;">
-                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
-                        <button>업로드</button>
-                    </div>
-                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
-                        <button id="property_modal_button">속성</button>
-                    </div>
-                    <div style="background-color: #00B8A3; font-size: 30px; margin:5px; border: 2px solid white">
-                        <button id="non_property_modal_button">비공간</button>
-                    </div>
-                </div>
-                <div id="property_modal" class="property_modal">
-                    <div id="property_modal_content" class="property_modal_content">
-                        <div style="display: flex; justify-content: space-between;">
-                            <div>속성</div>
-                            <div id="property_modal_close" onclick="closeModal()">
-                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close" style="margin-left:10px; width: auto; height: 20px">
-                            </div>
+            <div id="ditapContainer" class="container-viewer">
+                <ul class="ditap-toolbar-top-wrap top-left">
+                    <li class="ditap-toolbar-item">
+                        <button class="ditap-toolbar-btn ditap-upload-btn">
+                            <p class="ditap-function-btn-img js-basemap-btn"></p>
+                            <p class="ditap-btn-tooltip">업로드</p>
+                        </button>
+                    </li>
+                    <li class="ditap-toolbar-item">
+                        <button id="property_modal_button" class="ditap-toolbar-btn ditap-property-btn">
+                            <p class="ditap-function-btn-img js-basemap-btn"></p>
+                            <p class="ditap-btn-tooltip">속성</p>
+                        </button>
+                    </li>
+                    <li class="ditap-toolbar-item">
+                        <button id="non_property_modal_button" class="ditap-toolbar-btn ditap-non-space-btn">
+                            <p class="ditap-function-btn-img js-basemap-btn"></p>
+                            <p class="ditap-btn-tooltip">비공간</p>
+                        </button>
+                    </li>
+                </ul>
+                <div id="property_modal" class="property-modal">
+                    <div id="property_modal_content" class="property-modal-content">
+                        <div class="modal-content-top">
+                            <div class="title">속성</div>
+                            <button class="close" onclick="closeModal()">
+                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close">
+                            </button>
                         </div>
                     </div>
-                    <div id="non_property_modal_content" class="non_property_modal_content">
-                        <div style="display: flex; justify-content: space-between;">
-                            <div>비공간</div>
-                            <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
-                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
-                            </div>
+                    <div id="non_property_modal_content" class="non-property-modal-content">
+                        <div class="modal-content-top">
+                            <div class="title">비공간</div>
+                            <button class="close" onclick="closeNonPropertyModal()">
+                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close">
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div id="upload_modal" class="upload_modal">
+                <div class="upload_modal">
                     <div class="upload_modal_content">
                         <span id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">&times;</span>
                         <div style="margin:10px; color: white">
@@ -82,6 +90,30 @@
                     </div>
                 </div>
 
+                <div class="compass-tool">
+                    <div class="compass-wrap">
+
+                        <div class="compass">
+                            <p class="compass-img">
+                                <img class="tool_compass" src="/public/img/inter_tool_comp.png" alt="img">
+                            </p>
+                        </div>
+                        <div class="compass-arrow">
+                        <p id="upCtrlBtn">
+                            <button class="top" ></button>
+                        </p>
+                        <p id="rightCtrlBtn">
+                            <button class="right" ></button>
+                        </p>
+                        <p id="downCtrlBtn">
+                            <button class="bottom" ></button>
+                        </p>
+                        <p id="leftCtrlBtn">
+                            <button class="left" ></button>
+                        </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="uploading-overlay" style="display: none;">
                 <div id="spinner" class="loader"></div>
@@ -128,10 +160,11 @@
         <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
         <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
 
-        <!-- Keyboard Event -->
+
+        <!-- Heliosen Event -->
         <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
         <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
 
         <script>
         const viewer = new Ditap.DitapViewer("ditapContainer", {
@@ -170,10 +203,24 @@
                 baseLayerPicker: true,
                 imageryProviderViewModels: createCustomImageryProviderViewModels(),
                 terrainProviderViewModels: createCustomTerrainProviderViewModels(),
+                terrainProvider: requestDemTileMap(),
+
         });
+
+        //tileset 요청
+        const tilesetList = {
+            //아파치 타일 경로 - 장성 내부
+            "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
+            "pointCloud":"public/3dtileset/point/tileset.json",
+        }
+
+        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+        //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
 
         viewer.camera.setView({
                 destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
+                //장성 군청
+                //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
                 orientation: {
                     heading: Cesium.Math.toRadians(90.0),
                     pitch: Cesium.Math.toRadians(-90),
@@ -211,6 +258,32 @@
         document.addEventListener("keyup",function (e) {
            Heliosen.keyboard.KeyboardEvent("keyup",e.keyCode);
         },false);
+
+        // compass Event
+        compassMove(viewer);
+
+        $(document).on("click", ".compass", function () {
+            compassClick(viewer);
+        });
+
+        let flags = { mousedown: false, directionId: null };
+
+         $(document).on("mousedown", ".compass-arrow p", function () {
+             let directionId = $(this).attr("id");
+
+             flags.mousedown = true;
+             flags.directionId = directionId;
+
+             locationMove(viewer,flags)
+
+         });
+
+         $(document).on("mouseup", ".compass-arrow p", function () {
+                flags.mousedown = false;
+                flags.directionId = null;
+
+                locationMove(viewer,flags)
+         });
 
         </script>
     </body>
