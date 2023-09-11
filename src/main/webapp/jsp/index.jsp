@@ -203,7 +203,7 @@
                 baseLayerPicker: true,
                 imageryProviderViewModels: createCustomImageryProviderViewModels(),
                 terrainProviderViewModels: createCustomTerrainProviderViewModels(),
-                terrainProvider: requestDemTileMap(),
+                //terrainProvider: requestDemTileMap(),
 
         });
 
