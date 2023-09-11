@@ -1,8 +1,8 @@
 
 .desc-popup{
 	position: fixed;
-	right: 500px;
-	top: 100px;
+	right: 100px;
+	top: 190px;
 	background-color: white;
 	padding: 15px 12px;
 	border-radius: 10px;
@@ -12,8 +12,8 @@
 
 .desc-popup-none{
 	position: fixed;
-	right: 500px;
-	top: 100px;
+	right: 100px;
+	top: 190px;
 	background-color: white;
 	padding: 15px 12px;
 	border-radius: 10px;
@@ -107,6 +107,11 @@
 .scroll-table{
     max-height: 411px;
     overflow-y: auto;
+}
+
+.desc-scroll-list, .desc-table,
+.scroll-table .desc-table{
+    width : 100%;
 }
 
 .desc-item .desc-table-item,

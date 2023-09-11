@@ -185,7 +185,7 @@
     //팝업 띄우기
     function getPopup(data) {
        //토지대장
-       let landUl = `<table>`;
+       let landUl = `<table class="desc-table">`;
        if (data?.Base) {
             let tr = undefined;
             if (data.Land.length > 0) {
@@ -267,7 +267,7 @@
             $("#pPrice").append(pPriceUl);
 
       //건물 기본 정보
-       let baseUl = `<table>`;
+       let baseUl = `<table class="desc-table">`;
        if (data?.Base) {
             let tr = undefined;
             if (data.Base.length > 0) {

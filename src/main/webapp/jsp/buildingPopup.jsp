@@ -138,7 +138,7 @@
         <!--공동 주택 가격-->
          <div class="desc-item" id ="tap4Info">  <!-- 여기 온 -->
             <div class="desc-scroll-list">
-                <table>
+                <table class="desc-table">
                     <tr class="desc-scroll-item">
                         <th class="desc-scroll-name">기준년도</th>
                         <th class="desc-scroll-name">기준월</th>
@@ -182,7 +182,7 @@
         <div class="desc-list">
             <div class="desc-item scroll on">
                 <div class="scroll-table">
-                    <table>
+                    <table class="table">
                         <tr class="desc-table-item">
                             <td class="desc-table-cont">조회 결과가 없습니다.</td>
                         </tr>
