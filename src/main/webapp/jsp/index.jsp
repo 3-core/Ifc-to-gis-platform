@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/uploadModal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/locationSelectBox.css">
         <!-- DitapJS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
 

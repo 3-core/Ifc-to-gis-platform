@@ -18,7 +18,6 @@
     width: 80%;
     max-width: 400px;
     height: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4), 0 0 50px rgba(0,0,0,0.5);
     display: flex;
     justify-content: space-between;
     align-items: center;
