@@ -60,6 +60,7 @@
 
                     //팝업 닫기
                     $(".desc-popup").css("display", "none");
+                    $(".desc-popup-none").css("display", "none");
 
                 }else{
                     //이전에 선택된 모델과 현재 선택 모델이 다름 : 이전 모델 색상 초기화 및 현재 모델 색상 변경
