@@ -10,6 +10,18 @@
 	box-shadow: 0 0 1rem 3px rgb(0 0 0/ 15%);
 }
 
+.desc-popup-none{
+	position: fixed;
+	right: 500px;
+	top: 100px;
+	background-color: white;
+	padding: 15px 12px;
+	border-radius: 10px;
+	z-index: 3;
+	box-shadow: 0 0 1rem 3px rgb(0 0 0/ 15%);
+}
+
+
 .desc-top{
     padding-bottom : 10px;
 	display: flex;

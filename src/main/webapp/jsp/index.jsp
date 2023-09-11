@@ -95,7 +95,7 @@
 
                         <div class="compass">
                             <p class="compass-img">
-                                <img class="tool_compass" src="/public/img/inter_tool_comp.png" alt="img">
+                                <img class="tool_compass" src="${pageContext.request.contextPath}/public/img/inter_tool_comp.png" alt="img">
                             </p>
                         </div>
                         <div class="compass-arrow">
@@ -208,7 +208,7 @@
         });
 
         //tileset 요청
-        const tilesetList = {
+        /*const tilesetList = {
             //아파치 타일 경로 - 장성 내부
             "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
             "pointCloud":"public/3dtileset/point/tileset.json",
@@ -216,6 +216,7 @@
 
         addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
         //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
+        */
 
         viewer.camera.setView({
                 destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),

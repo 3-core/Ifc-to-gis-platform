@@ -66,7 +66,7 @@
 </div>
 
 <!-- 건물 정보 팝업 -->
-<div id="info-popup" class="desc-popup" style="display : none;">
+<div class="desc-popup" style="display : none;">
 
     <div class="desc-top" >
         <h2 class="title">부동산종합정보</h2>
@@ -94,7 +94,6 @@
                 </p>
             </div>
         </div>
-
 
          <!--공시지가-->
          <div class="desc-item" id ="tap2Info">  <!-- 여기 온 -->
@@ -166,7 +165,7 @@
 </div>
 
 <!-- 건물 정보 없음 -->
-<div id= "noInfo-popup" class="desc-popup" style="display : none;">
+<div class="desc-popup-none" style="display : none;">
 
     <div class="desc-top" >
         <h2 class="title">부동산종합정보</h2>
