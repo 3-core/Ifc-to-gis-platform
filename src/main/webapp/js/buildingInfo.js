@@ -1,102 +1,129 @@
+   //추가 아이콘 클릭시 활성화
+   $(document).on('click', '.ditap-building-btn', function(){
+
+       const classes = document.getElementById("ditap-building").classList;
+       if (classes.contains('on')) {
+
+           document.getElementById("ditap-building").classList.remove('on');
+
+           closePopup();
+
+       }else{
+           document.getElementById("ditap-building").classList.add('on');
+       }
+
+   });
+
    //클릭한 이전 건물을 저장하기 위해 사용
    let previousModel;
 
     //건물 정보 팝업 띄우기
    function getBuildingInfoPopup(event,viewer,pickObject) {
 
-        //투명화 모델 id 수정
-        let modelList = ["34002"];
+        const classes = document.getElementById("ditap-building").classList;
 
-        if (pickObject._batchId == undefined) {
-        //glb클릭
-        }else{
-        //타일셋 클릭
+        if (classes.contains('on')) {
 
-            //클릭시 tileset 색상 변경
-            // 이전에 선택된 모델과 현재 선택 모델이 같음
-            // 부동산 종합정보 닫기
-            if (previousModel === pickObject) {
+            //투명화 모델 id 수정
+            let modelList = ["34002"];
 
-                let conditions = [
-                    [
-                        "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
-                    ],
-                    [
-                        "${feature['id']} === '" + pickObject.getProperty("id") + "'",'color("white")',
-                    ],
-                ]
-
-                //glb가 위치할 기본 tileset 투명화 적용
-                for (let i = 0; i < modelList.length; i++){
-                    let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
-                    conditions.push(obj)
-                }
-
-                pickObject.tileset.style = new Cesium.Cesium3DTileStyle({
-                    color: {conditions: conditions},
-                });
-
-                previousModel = undefined;
-
-                //팝업 닫기
-                $(".desc-popup").css("display", "none");
-
+            if (pickObject._batchId == undefined) {
+            //glb클릭
             }else{
-                //이전에 선택된 모델과 현재 선택 모델이 다름 : 이전 모델 색상 초기화 및 현재 모델 색상 변경
+            //타일셋 클릭
 
-                //이전 모델 색상 초기화
-                if (previousModel) {
-                    if (previousModel?.tileset) {
+                //클릭시 tileset 색상 변경
+                // 이전에 선택된 모델과 현재 선택 모델이 같음
+                // 부동산 종합정보 닫기
+                if (previousModel === pickObject) {
 
-                        let conditions = [
-                            [
-                                "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
-                            ],
-                            [
-                                "${feature['id']} === '" + previousModel.getProperty("id") +"'",'color("white")',
-                            ],
-                        ]
+                    let conditions = [
+                        [
+                            "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
+                        ],
+                        [
+                            "${feature['id']} === '" + pickObject.getProperty("id") + "'",'color("white")',
+                        ],
+                    ]
 
-                        previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
-                            color: {conditions: conditions},
-                        });
-                    } else {
-                        previousModel.color = new Cesium.Color(1, 1, 1, 1);
+                    //glb가 위치할 기본 tileset 투명화 적용
+                    for (let i = 0; i < modelList.length; i++){
+                        let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                        conditions.push(obj)
+                    }
+
+                    pickObject.tileset.style = new Cesium.Cesium3DTileStyle({
+                        color: {conditions: conditions},
+                    });
+
+                    previousModel = undefined;
+
+                    //팝업 닫기
+                    $(".desc-popup").css("display", "none");
+
+                }else{
+                    //이전에 선택된 모델과 현재 선택 모델이 다름 : 이전 모델 색상 초기화 및 현재 모델 색상 변경
+
+                    //이전 모델 색상 초기화
+                    if (previousModel) {
+                        if (previousModel?.tileset) {
+
+                            let conditions = [
+                                [
+                                    "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
+                                ],
+                                [
+                                    "${feature['id']} === '" + previousModel.getProperty("id") +"'",'color("white")',
+                                ],
+                            ]
+
+                            previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
+                                color: {conditions: conditions},
+                            });
+                        } else {
+                            previousModel.color = new Cesium.Color(1, 1, 1, 1);
+                        }
+                    }
+
+                    //현재 모델 색상 변경
+                    previousModel = pickObject;
+                    let conditions = [
+                        [
+                            "${feature['id']} === '" +pickObject.getProperty("id") +"'",'color("lightcoral")',
+                        ],
+                        [
+                            "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
+                        ],
+                    ]
+
+                    //glb가 위치할 기본 tileset 투명화 적용
+                    for (let i = 0; i < modelList.length; i++){
+                        let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                        conditions.push(obj)
+                    }
+
+                    pickObject.tileset.style = new Cesium.Cesium3DTileStyle({
+                        color: {    conditions: conditions},
+                    });
+
+                    //Remove browser right-click context menu
+                    window.addEventListener("contextmenu", (e) => e.preventDefault());
+
+                    //dim
+                    $("#loadingDim").css("display", "block");
+
+                    //getCoordinates 함수 호출
+                    try {
+                        setTimeout(() => {
+                            getBuildingInfo(event,viewer,pickObject.getProperty("id"));
+                            $("#loadingDim").hide();
+                        }, 2);
+                    } catch(e) {
+
+                        $(".desc-popup-none").css("display", "block");
+                        $("#loadingDim").hide();
                     }
                 }
-
-                //현재 모델 색상 변경
-                previousModel = pickObject;
-                let conditions = [
-                    [
-                        "${feature['id']} === '" +pickObject.getProperty("id") +"'",'color("lightcoral")',
-                    ],
-                    [
-                        "(regExp('^46').test(${feature['id']}))",'color("white", 0.75)',
-                    ],
-                ]
-
-                //glb가 위치할 기본 tileset 투명화 적용
-                for (let i = 0; i < modelList.length; i++){
-                    let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
-                    conditions.push(obj)
-                }
-
-                pickObject.tileset.style = new Cesium.Cesium3DTileStyle({
-                    color: {    conditions: conditions},
-                });
-
-                //Remove browser right-click context menu
-                window.addEventListener("contextmenu", (e) => e.preventDefault());
-
-                //dim
-                $("#loadingDim").css("display", "block");
-
-                //getCoordinates 함수 호출
-                setTimeout(() => {
-                    getBuildingInfo(event,viewer,pickObject.getProperty("id"));
-                    $("#loadingDim").hide();
-                }, 2);
             }
         }
    }
@@ -123,30 +150,40 @@
              let apiDate = getAPIInfo(pnu);
 
              let resultData = getPopup(apiDate);
-             $("#info-popup").css("display", "block");
+
+             //상단 탭 색상 변경
+             document.getElementById("tap2").classList.remove('on');
+             document.getElementById("tap3").classList.remove('on');
+             document.getElementById("tap4").classList.remove('on');
+
+             document.getElementById("tap2Info").classList.remove('on');
+             document.getElementById("tap3Info").classList.remove('on');
+             document.getElementById("tap4Info").classList.remove('on');
+
+             document.getElementById("tap1").classList.add('on');
+             document.getElementById("tap1Info").classList.add('on');
+
+             $(".desc-popup-none").css("display", "none");
+             $(".desc-popup").css("display", "block");
 
              $("#loadingDim").hide();
         }else{
           //pnu 조회 안됨
           //정보 없음 팝업 띄우기
-          $("#noInfo-popup").css("display", "block");
+          $(".desc-popup-none").css("display", "block");
+
 
         }
 
       }else{
       //좌표조회 안됨
       //정보 없음 팝업 띄우기
-      $("#noInfo-popup").css("display", "block");
+        $(".desc-popup-none").css("display", "block");
       }
     }
 
     //팝업 띄우기
     function getPopup(data) {
-
-
-
-
-
        //토지대장
        let landUl = `<table>`;
        if (data?.Base) {
@@ -325,7 +362,7 @@
                     bPriceUl += li;
                 }
             }else {
-                li = `
+                let li = `
                     <li class="table-item">
                         <p class="table-cont">조회 결과가 없습니다.</p>
                     </li>
@@ -336,10 +373,9 @@
             document.getElementById('bPrice').innerText = '';
 
             $("#bPrice").append(bPriceUl);
+
        return;
-
     }
-
 
    //pnu값 조회
    function getPnuNumber(coords, bid) {
@@ -420,7 +456,7 @@
 
       });
 
-      //공동 주택가격 BPrice
+      //공동 주택 가격 BPrice
       $.ajax({
         url: `api/getBuildingInfo.do?apiType=BPrice&pnu=${pnu}`,
         type: "GET",
@@ -438,40 +474,47 @@
 
       return data;
    }
+
+
+   //부동산 팝업 닫기 및 색상 원복 함수
+   function closePopup() {
+        //투명화 모델 id 수정
+        let modelList = ["34002"];
+
+        if (previousModel?.tileset) {
+
+             let conditions = [
+                    ["(regExp('^46').test(${feature['id']}))", 'color("white", 0.75)'],
+                    [
+                      "${feature['id']} === '" + previousModel.getProperty("id") + "'",
+                      'color("white")',
+                    ],
+             ]
+
+             //투명도 적용
+              for (let i = 0; i < modelList.length; i++){
+                let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                conditions.push(obj)
+              }
+
+
+              previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                  conditions: conditions
+                },
+              });
+            }
+
+         previousModel = undefined;
+         $(".desc-popup").css("display", "none");
+         $(".desc-popup-none").css("display", "none");
+   }
+
+
     //부동산 정보 팝업 닫기
     $(document).on('click', '.close-btn', function(e){
 
-    //기본 색 으로 바꾸기
-
-    //투명화 모델 id 수정
-    let modelList = ["34002"];
-
-    if (previousModel?.tileset) {
-
-         let conditions = [
-                ["(regExp('^46').test(${feature['id']}))", 'color("white", 0.75)'],
-                [
-                  "${feature['id']} === '" + previousModel.getProperty("id") + "'",
-                  'color("white")',
-                ],
-         ]
-
-         //투명도 적용
-          for (let i = 0; i < modelList.length; i++){
-            let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
-            conditions.push(obj)
-          }
-
-
-          previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
-            color: {
-              conditions: conditions
-            },
-          });
-        }
-
-     previousModel = undefined;
-     $(".desc-popup").css("display", "none");
+        closePopup();
 
     });
 
@@ -484,3 +527,28 @@
         return "";
       }
     }
+
+    $('.desc-tap').click(function(){
+
+        //상단 탭 색상 변경
+        document.getElementById($('.on').attr('id')).classList.remove('on');
+
+        let tapId = $(this).attr("id");
+        document.getElementById($(this).attr("id")).classList.add('on');
+
+        document.getElementById("tap1Info").classList.remove('on');
+        document.getElementById("tap2Info").classList.remove('on');
+        document.getElementById("tap3Info").classList.remove('on');
+        document.getElementById("tap4Info").classList.remove('on');
+
+        if(tapId =="tap1"){
+            document.getElementById("tap1Info").classList.add('on');
+        }else if(tapId =="tap2"){
+            document.getElementById("tap2Info").classList.add('on');
+        }else if(tapId =="tap3"){
+            document.getElementById("tap3Info").classList.add('on');
+        }else if(tapId =="tap4"){
+            document.getElementById("tap4Info").classList.add('on');
+        }
+    });
+

@@ -1,4 +1,34 @@
 
+    // 포인트 클라우드, 행정정보 버튼 생성
+    $(document).ready(function() {
+     let addBtn = `
+                    <button class="ditap-toolbar-btn ditap-weather-btn">
+                        <p id ="ditap-weather" class="ditap-function-btn-img"></p>
+                        <p class="ditap-btn-tooltip">LAS</p>
+                    </button>
+                    <button class="ditap-toolbar-btn ditap-building-btn">
+                        <p id ="ditap-building" class="ditap-function-btn-img"></p>
+                        <p class="ditap-btn-tooltip">행정정보</p>
+                    </button>
+                    `;
+
+        $(addBtn).insertBefore(".ditap-full-btn");
+
+     });
+
+     //추가 아이콘 클릭시 활성화
+      $(document).on('click', '.ditap-weather-btn', function(){
+
+            const classes = document.getElementById("ditap-weather").classList;
+            if (classes.contains('on')) {
+
+                document.getElementById("ditap-weather").classList.remove('on');
+
+            }else{
+                document.getElementById("ditap-weather").classList.add('on');
+            }
+
+      });
 
     //로컬 환경
     //터레인 호출 함수

@@ -66,7 +66,7 @@
 </div>
 
 <!-- 건물 정보 팝업 -->
-<div id="info-popup" class="desc-popup" style="display : none;">
+<div class="desc-popup" style="display : none;">
 
     <div class="desc-top" >
         <h2 class="title">부동산종합정보</h2>
@@ -74,15 +74,15 @@
     </div>
     <div class="desc-container">
         <div class="desc-tap-wrap">
-            <a class="desc-tap on" title="토지대장">토지대장</a>
-            <a class="desc-tap" title="공시지가">공시지가</a>
-            <a class="desc-tap" title="건물 기본사항">건물 기본사항</a>
-            <a class="desc-tap" title="주택가격">주택가격</a>
+            <a id ="tap1" class="desc-tap on" title="토지대장">토지대장</a>
+            <a id ="tap2" class="desc-tap" title="공시지가">공시지가</a>
+            <a id ="tap3" class="desc-tap" title="건물 기본사항">건물 기본사항</a>
+            <a id ="tap4" class="desc-tap" title="주택가격">주택가격</a>
         </div>
 
         <!--토지대장-->
         <div class="desc-list">
-            <div class="desc-item scroll on"> <!-- 여기 온 -->
+            <div class="desc-item scroll on" id ="tap1Info"> <!-- 여기 온 -->
                 <div class="scroll-table" id="land">
 
                 </div>
@@ -95,9 +95,8 @@
             </div>
         </div>
 
-
          <!--공시지가-->
-         <div class="desc-item">  <!-- 여기 온 -->
+         <div class="desc-item" id ="tap2Info">  <!-- 여기 온 -->
             <div class="desc-scroll-list ">
                 <table>
                     <tr class="desc-scroll-item">
@@ -123,7 +122,7 @@
          </div>
 
         <!--건물 기본 정보-->
-        <div class="desc-item scroll" > <!-- 여기 온 -->
+        <div class="desc-item scroll" id ="tap3Info" > <!-- 여기 온 -->
             <div class="scroll-table" id="base">
             </div>
 
@@ -137,8 +136,8 @@
         </div>
 
         <!--공동 주택 가격-->
-         <div class="desc-item">  <!-- 여기 온 -->
-            <div class="desc-scroll-list ">
+         <div class="desc-item" id ="tap4Info">  <!-- 여기 온 -->
+            <div class="desc-scroll-list">
                 <table>
                     <tr class="desc-scroll-item">
                         <th class="desc-scroll-name">기준년도</th>
@@ -166,7 +165,7 @@
 </div>
 
 <!-- 건물 정보 없음 -->
-<div id= "noInfo-popup" class="desc-popup" style="display : none;">
+<div class="desc-popup-none" style="display : none;">
 
     <div class="desc-top" >
         <h2 class="title">부동산종합정보</h2>
