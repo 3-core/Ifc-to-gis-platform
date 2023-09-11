@@ -123,30 +123,39 @@
              let apiDate = getAPIInfo(pnu);
 
              let resultData = getPopup(apiDate);
+
+             //상단 탭 색상 변경
+             document.getElementById("tap2").classList.remove('on');
+             document.getElementById("tap3").classList.remove('on');
+             document.getElementById("tap4").classList.remove('on');
+
+             document.getElementById("tap2Info").classList.remove('on');
+             document.getElementById("tap3Info").classList.remove('on');
+             document.getElementById("tap4Info").classList.remove('on');
+
+             document.getElementById("tap1").classList.add('on');
+             document.getElementById("tap1Info").classList.add('on');
+
+
              $("#info-popup").css("display", "block");
 
              $("#loadingDim").hide();
         }else{
           //pnu 조회 안됨
           //정보 없음 팝업 띄우기
-          $("#noInfo-popup").css("display", "block");
+         // $("#noInfo-popup").css("display", "block");
 
         }
 
       }else{
       //좌표조회 안됨
       //정보 없음 팝업 띄우기
-      $("#noInfo-popup").css("display", "block");
+      //$("#noInfo-popup").css("display", "block");
       }
     }
 
     //팝업 띄우기
     function getPopup(data) {
-
-
-
-
-
        //토지대장
        let landUl = `<table>`;
        if (data?.Base) {
@@ -325,7 +334,7 @@
                     bPriceUl += li;
                 }
             }else {
-                li = `
+                let li = `
                     <li class="table-item">
                         <p class="table-cont">조회 결과가 없습니다.</p>
                     </li>
@@ -336,6 +345,7 @@
             document.getElementById('bPrice').innerText = '';
 
             $("#bPrice").append(bPriceUl);
+
        return;
 
     }
@@ -420,7 +430,7 @@
 
       });
 
-      //공동 주택가격 BPrice
+      //공동 주택 가격 BPrice
       $.ajax({
         url: `api/getBuildingInfo.do?apiType=BPrice&pnu=${pnu}`,
         type: "GET",
@@ -484,3 +494,28 @@
         return "";
       }
     }
+
+    $('.desc-tap').click(function(){
+
+        //상단 탭 색상 변경
+        document.getElementById($('.on').attr('id')).classList.remove('on');
+
+        let tapId = $(this).attr("id");
+        document.getElementById($(this).attr("id")).classList.add('on');
+
+        document.getElementById("tap1Info").classList.remove('on');
+        document.getElementById("tap2Info").classList.remove('on');
+        document.getElementById("tap3Info").classList.remove('on');
+        document.getElementById("tap4Info").classList.remove('on');
+
+        if(tapId =="tap1"){
+            document.getElementById("tap1Info").classList.add('on');
+        }else if(tapId =="tap2"){
+            document.getElementById("tap2Info").classList.add('on');
+        }else if(tapId =="tap3"){
+            document.getElementById("tap3Info").classList.add('on');
+        }else if(tapId =="tap4"){
+            document.getElementById("tap4Info").classList.add('on');
+        }
+    });
+
