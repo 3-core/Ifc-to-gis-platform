@@ -37,14 +37,6 @@
                     </div>
                 </div>
             </div>
-                <button class="ditap-toolbar-btn ditap-weather-btn">
-                    <p class="ditap-function-btn-img"></p>
-                    <p class="ditap-btn-tooltip">날씨</p>
-                </button>
-                <button class="ditap-toolbar-btn ditap-building-btn">
-                    <p class="ditap-function-btn-img"></p>
-                    <p class="ditap-btn-tooltip">부동산</p>
-                </button>
             <div id="ditapContainer" class="container-viewer">
                 <ul class="ditap-toolbar-top-wrap top-left">
                     <li class="ditap-toolbar-item">
@@ -225,6 +217,7 @@
         addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
         //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
         */
+
 
         viewer.camera.setView({
                 destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
