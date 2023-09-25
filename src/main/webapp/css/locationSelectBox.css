@@ -1,0 +1,22 @@
+#citySelect,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#citySelect {
+    width: 200px;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}

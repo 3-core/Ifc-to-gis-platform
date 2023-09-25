@@ -11,7 +11,7 @@ function fileUpload() {
 
         overlay.style.display = "block";
 
-        axios.post('http://localhost:8000/uploadfile', formData, {
+        axios.post('http://localhost:8000/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

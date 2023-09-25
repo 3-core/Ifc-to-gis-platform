@@ -1741,6 +1741,7 @@ input:focus {
 }
 .ditap-toolbar-right-list {
   padding-bottom: 20px;
+  margin-top: 60px;
 }
 .ditap-toolbar-right-item {
   height: 54px;

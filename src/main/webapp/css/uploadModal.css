@@ -1,17 +1,3 @@
-#upload_modal_button {
-    background-color: #dbe0e2;
-    cursor: pointer margin: 20px;
-    padding: 10px;
-    font-size: 13px;
-    border: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-#upload_modal_button:hover {
-    background-color: #efeded;
-}
-
 .upload_modal {
     display: none;
     position: fixed;
@@ -30,9 +16,21 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
+    width: 80%;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 600px) {
+    .upload_modal_content {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .upload_modal_content {
+        width: 30%;
+    }
 }
 
 #file_input {
@@ -41,7 +39,6 @@
 
 #upload_file_input {
     margin: 10px 0;
-    font-size: 13px;
     padding: 10px;
     background-color: #dbe0e2;
     border: none;
@@ -59,8 +56,8 @@
 }
 
 #upload_button {
+    font-size:13px;
     margin: 10px 0;
-    font-size: 13px;
     padding: 10px;
     background-color: #dbe0e2;
     border: none;
@@ -72,25 +69,12 @@
     background-color: #efeded;
 }
 
-.upload_modal_close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.upload_modal_close:hover,
-.upload_modal_close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .file_input_div {
-    color: white;
+    background-color: white;
+    border: 1px solid #00B8A3;
     font-size: 15px;
     margin: 8px;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-left: 3px;
     min-height: 28px;
     border-radius: 5px;
@@ -113,7 +97,7 @@
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #00B8A3;
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite;
