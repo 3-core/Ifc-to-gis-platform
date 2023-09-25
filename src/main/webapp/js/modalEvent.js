@@ -8,6 +8,11 @@ let closeNonPropertyModal = document.getElementById('non_property_modal_close')
 let propertyModalButton = document.getElementById('property_modal_button')
 let nonPropertyModalButton = document.getElementById('non_property_modal_button')
 
+function showPropertyModal() {
+    propertyModalContent.style.display = 'block';
+    nonPropertyModalContent.style.display = 'none';
+}
+
 function onClickPropertyModalButton() {
     togglePropertyModal()
     nonPropertyModalContent.style.display = 'none'
