@@ -22,6 +22,9 @@
         <!-- DitapJS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
 
+        <script stc="${pageContext.request.contextPath}/js/modal.js"></script>
+
+
         <title>다이탭</title>
     </head>
 
@@ -130,45 +133,54 @@
                 <div id="uploading-text">UPLOADING</div>
             </div>
         </div>
+                <div id="uploading-overlay" style="display: none; z-index: 6000">
+                    <%@ include file="./upload/upload_spinner.jsp" %>
+                </div>
+            </div>
 
-        <!-- CesiumJS-->
-        <script src="https://cesium.com/downloads/cesiumjs/releases/1.105.1/Build/Cesium/Cesium.js"></script>
-        <!-- Jquery-->
-        <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
-        <!-- Axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- CesiumJS-->
+            <script src="https://cesium.com/downloads/cesiumjs/releases/1.105.1/Build/Cesium/Cesium.js"></script>
+            <!-- Jquery-->
+            <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+            <!-- Axios -->
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <!-- Index -->
-        <script src="${pageContext.request.contextPath}/js/index.js"></script>
-        <!-- Cesium Viewer -->
-        <script src="${pageContext.request.contextPath}/js/cesium.js"></script>
-        <!-- Storage -->
-        <script src="${pageContext.request.contextPath}/js/storage.js"></script>
-        <!-- Cesium Utility -->
-        <script src="${pageContext.request.contextPath}/js/utils.js"></script>
-        <!-- Measurement -->
-        <script src="${pageContext.request.contextPath}/js/measure.js"></script>
-        <!-- Transform -->
-        <script src="${pageContext.request.contextPath}/js/transform.js"></script>
-        <!-- Clipping -->
-        <script src="${pageContext.request.contextPath}/js/clipping.js"></script>
-        <!-- Event -->
-        <script src="${pageContext.request.contextPath}/js/events.js"></script>
-        <!-- DitapJS -->
-        <script src="${pageContext.request.contextPath}/js/DitapJS/Ditap.js"></script>
-        <!-- BackGroundMap -->
-        <script src="${pageContext.request.contextPath}/js/backGroundMap.js"></script>
-        <!-- GLB Models -->
-        <script src="${pageContext.request.contextPath}/js/models.js"></script>
-        <!-- ModalFunction -->
-        <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
-        <!-- MoveFunction -->
-        <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
-        <!-- UploadJS -->
-        <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
+            <!-- Index -->
+            <script src="${pageContext.request.contextPath}/js/index.js"></script>
+            <!-- Cesium Viewer -->
+            <script src="${pageContext.request.contextPath}/js/cesium.js"></script>
+            <!-- Storage -->
+            <script src="${pageContext.request.contextPath}/js/storage.js"></script>
+            <!-- Cesium Utility -->
+            <script src="${pageContext.request.contextPath}/js/utils.js"></script>
+            <!-- Measurement -->
+            <script src="${pageContext.request.contextPath}/js/measure.js"></script>
+            <!-- Transform -->
+            <script src="${pageContext.request.contextPath}/js/transform.js"></script>
+            <!-- Clipping -->
+            <script src="${pageContext.request.contextPath}/js/clipping.js"></script>
+            <!-- Event -->
+            <script src="${pageContext.request.contextPath}/js/events.js"></script>
+            <!-- DitapJS -->
+            <script src="${pageContext.request.contextPath}/js/DitapJS/Ditap.js"></script>
+            <!-- BackGroundMap -->
+            <script src="${pageContext.request.contextPath}/js/backGroundMap.js"></script>
+            <!-- GLB Models -->
+            <script src="${pageContext.request.contextPath}/js/models.js"></script>
+            <!-- ModalFunction -->
+            <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
+            <!-- MoveFunction -->
+            <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
+            <!-- UploadJS -->
+            <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
+
+            <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
+            <!-- Keyboard Event -->
+            <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
 
 
         <!-- Heliosen Event -->
@@ -176,35 +188,34 @@
         <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
         <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
 
-        <script>
-        const viewer = new Ditap.DitapViewer("ditapContainer", {
-
-                editingTools: {
-                  createTools: {
-                    point: true,
-                    linestring: true,
-                    polygon: true,
-                  },
-                  select: {
-                    hoverColor: Ditap.Color.fromCssColorString("#BDBDBD"),
-                    selectedColor: Ditap.Color.fromCssColorString("#9DCFFF"),
-                  },
-                  remove: true,
-                },
-                analysisTools: {
-                  visibility: true,
-                  clipping: true,
-                  split: true,
-                },
-                measurementTools: {
-                  altitude: true,
-                  straight: true,
-                  ground: true,
-                  plane: true,
-                  vertical: true,
-                  horizontal: true,
-                  area: true,
-                  volume: true,
+            <script>
+                const viewer = new Ditap.DitapViewer("ditapContainer", {
+                    editingTools: {
+                        createTools: {
+                            point: true,
+                            linestring: true,
+                            polygon: true,
+                        },
+                        select: {
+                            hoverColor: Ditap.Color.fromCssColorString("#BDBDBD"),
+                            selectedColor: Ditap.Color.fromCssColorString("#9DCFFF"),
+                        },
+                        remove: true,
+                    },
+                    analysisTools: {
+                        visibility: true,
+                        clipping: true,
+                        split: true,
+                    },
+                    measurementTools: {
+                        altitude: true,
+                        straight: true,
+                        ground: true,
+                        plane: true,
+                        vertical: true,
+                        horizontal: true,
+                        area: true,
+                        volume: true,
 
                 },
                 homeButton: true,
@@ -239,37 +250,78 @@
                 }
         });
 
-        // Property Click Handler
-        const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
-        handler.setInputAction(async function (event) {
-            const pickObject = viewer.scene.pick(event.position);
+                let previousNode;
+                let previousColor;
+                // Property Click Handler
+                const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
+                handler.setInputAction(async function (event) {
+                    const pickObject = viewer.scene.pick(event.position);
 
-                //건물 정보 보기
-                if (Cesium.defined(pickObject)) {
+                    //건물 정보 보기
+                    if (Cesium.defined(pickObject)) {
+                        getBuildingInfoPopup(event, viewer, pickObject);
+                    }
 
-                    getBuildingInfoPopup(event,viewer,pickObject)
-                }
+                    if (Cesium.defined(pickObject) && pickObject.detail.node) {
+                        const guid = pickObject.detail.node._name;
+                        const node = pickObject.detail.node;
 
-               if (Cesium.defined(pickObject) && pickObject.detail.node) {
-                    const guid = pickObject.detail.node._name;
-                }
+						handleNodeFocus(node);
 
-        }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
+						const URL = "http://localhost:8000/ifc/properties/" + guid
+                        axios.get(URL)
+                        .then(function (response) {
+                            const propertyData = {
+                                property: response.data.element_property,
+                                pset: response.data.pset_property
+                            }
 
-        // GLB Models
-        // viewer.scene.primitives.add(jeonju_model);
+                            document.getElementById('property-section').innerHTML = '';
+                            document.getElementById('pset-section').innerHTML = '';
 
-        // keyboard Event
-        Heliosen.keyboard.initKeyboard(viewer);
+							document.getElementById('h2-property').style.display = "block"
+							document.getElementById('h2-pset').style.display = "block"
 
-        document.addEventListener("keydown",function (e) {
-           Heliosen.keyboard.KeyboardEvent("keydown",e.keyCode);
-        },false);
+							document.getElementById('tree-container').style.display = "block"
+							document.getElementById('floor-tree-container').style.display = "block"
+                            displaySectionData(propertyData.property, "property-section")
+                            displaySectionData(propertyData.pset, "pset-section")
 
-        document.addEventListener("keyup",function (e) {
-           Heliosen.keyboard.KeyboardEvent("keyup",e.keyCode);
-        },false);
+							highlightNodeByGuid(guid)
+                            showPropertyModal()
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                    }
 
+                }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
+
+                // GLB Models
+                viewer.scene.primitives.add(siheung_model);
+
+                // keyboard Event
+                Heliosen.keyboard.initKeyboard(viewer);
+
+                document.addEventListener("keydown", function (e) {
+                    Heliosen.keyboard.KeyboardEvent("keydown", e.keyCode);
+                }, false);
+
+                document.addEventListener("keyup", function (e) {
+                    Heliosen.keyboard.KeyboardEvent("keyup", e.keyCode);
+                }, false);
+
+                let nodeObjects;
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        nodeObjects = siheung_model._nodesByName;
+                    }, 2000);
+                });
+
+
+
+
+            </script>
         // compass Event
         compassMove(viewer);
 
