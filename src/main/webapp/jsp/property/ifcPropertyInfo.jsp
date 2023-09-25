@@ -61,32 +61,26 @@
 
 	function displaySectionData(data, sectionId) {
         const section = document.getElementById(sectionId);
-        let count = 0;
+            let count = 0;
 
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                const value = data[key];
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const value = data[key];
 
-                // 값이 객체인 경우
-                if (typeof value === 'object' && value !== null) {
-                    // 객체의 키를 사용하여 표시
-                    displayKeyValue(key + " [Object]", JSON.stringify(value), section, count);
-                    count++;
-
-                    // 객체의 각 속성을 추가로 표시 (예: 'Reference', 'id' 등)
-                    for (const subKey in value) {
-                        if (value.hasOwnProperty(subKey)) {
-                            displayKeyValue(subKey, value[subKey], section, count);
-                            count++;
+                    if (typeof value === 'object' && value !== null) {
+                        // 객체의 각 속성을 추가로 표시 (예: 'Reference', 'id' 등)
+                        for (const subKey in value) {
+                            if (value.hasOwnProperty(subKey)) {
+                                displayKeyValue(subKey, value[subKey], section, count);
+                                count++;
+                            }
                         }
+                    } else {
+                        displayKeyValue(key, value, section, count);
+                        count++;
                     }
-                } else {
-                    // 값이 객체가 아닌 경우
-                    displayKeyValue(key, value, section, count);
-                    count++;
                 }
             }
-        }
     }
 
     function displayKeyValue(key, value, section, count) {
