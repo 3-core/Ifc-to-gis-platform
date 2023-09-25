@@ -29,113 +29,142 @@
     </head>
 
     <body>
-        <%@ include file="./buildingPopup.jsp"%>
-        <div class="wrap">
-            <div class="header-wrap">
-                <div class="header-logo">
-                    <div class="header-logo-img">
-                        <img src="${pageContext.request.contextPath}/public/img/lx_logo.png" alt="lx_logo"/>
-                    </div>
-                    <div class="header-logo-txt">
-                        한국국토정보공사
+        <%@ include file="./buildingPopup.jsp" %>
+            <div class="wrap">
+                <div class="header-wrap">
+                    <div class="header-logo">
+                        <div class="header-logo-img">
+                            <img src="${pageContext.request.contextPath}/public/img/logo.png" alt="lx_logo" />
+                        </div>
+                        <div class="header-logo-txt">
+                            한국국토정보공사
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="ditapContainer" class="container-viewer">
-                <ul class="ditap-toolbar-top-wrap top-left">
-                    <li class="ditap-toolbar-item">
-                        <button class="ditap-toolbar-btn ditap-upload-btn">
-                            <p class="ditap-function-btn-img js-basemap-btn"></p>
-                            <p class="ditap-btn-tooltip">업로드</p>
-                        </button>
-                    </li>
-                    <li class="ditap-toolbar-item">
-                        <button id="property_modal_button" class="ditap-toolbar-btn ditap-property-btn">
-                            <p class="ditap-function-btn-img js-basemap-btn"></p>
-                            <p class="ditap-btn-tooltip">속성</p>
-                        </button>
-                    </li>
-                    <li class="ditap-toolbar-item">
-                        <button id="non_property_modal_button" class="ditap-toolbar-btn ditap-non-space-btn">
-                            <p class="ditap-function-btn-img js-basemap-btn"></p>
-                            <p class="ditap-btn-tooltip">비공간</p>
-                        </button>
-                    </li>
-                </ul>
-                <div id="property_modal" class="property-modal">
-                    <div id="property_modal_content" class="property-modal-content">
-                        <div class="modal-content-top">
-                            <div class="title">속성</div>
-                            <button class="close" onclick="closeModal()">
-                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close">
+                <div id="ditapContainer" class="container-viewer">
+                    <ul class="ditap-toolbar-top-wrap top-left">
+                        <li class="ditap-toolbar-item">
+                            <button class="ditap-toolbar-btn ditap-upload-btn" onclick="openUploadModal()">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">업로드</p>
                             </button>
-                        </div>
-                    </div>
-                    <div id="non_property_modal_content" class="non-property-modal-content">
-                        <div class="modal-content-top">
-                            <div class="title">비공간</div>
-                            <button class="close" onclick="closeNonPropertyModal()">
-                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close">
+                        </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="property_modal_button" class="ditap-toolbar-btn ditap-property-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">속성</p>
                             </button>
+                        </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="non_property_modal_button" class="ditap-toolbar-btn ditap-non-space-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">비공간</p>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div id="property_modal" class="property_modal">
+                        <div id="property_modal_content" class="property_modal_content">
+                            <div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 15px">
+                                        <div>검색</div>
+                                        <div id="property_modal_close">
+                                            <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close"
+                                                style="margin-left:10px; width: auto; height: 20px">
+                                        </div>
+                                    </div>
+                                    <div style="font-size:13px; color: #7A7A7A;">
+                                        지정된 위치로 이동합니다.
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-top: 10px">
+                                        <select id="citySelect" style="flex-grow: 7">
+                                            <option value="blank"></option>
+                                            <option value="jeonju">전북 완주군 이서면 갈산리 690</option>
+                                        </select>
+                                        <div style="margin: 18px 0 0 11px">
+                                            <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="location_search" onclick="moveLocation()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- IFC 구조 -->
+                            <div>
+                                <%@ include file="./property/property.jsp" %>
+                            </div>
+                            <!-- 속성정보 -->
+                            <div>
+                            </div>
+                        </div>
+                        <div id="non_property_modal_content" class="non_property_modal_content">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>비공간</div>
+                                <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
+                                    <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="upload_modal" class="upload_modal">
+                        <div class="upload_modal_content">
+                            <div style="display: flex; justify-content: space-between">
+                                <div style="margin:10px; color: white">
+                                    <div style="font-size: 20px; font-weight: bold">IFC 업로드</div>
+                                    <div style="font-size: 12px; color:#a5a5a5; margin-top: 5px">파일의 변환(IFC -> GLB)과 속성정보 데이터를 추출합니다.</div>
+                                </div>
+                                <div id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">
+                                    <img src="${pageContext.request.contextPath}/public/img/close.png" alt="upload_modal_close"
+                                        style="margin-left:10px; margin-top:10px; width: auto; height: 20px">
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between">
+                                <input type="file" id="file_input" style="flex-grow: 9;">
+                                <p id="file_name" class="file_input_div" style="flex-grow:9">선택된 IFC 파일이 없습니다.</p>
+                                <label id="upload_file_input" for="file_input">파일 선택</label>
+                            </div>
+                            <div style="display:flex; justify-content: flex-end">
+                                <button id="upload_button" onclick="fileUpload()">업로드</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="compass-tool">
+                        <div class="compass-wrap">
+
+                            <div class="compass">
+                                <p class="compass-img">
+                                    <img class="tool_compass" src="${pageContext.request.contextPath}/public/img/inter_tool_comp.png"
+                                        alt="img">
+                                </p>
+                            </div>
+                            <div class="compass-arrow">
+                                <p id="upCtrlBtn">
+                                    <button class="top"></button>
+                                </p>
+                                <p id="rightCtrlBtn">
+                                    <button class="right"></button>
+                                </p>
+                                <p id="downCtrlBtn">
+                                    <button class="bottom"></button>
+                                </p>
+                                <p id="leftCtrlBtn">
+                                    <button class="left"></button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="upload_modal" class="upload_modal">
-                    <div class="upload_modal_content">
-                        <div style="display: flex; justify-content: space-between">
-                            <div style="margin:10px; color: white">
-                                <div style="font-size: 20px; font-weight: bold">IFC 업로드</div>
-                                <div style="font-size: 12px; color:#a5a5a5; margin-top: 5px">파일의 변환(IFC -> GLB)과 속성정보 데이터를 추출합니다.</div>
-                            </div>
-                            <div id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">
-                                <img src="${pageContext.request.contextPath}/public/img/close.png" alt="upload_modal_close" style="margin-left:10px; margin-top:10px; width: auto; height: 20px">
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between">
-                            <input type="file" id="file_input" style="flex-grow: 9;">
-                            <p id="file_name" class="file_input_div" style="flex-grow:9">선택된 IFC 파일이 없습니다.</p>
-                            <label id="upload_file_input" for="file_input">파일 선택</label>
-                        </div>
-                        <div style="display:flex; justify-content: flex-end">
-                            <button id="upload_button" onclick="fileUpload()">업로드</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="compass-tool">
-                    <div class="compass-wrap">
-
-                        <div class="compass">
-                            <p class="compass-img">
-                                <img class="tool_compass" src="${pageContext.request.contextPath}/public/img/inter_tool_comp.png" alt="img">
-                            </p>
-                        </div>
-                        <div class="compass-arrow">
-                        <p id="upCtrlBtn">
-                            <button class="top" ></button>
-                        </p>
-                        <p id="rightCtrlBtn">
-                            <button class="right" ></button>
-                        </p>
-                        <p id="downCtrlBtn">
-                            <button class="bottom" ></button>
-                        </p>
-                        <p id="leftCtrlBtn">
-                            <button class="left" ></button>
-                        </p>
-                        </div>
-                    </div>
+                <div id="uploading-overlay" style="display: none; z-index: 6000">
+                    <div id="spinner" class="loader"></div>
+                    <div id="uploading-text">UPLOADING</div>
                 </div>
             </div>
             <div id="uploading-overlay" style="display: none; z-index: 6000">
-                <div id="spinner" class="loader"></div>
-                <div id="uploading-text">UPLOADING</div>
+                <%@ include file="./upload/upload_spinner.jsp" %>
             </div>
-        </div>
-                <div id="uploading-overlay" style="display: none; z-index: 6000">
-                    <%@ include file="./upload/upload_spinner.jsp" %>
-                </div>
             </div>
 
             <!-- CesiumJS-->
@@ -177,16 +206,14 @@
             <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
             <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
 
+			<!-- Soosung Event -->
             <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
-            <!-- Keyboard Event -->
+
+
+            <!-- Heliosen Event -->
             <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
             <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
-
-
-        <!-- Heliosen Event -->
-        <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
-        <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
-        <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
+            <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
 
             <script>
                 const viewer = new Ditap.DitapViewer("ditapContainer", {
@@ -217,38 +244,38 @@
                         area: true,
                         volume: true,
 
-                },
-                homeButton: true,
-                navigationHelpButton: true,
-                fullscreenButton: true,
-                baseLayerPicker: true,
-                imageryProviderViewModels: createCustomImageryProviderViewModels(),
-                terrainProviderViewModels: createCustomTerrainProviderViewModels(),
-                //terrainProvider: requestDemTileMap(),
+                    },
+                    homeButton: true,
+                    navigationHelpButton: true,
+                    fullscreenButton: true,
+                    baseLayerPicker: true,
+                    imageryProviderViewModels: createCustomImageryProviderViewModels(),
+                    terrainProviderViewModels: createCustomTerrainProviderViewModels(),
+                    //terrainProvider: requestDemTileMap(),
 
-        });
+                });
 
-        //tileset 요청
-        const tilesetList = {
-            //아파치 타일 경로 - 장성 내부
-            "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
-            "pointCloud":"public/3dtileset/point/tileset.json",
-        }
+                //tileset 요청
+                const tilesetList = {
+                    //아파치 타일 경로 - 장성 내부
+                    "jangseongTileset": `http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
+                    "pointCloud": "public/3dtileset/point/tileset.json",
+                };
 
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
-        //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
+                addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+                //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
 
 
-        viewer.camera.setView({
-                destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
-                //장성 군청
-                //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
-                orientation: {
-                    heading: Cesium.Math.toRadians(90.0),
-                    pitch: Cesium.Math.toRadians(-90),
-                    roll: 0.0
-                }
-        });
+                viewer.camera.setView({
+                    destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
+                    //장성 군청
+                    //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
+                    orientation: {
+                        heading: Cesium.Math.toRadians(90.0),
+                        pitch: Cesium.Math.toRadians(-90),
+                        roll: 0.0
+                    }
+                });
 
                 let previousNode;
                 let previousColor;
@@ -266,33 +293,33 @@
                         const guid = pickObject.detail.node._name;
                         const node = pickObject.detail.node;
 
-						handleNodeFocus(node);
+                        handleNodeFocus(node);
 
-						const URL = "http://localhost:8000/ifc/properties/" + guid
+                        const URL = "http://localhost:8000/ifc/properties/" + guid;
                         axios.get(URL)
-                        .then(function (response) {
-                            const propertyData = {
-                                property: response.data.element_property,
-                                pset: response.data.pset_property
-                            }
+                            .then(function (response) {
+                                const propertyData = {
+                                    property: response.data.element_property,
+                                    pset: response.data.pset_property
+                                };
 
-                            document.getElementById('property-section').innerHTML = '';
-                            document.getElementById('pset-section').innerHTML = '';
+                                document.getElementById('property-section').innerHTML = '';
+                                document.getElementById('pset-section').innerHTML = '';
 
-							document.getElementById('h2-property').style.display = "block"
-							document.getElementById('h2-pset').style.display = "block"
+                                document.getElementById('h2-property').style.display = "block";
+                                document.getElementById('h2-pset').style.display = "block";
 
-							document.getElementById('tree-container').style.display = "block"
-							document.getElementById('floor-tree-container').style.display = "block"
-                            displaySectionData(propertyData.property, "property-section")
-                            displaySectionData(propertyData.pset, "pset-section")
+                                document.getElementById('tree-container').style.display = "block";
+                                document.getElementById('floor-tree-container').style.display = "block";
+                                displaySectionData(propertyData.property, "property-section");
+                                displaySectionData(propertyData.pset, "pset-section");
 
-							highlightNodeByGuid(guid)
-                            showPropertyModal()
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
+                                highlightNodeByGuid(guid);
+                                showPropertyModal();
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
                     }
 
                 }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
@@ -312,43 +339,38 @@
                 }, false);
 
                 let nodeObjects;
-                document.addEventListener("DOMContentLoaded", function() {
-                    setTimeout(function() {
+                document.addEventListener("DOMContentLoaded", function () {
+                    setTimeout(function () {
                         nodeObjects = siheung_model._nodesByName;
                     }, 2000);
                 });
 
+                compassMove(viewer);
 
+                $(document).on("click", ".compass", function () {
+                    compassClick(viewer);
+                });
 
+                let flags = { mousedown: false, directionId: null };
+
+                $(document).on("mousedown", ".compass-arrow p", function () {
+                    let directionId = $(this).attr("id");
+
+                    flags.mousedown = true;
+                    flags.directionId = directionId;
+
+                    locationMove(viewer, flags);
+
+                });
+
+                $(document).on("mouseup", ".compass-arrow p", function () {
+                    flags.mousedown = false;
+                    flags.directionId = null;
+
+                    locationMove(viewer, flags);
+                });
 
             </script>
-        // compass Event
-        compassMove(viewer);
-
-        $(document).on("click", ".compass", function () {
-            compassClick(viewer);
-        });
-
-        let flags = { mousedown: false, directionId: null };
-
-         $(document).on("mousedown", ".compass-arrow p", function () {
-             let directionId = $(this).attr("id");
-
-             flags.mousedown = true;
-             flags.directionId = directionId;
-
-             locationMove(viewer,flags)
-
-         });
-
-         $(document).on("mouseup", ".compass-arrow p", function () {
-                flags.mousedown = false;
-                flags.directionId = null;
-
-                locationMove(viewer,flags)
-         });
-
-        </script>
     </body>
 
     </html>
