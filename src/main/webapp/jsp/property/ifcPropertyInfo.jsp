@@ -5,7 +5,7 @@
         color: black;
         overflow-x: hidden;
         overflow-y: auto;
-        height: 300px;
+        height: 320px;
         max-height: 500px;
         padding: 5px;
     }

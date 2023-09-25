@@ -28,7 +28,7 @@
 
         .tab-content {
             margin-top: 5px;
-            height: 300px;
+            height: 250px;
             padding: 15px;
             color: black;
             overflow: auto;
@@ -51,7 +51,7 @@
 
         #tree-container,
         #floor-tree-container {
-            font-size: 17px;
+            font-size: 13px;
         }
 
         .tree-node {
@@ -341,10 +341,10 @@
     <div>
         <!--IFC 구조-->
         <div>
-            <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+            <div style="margin-top: 15px; display: flex; justify-content: space-between;">
                 <div>
-                    <div style="font-size: 20px">IFC 구조</div>
-                    <div style="font-size: 15px; color: #7A7A7A; margin-top: 3px">BIM 데이터의 구조를 확인할 수 있습니다.</div>
+                    <div style="font-size: 15px">IFC 구조</div>
+                    <div style="font-size: 13px; color: #7A7A7A; margin-top: 3px">BIM 데이터의 구조를 확인할 수 있습니다.</div>
                 </div>
             </div>
             <div style="margin-top:10px; background-color: white; border-radius: 10px; border: 1px solid #00b8a3">
@@ -369,9 +369,9 @@
 
         <!--속성정보-->
         <div>
-            <div style="margin-top: 30px">
-                <div style="font-size: 20px">속성 정보</div>
-                <div style="font-size: 15px; color: #7A7A7A; margin-top: 3px">객체별 속성을 확인할 수 있습니다.</div>
+            <div style="margin-top: 15px">
+                <div style="font-size: 15px">속성 정보</div>
+                <div style="font-size: 13px; color: #7A7A7A; margin-top: 3px">객체별 속성을 확인할 수 있습니다.</div>
             </div>
             <div style="margin-top:10px; background-color: white; border-radius: 10px; border: 1px solid #00b8a3">
                 <%@ include file="./ifcPropertyInfo.jsp" %>
