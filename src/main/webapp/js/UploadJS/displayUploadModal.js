@@ -9,4 +9,3 @@ function openUploadModal() {
     };
 };
 
-uploadModalButton.addEventListener('click', openUploadModal)
