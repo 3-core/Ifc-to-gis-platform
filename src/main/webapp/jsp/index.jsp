@@ -61,6 +61,12 @@
                                 <p class="ditap-btn-tooltip">비공간</p>
                             </button>
                         </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="rotate_model_button" class="ditap-toolbar-btn ditap-non-space-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">회전</p>
+                            </button>
+                        </li>
                     </ul>
 
                     <div id="property_modal" class="property_modal">
@@ -129,6 +135,10 @@
                                 <button id="upload_button" onclick="fileUpload()">업로드</button>
                             </div>
                         </div>
+                    </div>
+
+					<div>
+                        <%@ include file="./modelRotateModal/modelRotateModal.jsp" %>
                     </div>
 
                     <div class="compass-tool">
@@ -208,7 +218,8 @@
 
 			<!-- Soosung Event -->
             <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
-
+            <script src="${pageContext.request.contextPath}/js/rotateModel.js"></script>
+            <script src="${pageContext.request.contextPath}/js/changeModel.js"></script>
 
             <!-- Heliosen Event -->
             <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
@@ -265,9 +276,12 @@
                 addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
                 //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
 
-
                 viewer.camera.setView({
-                    destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
+                    destination: new Cesium.Cartesian3.fromDegrees(
+                    127.06546589276200,
+                    35.83808503357750,
+                    34.97499999999889
+                    ),
                     //장성 군청
                     //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
                     orientation: {
@@ -325,7 +339,10 @@
                 }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
 
                 // GLB Models
-                viewer.scene.primitives.add(siheung_model);
+                // viewer.scene.primitives.add(siheung_model);
+                viewer.scene.primitives.add(siheung_floor_model);
+                siheung_floor_model.show = false
+                viewer.scene.primitives.add(siheung_wrong_model);
 
                 // keyboard Event
                 Heliosen.keyboard.initKeyboard(viewer);
@@ -341,7 +358,7 @@
                 let nodeObjects;
                 document.addEventListener("DOMContentLoaded", function () {
                     setTimeout(function () {
-                        nodeObjects = siheung_model._nodesByName;
+                        nodeObjects = siheung_wrong_model._nodesByName;
                     }, 2000);
                 });
 
