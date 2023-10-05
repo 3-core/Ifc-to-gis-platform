@@ -276,7 +276,7 @@
                     }
 
                     targetNode.classList.add('highlighted');
-                    targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });  // 스크롤 이동
+                    targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             });
         }
@@ -294,7 +294,6 @@
                     document.getElementById('property-section').innerHTML = '';
                     document.getElementById('pset-section').innerHTML = '';
 
-                    // 데이터를 받아온 후에 displaySectionData 함수를 호출합니다.
                     displaySectionData(propertyData.property, 'property-section');
                     displaySectionData(propertyData.pset, 'pset-section');
                 })
@@ -342,9 +341,14 @@
         <!--IFC 구조-->
         <div>
             <div style="margin-top: 15px; display: flex; justify-content: space-between;">
-                <div>
-                    <div style="font-size: 15px">IFC 구조</div>
-                    <div style="font-size: 13px; color: #7A7A7A; margin-top: 3px">BIM 데이터의 구조를 확인할 수 있습니다.</div>
+                <div style="display: flex;">
+                    <div>
+                        <div style="font-size: 15px">IFC 구조</div>
+                        <div style="font-size: 13px; color: #7A7A7A; margin-top: 3px">BIM 데이터의 구조를 확인할 수 있습니다.</div>
+                    </div>
+                    <button id="model-change-button" style="background-color: grey; color: white; height: 30px; width: 30px; border-radius: 50%; margin-left: 115px">
+                        <img src="${pageContext.request.contextPath}/public/img/stack.png" alt="stack" style="width: 50%%; height: auto;">
+                    </button>
                 </div>
             </div>
             <div style="margin-top:10px; background-color: white; border-radius: 10px; border: 1px solid #00b8a3">
