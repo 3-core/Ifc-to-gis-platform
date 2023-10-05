@@ -24,35 +24,34 @@
 
     #model-rotate-title {
         font-size: 20px;
-        color: pink;
+        font-weight: bold;
+        color: white;
         text-align: center;
     }
 
     #model-rotate-content {
         font-size: 15px;
-        color: pink;
+        color: white;
         text-align: center;
     }
 
     #model-rotate-footer {
         display: none;
         font-size: 15px;
-        color: pink;
+        color: white;
         text-align: center;
         padding: 40px
     }
 </style>
 
 <script>
-	const modelClosenessData = ["1", "2", "3", "4", "5", "6", "7", "8"]
-
-    let headingValue = 228;
-
 	document.addEventListener("DOMContentLoaded", function () {
-		let angleValue = 0; // 시작 값
-        let index = 0; // modelClosenessData 배열의 인덱스
+		const modelClosenessData = ["1", "2", "3", "4", "5", "6", "7", "8"]
+        let headingValue = 228;
+        let rotateCount = 0;
+		let angleValue = 0;
+        let index = 0;
 
-        // A와 MC의 위치를 직접 참조
         const angleElement = document.querySelector("#model-rotate-angle > div:last-child");
         const modelClosenessElement = document.querySelector("#model-rotate-closeness > div:last-child");
 
@@ -63,7 +62,7 @@
                     headingValue -= 360;
                 }
 
-                const siheung_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+                const siheung_rotate_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
                     new Ditap.Cartesian3.fromDegrees(
                         127.058968,
                         35.835169,
@@ -73,25 +72,27 @@
                     Ditap.Ellipsoid.WGS84,
                     Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
                 );
+                rotateCount++;
 
-                siheung_model1.modelMatrix = siheung_model_matrix;
+                if (rotateCount >= 8) {
+                    clearInterval(intervalId);
+                }
+                siheung_wrong_model.modelMatrix = siheung_rotate_model_matrix;
             }, 1000);
 
             let updateIntervalId = setInterval(() => {
-                    // angleValue 업데이트
                     angleValue += 18.75;
-                    if (angleValue > 200) {
-                        angleValue = 200;
-                        clearInterval(updateIntervalId); // 200 이상이면 업데이트 중지
+                    if (angleValue > 150) {
+                        angleValue = 150;
+                        clearInterval(updateIntervalId);
                     }
                     angleElement.textContent = angleValue;
 
-                    // modelClosenessData 업데이트
                     if (index < modelClosenessData.length) {
                         modelClosenessElement.textContent = modelClosenessData[index];
                         index++;
                     } else {
-                        clearInterval(updateIntervalId); // 배열의 모든 값을 표시한 뒤 업데이트 중지
+                        clearInterval(updateIntervalId);
                     }
                 }, 1000);
 
@@ -100,7 +101,6 @@
                 document.getElementById('model-rotate-footer').style.display = "block";
             }, 9000);
 
-            // 모달창 작동 부분
             document.getElementById('model-rotate-modal').style.display = "block";
 
             setTimeout(() => {
@@ -117,15 +117,15 @@
 	</div>
 	<div id="model-rotate-content">
 		<div id="model-rotate-angle">
-			<div>Angle:</div>
-			<div>A</div>
+			<div>Angle(회전각도)</div>
+			<div></div>
 		</div>
 		<div id="model-rotate-closeness" style="margin-top: 10px">
-			<div>ModelCloseness:</div>
-            <div>MC</div>
+			<div>ModelCloseness(모델유사도)</div>
+            <div></div>
 		</div>
 	</div>
-	<div id="model-rotate-footer">
-		GeoReferencing이 완료 되었습니다.
+	<div id="model-rotate-footer" style="font-size: 15px; font-weight: bold">
+		폴리곤 매칭이 완료되었습니다.
 	</div>
 </div>

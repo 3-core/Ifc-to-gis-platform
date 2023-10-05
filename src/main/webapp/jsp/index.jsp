@@ -219,6 +219,7 @@
 			<!-- Soosung Event -->
             <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
             <script src="${pageContext.request.contextPath}/js/rotateModel.js"></script>
+            <script src="${pageContext.request.contextPath}/js/changeModel.js"></script>
 
             <!-- Heliosen Event -->
             <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
@@ -339,7 +340,9 @@
 
                 // GLB Models
                 // viewer.scene.primitives.add(siheung_model);
-                viewer.scene.primitives.add(siheung_model1);
+                viewer.scene.primitives.add(siheung_floor_model);
+                siheung_floor_model.show = false
+                viewer.scene.primitives.add(siheung_wrong_model);
 
                 // keyboard Event
                 Heliosen.keyboard.initKeyboard(viewer);
@@ -355,7 +358,7 @@
                 let nodeObjects;
                 document.addEventListener("DOMContentLoaded", function () {
                     setTimeout(function () {
-                        nodeObjects = siheung_model._nodesByName;
+                        nodeObjects = siheung_wrong_model._nodesByName;
                     }, 2000);
                 });
 
