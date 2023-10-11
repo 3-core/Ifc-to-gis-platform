@@ -84,7 +84,7 @@
     }
 
 
-    // 나침반 클릭시 북방향 이동
+    // 나침반 클릭시 북방향
     function compassClick(viewer) {
 
         // 카메라 좌표

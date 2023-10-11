@@ -151,7 +151,7 @@
           category: "Ditap",
           creationFunction: function () {
             return new Ditap.CesiumTerrainProvider({
-                //헬리오센 - 전북 원주
+                //헬리오센 - 전북 원주(시연장소)
                 url :"http://server.heliosen.co.kr:18092/tilesets/duckjinwansan",
             });
           },
