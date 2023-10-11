@@ -18,22 +18,27 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/uploadModal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/locationSelectBox.css">
         <!-- DitapJS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
+
+        <script stc="${pageContext.request.contextPath}/js/modal.js"></script>
+
 
         <title>다이탭</title>
     </head>
 
     <body>
-        <%@ include file="./buildingPopup.jsp"%>
-        <div class="wrap">
-            <div class="header-wrap">
-                <div class="header-logo">
-                    <div class="header-logo-img">
-                        <img src="${pageContext.request.contextPath}/public/img/lx_logo.png" alt="lx_logo"/>
-                    </div>
-                    <div class="header-logo-txt">
-                        한국국토정보공사
+        <%@ include file="./buildingPopup.jsp" %>
+            <div class="wrap">
+                <div class="header-wrap">
+                    <div class="header-logo">
+                        <div class="header-logo-img">
+                            <img src="${pageContext.request.contextPath}/public/img/logo.png" alt="lx_logo" />
+                        </div>
+                        <div class="header-logo-txt">
+                            한국국토정보공사
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,6 +62,14 @@
                             <p class="ditap-btn-tooltip">비공간</p>
                         </button>
                     </li>
+
+                    <li class="ditap-toolbar-item">
+                        <button id="building_rotation_btn_button" class="ditap-toolbar-btn ditap-bid-rotation-btn">
+                            <p class="ditap-function-btn-img js-basemap-btn"></p>
+                            <p class="ditap-btn-tooltip">Polygon Matching</p>
+                        </button>
+                    </li>
+
                 </ul>
                 <div id="property_modal" class="property-modal">
                     <div id="property_modal_content" class="property-modal-content">
@@ -65,228 +78,336 @@
                             <button class="close" onclick="closeModal()">
                                 <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close">
                             </button>
-                        </div>
-                    </div>
-                    <div id="non_property_modal_content" class="non-property-modal-content">
-                        <div class="modal-content-top">
-                            <div class="title">비공간</div>
-                            <button class="close" onclick="closeNonPropertyModal()">
-                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close">
+                        </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="property_modal_button" class="ditap-toolbar-btn ditap-property-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">속성</p>
                             </button>
+                        </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="non_property_modal_button" class="ditap-toolbar-btn ditap-non-space-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">비공간</p>
+                            </button>
+                        </li>
+                        <li class="ditap-toolbar-item">
+                            <button id="rotate_model_button" class="ditap-toolbar-btn ditap-non-space-btn">
+                                <p class="ditap-function-btn-img js-basemap-btn"></p>
+                                <p class="ditap-btn-tooltip">회전</p>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div id="property_modal" class="property_modal">
+                        <div id="property_modal_content" class="property_modal_content">
+                            <div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 15px">
+                                        <div>검색</div>
+                                        <div id="property_modal_close">
+                                            <img src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close"
+                                                style="margin-left:10px; width: auto; height: 20px">
+                                        </div>
+                                    </div>
+                                    <div style="font-size:13px; color: #7A7A7A;">
+                                        지정된 위치로 이동합니다.
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-top: 10px">
+                                        <select id="citySelect" style="flex-grow: 7">
+                                            <option value="blank"></option>
+                                            <option value="jeonju">전북 완주군 이서면 갈산리 690</option>
+                                        </select>
+                                        <div style="margin: 18px 0 0 11px">
+                                            <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="location_search" onclick="moveLocation()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- IFC 구조 -->
+                            <div>
+                                <%@ include file="./property/property.jsp" %>
+                            </div>
+                            <!-- 속성정보 -->
+                            <div>
+                            </div>
+                        </div>
+                        <div id="non_property_modal_content" class="non_property_modal_content">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>비공간</div>
+                                <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
+                                    <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="upload_modal" class="upload_modal">
+                        <div class="upload_modal_content">
+                            <div style="display: flex; justify-content: space-between">
+                                <div style="margin:10px; color: white">
+                                    <div style="font-size: 20px; font-weight: bold">IFC 업로드</div>
+                                    <div style="font-size: 12px; color:#a5a5a5; margin-top: 5px">파일의 변환(IFC -> GLB)과 속성정보 데이터를 추출합니다.</div>
+                                </div>
+                                <div id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">
+                                    <img src="${pageContext.request.contextPath}/public/img/close.png" alt="upload_modal_close"
+                                        style="margin-left:10px; margin-top:10px; width: auto; height: 20px">
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between">
+                                <input type="file" id="file_input" style="flex-grow: 9;">
+                                <p id="file_name" class="file_input_div" style="flex-grow:9">선택된 IFC 파일이 없습니다.</p>
+                                <label id="upload_file_input" for="file_input">파일 선택</label>
+                            </div>
+                            <div style="display:flex; justify-content: flex-end">
+                                <button id="upload_button" onclick="fileUpload()">업로드</button>
+                            </div>
+                        </div>
+                    </div>
+
+					<div>
+                        <%@ include file="./modelRotateModal/modelRotateModal.jsp" %>
+                    </div>
+
+                    <div class="compass-tool">
+                        <div class="compass-wrap">
+
+                            <div class="compass">
+                                <p class="compass-img">
+                                    <img class="tool_compass" src="${pageContext.request.contextPath}/public/img/inter_tool_comp.png"
+                                        alt="img">
+                                </p>
+                            </div>
+                            <div class="compass-arrow">
+                                <p id="upCtrlBtn">
+                                    <button class="top"></button>
+                                </p>
+                                <p id="rightCtrlBtn">
+                                    <button class="right"></button>
+                                </p>
+                                <p id="downCtrlBtn">
+                                    <button class="bottom"></button>
+                                </p>
+                                <p id="leftCtrlBtn">
+                                    <button class="left"></button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="upload_modal">
-                    <div class="upload_modal_content">
-                        <span id="upload_modal_close" class="upload_modal_close" onclick="closeUploadModal()">&times;</span>
-                        <div style="margin:10px; color: white">
-                            <div style="font-size: 20px">IFC 파일을 선택해 주세요.</div>
-                        </div>
-                        <label id="upload_file_input" for="file_input">파일 선택</label>
-                        <input type="file" id="file_input">
-                        <p id="file_name" class="file_input_div">선택된 IFC 파일이 없습니다.</p>
-                        <button id="upload_button" onclick="fileUpload()">업로드</button>
-                    </div>
-                </div>
-
-                <div class="compass-tool">
-                    <div class="compass-wrap">
-
-                        <div class="compass">
-                            <p class="compass-img">
-                                <img class="tool_compass" src="${pageContext.request.contextPath}/public/img/inter_tool_comp.png" alt="img">
-                            </p>
-                        </div>
-                        <div class="compass-arrow">
-                        <p id="upCtrlBtn">
-                            <button class="top" ></button>
-                        </p>
-                        <p id="rightCtrlBtn">
-                            <button class="right" ></button>
-                        </p>
-                        <p id="downCtrlBtn">
-                            <button class="bottom" ></button>
-                        </p>
-                        <p id="leftCtrlBtn">
-                            <button class="left" ></button>
-                        </p>
-                        </div>
-                    </div>
+                <div id="uploading-overlay" style="display: none; z-index: 6000">
+                    <div id="spinner" class="loader"></div>
+                    <div id="uploading-text">UPLOADING</div>
                 </div>
             </div>
-            <div id="uploading-overlay" style="display: none;">
-                <div id="spinner" class="loader"></div>
-                <div id="uploading-text">UPLOADING</div>
+            <div id="uploading-overlay" style="display: none; z-index: 6000">
+                <%@ include file="./upload/upload_spinner.jsp" %>
             </div>
-        </div>
+            </div>
 
-        <!-- CesiumJS-->
-        <script src="https://cesium.com/downloads/cesiumjs/releases/1.105.1/Build/Cesium/Cesium.js"></script>
-        <!-- Jquery-->
-        <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
-        <!-- Axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- CesiumJS-->
+            <script src="https://cesium.com/downloads/cesiumjs/releases/1.105.1/Build/Cesium/Cesium.js"></script>
+            <!-- Jquery-->
+            <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+            <!-- Axios -->
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <!-- Index -->
-        <script src="${pageContext.request.contextPath}/js/index.js"></script>
-        <!-- Cesium Viewer -->
-        <script src="${pageContext.request.contextPath}/js/cesium.js"></script>
-        <!-- Storage -->
-        <script src="${pageContext.request.contextPath}/js/storage.js"></script>
-        <!-- Cesium Utility -->
-        <script src="${pageContext.request.contextPath}/js/utils.js"></script>
-        <!-- Measurement -->
-        <script src="${pageContext.request.contextPath}/js/measure.js"></script>
-        <!-- Transform -->
-        <script src="${pageContext.request.contextPath}/js/transform.js"></script>
-        <!-- Clipping -->
-        <script src="${pageContext.request.contextPath}/js/clipping.js"></script>
-        <!-- Event -->
-        <script src="${pageContext.request.contextPath}/js/events.js"></script>
-        <!-- DitapJS -->
-        <script src="${pageContext.request.contextPath}/js/DitapJS/Ditap.js"></script>
-        <!-- BackGroundMap -->
-        <script src="${pageContext.request.contextPath}/js/backGroundMap.js"></script>
-        <!-- GLB Models -->
-        <script src="${pageContext.request.contextPath}/js/models.js"></script>
-        <!-- ModalFunction -->
-        <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
-        <!-- MoveFunction -->
-        <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
-        <!-- UploadJS -->
-        <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
-        <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
+            <!-- Index -->
+            <script src="${pageContext.request.contextPath}/js/index.js"></script>
+            <!-- Cesium Viewer -->
+            <script src="${pageContext.request.contextPath}/js/cesium.js"></script>
+            <!-- Storage -->
+            <script src="${pageContext.request.contextPath}/js/storage.js"></script>
+            <!-- Cesium Utility -->
+            <script src="${pageContext.request.contextPath}/js/utils.js"></script>
+            <!-- Measurement -->
+            <script src="${pageContext.request.contextPath}/js/measure.js"></script>
+            <!-- Transform -->
+            <script src="${pageContext.request.contextPath}/js/transform.js"></script>
+            <!-- Clipping -->
+            <script src="${pageContext.request.contextPath}/js/clipping.js"></script>
+            <!-- Event -->
+            <script src="${pageContext.request.contextPath}/js/events.js"></script>
+            <!-- DitapJS -->
+            <script src="${pageContext.request.contextPath}/js/DitapJS/Ditap.js"></script>
+            <!-- BackGroundMap -->
+            <script src="${pageContext.request.contextPath}/js/backGroundMap.js"></script>
+            <!-- GLB Models -->
+            <script src="${pageContext.request.contextPath}/js/models.js"></script>
+            <!-- ModalFunction -->
+            <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
+            <!-- MoveFunction -->
+            <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
+            <!-- UploadJS -->
+            <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/fileSelect.js"></script>
+            <script src="${pageContext.request.contextPath}/js/UploadJS/fileUpload.js"></script>
 
+			<!-- Soosung Event -->
+            <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
+            <script src="${pageContext.request.contextPath}/js/rotateModel.js"></script>
+            <script src="${pageContext.request.contextPath}/js/changeModel.js"></script>
 
-        <!-- Heliosen Event -->
-        <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
-        <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
-        <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
+            <!-- Heliosen Event -->
+            <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/buildingInfo.js"></script>
+            <script src="${pageContext.request.contextPath}/js/mapFunction.js"></script>
 
-        <script>
-        const viewer = new Ditap.DitapViewer("ditapContainer", {
+            <script>
+                const viewer = new Ditap.DitapViewer("ditapContainer", {
+                    editingTools: {
+                        createTools: {
+                            point: true,
+                            linestring: true,
+                            polygon: true,
+                        },
+                        select: {
+                            hoverColor: Ditap.Color.fromCssColorString("#BDBDBD"),
+                            selectedColor: Ditap.Color.fromCssColorString("#9DCFFF"),
+                        },
+                        remove: true,
+                    },
+                    analysisTools: {
+                        visibility: true,
+                        clipping: true,
+                        split: true,
+                    },
+                    measurementTools: {
+                        altitude: true,
+                        straight: true,
+                        ground: true,
+                        plane: true,
+                        vertical: true,
+                        horizontal: true,
+                        area: true,
+                        volume: true,
 
-                editingTools: {
-                  createTools: {
-                    point: true,
-                    linestring: true,
-                    polygon: true,
-                  },
-                  select: {
-                    hoverColor: Ditap.Color.fromCssColorString("#BDBDBD"),
-                    selectedColor: Ditap.Color.fromCssColorString("#9DCFFF"),
-                  },
-                  remove: true,
-                },
-                analysisTools: {
-                  visibility: true,
-                  clipping: true,
-                  split: true,
-                },
-                measurementTools: {
-                  altitude: true,
-                  straight: true,
-                  ground: true,
-                  plane: true,
-                  vertical: true,
-                  horizontal: true,
-                  area: true,
-                  volume: true,
+                    },
+                    homeButton: true,
+                    navigationHelpButton: true,
+                    fullscreenButton: true,
+                    baseLayerPicker: true,
+                    imageryProviderViewModels: createCustomImageryProviderViewModels(),
+                    terrainProviderViewModels: createCustomTerrainProviderViewModels(),
+                });
 
-                },
-                homeButton: true,
-                navigationHelpButton: true,
-                fullscreenButton: true,
-                baseLayerPicker: true,
-                imageryProviderViewModels: createCustomImageryProviderViewModels(),
-                terrainProviderViewModels: createCustomTerrainProviderViewModels(),
-                //terrainProvider: requestDemTileMap(),
+                viewer.camera.setView({
+                    destination: new Cesium.Cartesian3.fromDegrees(
+                    127.06546589276200,
+                    35.83808503357750,
+                    34.97499999999889
+                    ),
+                    //장성 군청
+                    //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
+                    orientation: {
+                        heading: Cesium.Math.toRadians(90.0),
+                        pitch: Cesium.Math.toRadians(-90),
+                        roll: 0.0
+                    }
+                });
 
-        });
+                addTilesetToCesium();
 
-        //tileset 요청
-        const tilesetList = {
-            //아파치 타일 경로 - 장성 내부
-            "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
-            "pointCloud":"public/3dtileset/point/tileset.json",
-        }
+                let previousNode;
+                let previousColor;
+                // Property Click Handler
+                const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
+                handler.setInputAction(async function (event) {
+                    const pickObject = viewer.scene.pick(event.position);
 
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
-        //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
+                    //건물 정보 보기
+                    if (Cesium.defined(pickObject)) {
+                        getBuildingInfoPopup(event, viewer, pickObject);
+                    }
 
+                    if (Cesium.defined(pickObject) && pickObject.detail.node) {
+                        const guid = pickObject.detail.node._name;
+                        const node = pickObject.detail.node;
 
-        viewer.camera.setView({
-                destination: new Cesium.Cartesian3.fromDegrees(127.06546589276200, 35.83808503357750, 34.97499999999889),
-                //장성 군청
-                //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
-                orientation: {
-                    heading: Cesium.Math.toRadians(90.0),
-                    pitch: Cesium.Math.toRadians(-90),
-                    roll: 0.0
-                }
-        });
+                        handleNodeFocus(node);
 
-        // Property Click Handler
-        const handler = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
-        handler.setInputAction(async function (event) {
-            const pickObject = viewer.scene.pick(event.position);
+                        const URL = "http://localhost:8000/ifc/properties/" + guid;
+                        axios.get(URL)
+                            .then(function (response) {
+                                const propertyData = {
+                                    property: response.data.element_property,
+                                    pset: response.data.pset_property
+                                };
 
-                //건물 정보 보기
-                if (Cesium.defined(pickObject)) {
+                                document.getElementById('property-section').innerHTML = '';
+                                document.getElementById('pset-section').innerHTML = '';
 
-                    getBuildingInfoPopup(event,viewer,pickObject)
-                }
+                                document.getElementById('h2-property').style.display = "block";
+                                document.getElementById('h2-pset').style.display = "block";
 
-               if (Cesium.defined(pickObject) && pickObject.detail.node) {
-                    const guid = pickObject.detail.node._name;
-                }
+                                document.getElementById('tree-container').style.display = "block";
+                                document.getElementById('floor-tree-container').style.display = "block";
+                                displaySectionData(propertyData.property, "property-section");
+                                displaySectionData(propertyData.pset, "pset-section");
 
-        }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
+                                highlightNodeByGuid(guid);
+                                showPropertyModal();
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    }
 
-        // GLB Models
-        viewer.scene.primitives.add(jeonju_model);
+                }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
 
-        // keyboard Event
-        Heliosen.keyboard.initKeyboard(viewer);
+                // GLB Models
+                // viewer.scene.primitives.add(siheung_model);
+                viewer.scene.primitives.add(siheung_floor_model);
+                siheung_floor_model.show = false
+                viewer.scene.primitives.add(siheung_wrong_model);
 
-        document.addEventListener("keydown",function (e) {
-           Heliosen.keyboard.KeyboardEvent("keydown",e.keyCode);
-        },false);
+                // keyboard Event
+                Heliosen.keyboard.initKeyboard(viewer);
 
-        document.addEventListener("keyup",function (e) {
-           Heliosen.keyboard.KeyboardEvent("keyup",e.keyCode);
-        },false);
+                document.addEventListener("keydown", function (e) {
+                    Heliosen.keyboard.KeyboardEvent("keydown", e.keyCode);
+                }, false);
 
-        // compass Event
-        compassMove(viewer);
+                document.addEventListener("keyup", function (e) {
+                    Heliosen.keyboard.KeyboardEvent("keyup", e.keyCode);
+                }, false);
 
-        $(document).on("click", ".compass", function () {
-            compassClick(viewer);
-        });
+                let nodeObjects;
+                document.addEventListener("DOMContentLoaded", function () {
+                    setTimeout(function () {
+                        nodeObjects = siheung_wrong_model._nodesByName;
+                    }, 2000);
+                });
 
-        let flags = { mousedown: false, directionId: null };
+                compassMove(viewer);
 
-         $(document).on("mousedown", ".compass-arrow p", function () {
-             let directionId = $(this).attr("id");
+                $(document).on("click", ".compass", function () {
+                    compassClick(viewer);
+                });
 
-             flags.mousedown = true;
-             flags.directionId = directionId;
+                let flags = { mousedown: false, directionId: null };
 
-             locationMove(viewer,flags)
+                $(document).on("mousedown", ".compass-arrow p", function () {
+                    let directionId = $(this).attr("id");
 
-         });
+                    flags.mousedown = true;
+                    flags.directionId = directionId;
 
-         $(document).on("mouseup", ".compass-arrow p", function () {
-                flags.mousedown = false;
-                flags.directionId = null;
+                    locationMove(viewer, flags);
 
-                locationMove(viewer,flags)
-         });
+                });
 
-        </script>
+                $(document).on("mouseup", ".compass-arrow p", function () {
+                    flags.mousedown = false;
+                    flags.directionId = null;
+
+                    locationMove(viewer, flags);
+                });
+
+            </script>
     </body>
 
     </html>
