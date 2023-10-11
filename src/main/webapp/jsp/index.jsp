@@ -57,14 +57,6 @@
                             <p class="ditap-btn-tooltip">비공간</p>
                         </button>
                     </li>
-
-                    <li class="ditap-toolbar-item">
-                        <button id="building_rotation_btn_button" class="ditap-toolbar-btn ditap-bid-rotation-btn">
-                            <p class="ditap-function-btn-img js-basemap-btn"></p>
-                            <p class="ditap-btn-tooltip">Polygon Matching</p>
-                        </button>
-                    </li>
-
                 </ul>
                 <div id="property_modal" class="property-modal">
                     <div id="property_modal_content" class="property-modal-content">
@@ -211,10 +203,19 @@
                 baseLayerPicker: true,
                 imageryProviderViewModels: createCustomImageryProviderViewModels(),
                 terrainProviderViewModels: createCustomTerrainProviderViewModels(),
+                //terrainProvider: requestDemTileMap(),
 
         });
 
-        addTilesetToCesium();
+        //tileset 요청
+        const tilesetList = {
+            //아파치 타일 경로 - 장성 내부
+            "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
+            "pointCloud":"public/3dtileset/point/tileset.json",
+        }
+
+        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+        //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
 
 
         viewer.camera.setView({

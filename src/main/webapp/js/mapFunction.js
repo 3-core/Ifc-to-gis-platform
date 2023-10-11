@@ -1,14 +1,4 @@
 
-    var globalTileset = undefined;
-
-    //tileset 요청
-    const tilesetList = {
-        //아파치 타일 경로 - 장성 내부
-        "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
-        //"pointCloud":`http://43.201.125.240:8081/3dtiles/etri/etri_3dtiles_11g/tileset.json`,
-        //"pointCloud":` http://43.201.125.240:8081/3dtiles/tongyeong_market/tileset.json`,
-    }
-
     // 포인트 클라우드, 행정정보 버튼 생성
     $(document).ready(function() {
      let addBtn = `
@@ -26,17 +16,27 @@
 
      });
 
-    function addTilesetToCesium(){
+     //추가 아이콘 클릭시 활성화
+      $(document).on('click', '.ditap-weather-btn', function(){
 
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+            const classes = document.getElementById("ditap-weather").classList;
+            if (classes.contains('on')) {
 
-    }
+                document.getElementById("ditap-weather").classList.remove('on');
 
-    function removeTilesetListToCesium(){
+            }else{
+                document.getElementById("ditap-weather").classList.add('on');
+            }
 
-        viewer.scene.primitives.remove(globalTileset);
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+      });
 
+    //로컬 환경
+    //터레인 호출 함수
+    function requestDemTileMap() {
+        const provider = new Cesium.CesiumTerrainProvider({
+            url: "http://211.47.67.141:8090/tilesets/layer"
+        });
+        return provider;
     }
 
     //타일셋 호출 함수
@@ -56,33 +56,26 @@
         });
 
         let tileset = viewer.scene.primitives.add(tile);
-        globalTileset = tileset;
 
         //타일셋 위치로 이동
         viewer.zoomTo(tileset);
 
-        //타일셋 데이터 타입에 따라 스타일 분기
-        if(tileName == "jangseongTileset"){
-            //투명화 모델 id 수정
-            let modelList = ["34002"];
-            let conditions = [];
+        //투명화 모델 id 수정
+        let modelList = ["34002"];
+        let conditions = [];
 
-            //glb가 위치할 기본 tileset 투명화 적용
-            for (let i = 0; i < modelList.length; i++){
-                let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
-                conditions.push(obj)
-            }
-
-            tileset.style  = new Cesium.Cesium3DTileStyle({
-                color: {conditions: conditions},
-                //color: "rgba(255, 0, 0, 0.5)",
-            });
+        //glb가 위치할 기본 tileset 투명화 적용
+        for (let i = 0; i < modelList.length; i++){
+            let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+            conditions.push(obj)
         }
 
+        tileset.style  = new Cesium.Cesium3DTileStyle({
+            color: {conditions: conditions},
+        });
 
-      return tileset;
+      return tile;
     }
-
 
     // 나침반 클릭시 북방향 이동
     function compassClick(viewer) {
