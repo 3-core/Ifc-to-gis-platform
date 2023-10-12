@@ -19,7 +19,7 @@
     #model-rotate-title,
     #model-rotate-content,
     #model-rotate-footer {
-        height: 33.33%; /* 각 섹션을 세로로 3등분 */
+        height: 33.33%;
     }
 
     #model-rotate-title {
@@ -46,7 +46,7 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-		const modelClosenessData = ["1", "2", "3", "4", "5", "6", "7", "8"]
+		const modelClosenessData = [461.49297095574445, 332.1309522125708, 199.3679065185259, 185.57968155973555, 123.09585257082607, 59.58904585006059, 31.24583812847083, 7.85130191128515]
         let headingValue = 228;
         let rotateCount = 0;
 		let angleValue = 0;
