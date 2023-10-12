@@ -41,7 +41,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             <div id="ditapContainer" class="container-viewer">
                 <ul class="ditap-toolbar-top-wrap top-left">
                     <li class="ditap-toolbar-item">
@@ -72,32 +71,6 @@
 
                 </ul>
                 <div id="property_modal" class="property-modal">
-                    <div id="property_modal_content" class="property-modal-content">
-                        <div class="modal-content-top">
-                            <div class="title">속성</div>
-                            <button class="close" onclick="closeModal()">
-                                <img class="close-img" src="${pageContext.request.contextPath}/public/img/close.png" alt="property_modal_close">
-                            </button>
-                        </li>
-                        <li class="ditap-toolbar-item">
-                            <button id="property_modal_button" class="ditap-toolbar-btn ditap-property-btn">
-                                <p class="ditap-function-btn-img js-basemap-btn"></p>
-                                <p class="ditap-btn-tooltip">속성</p>
-                            </button>
-                        </li>
-                        <li class="ditap-toolbar-item">
-                            <button id="non_property_modal_button" class="ditap-toolbar-btn ditap-non-space-btn">
-                                <p class="ditap-function-btn-img js-basemap-btn"></p>
-                                <p class="ditap-btn-tooltip">비공간</p>
-                            </button>
-                        </li>
-                        <li class="ditap-toolbar-item">
-                            <button id="rotate_model_button" class="ditap-toolbar-btn ditap-non-space-btn">
-                                <p class="ditap-function-btn-img js-basemap-btn"></p>
-                                <p class="ditap-btn-tooltip">회전</p>
-                            </button>
-                        </li>
-                    </ul>
 
                     <div id="property_modal" class="property_modal">
                         <div id="property_modal_content" class="property_modal_content">
@@ -201,6 +174,7 @@
                     <div id="spinner" class="loader"></div>
                     <div id="uploading-text">UPLOADING</div>
                 </div>
+            </div>
             </div>
             <div id="uploading-overlay" style="display: none; z-index: 6000">
                 <%@ include file="./upload/upload_spinner.jsp" %>
