@@ -68,7 +68,6 @@
                     const value = data[key];
 
                     if (typeof value === 'object' && value !== null) {
-                        // 객체의 각 속성을 추가로 표시 (예: 'Reference', 'id' 등)
                         for (const subKey in value) {
                             if (value.hasOwnProperty(subKey)) {
                                 displayKeyValue(subKey, value[subKey], section, count);
@@ -127,10 +126,7 @@
         section.appendChild(pairDiv);
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        displaySectionData(propertyData.property, 'property-section');
-        displaySectionData(propertyData.pset, 'pset-section');
-    });
+
 </script>
 
 <div id="combined-info" style="">
