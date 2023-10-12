@@ -37,7 +37,7 @@
                             <img src="${pageContext.request.contextPath}/public/img/logo.png" alt="lx_logo" />
                         </div>
                         <div class="header-logo-txt">
-                            한국국토정보공사
+                            공간정보연구원
                         </div>
                     </div>
                 </div>
