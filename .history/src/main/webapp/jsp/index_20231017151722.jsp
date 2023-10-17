@@ -30,7 +30,6 @@
     </head>
 
     <body>
-        <%@ include file="./nonspatial/buildingInfo.jsp" %>
         <%@ include file="./buildingPopup.jsp" %>
             <div class="wrap">
                 <div class="header-wrap">
@@ -116,12 +115,6 @@
                                     <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
                                 </div>
                             </div>
-
-                            <%-- 비공간 검색 --%>
-                            <div>
-                                <%@ include file="./nonspatial/nonspatialProperty.jsp" %>
-                            </div>
-
                         </div>
                     </div>
 
@@ -222,14 +215,6 @@
             <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
             <!-- MoveFunction -->
             <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
-            <!-- search admin / rectagnle -->
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/SGI.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchAdmin.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchHospital.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchBuildingInfo.js"></script>
-
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/selectRectangle.js"></script>
-
             <!-- UploadJS -->
             <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
             <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>

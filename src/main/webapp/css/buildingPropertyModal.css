@@ -1,0 +1,43 @@
+.building_property_modal {
+    display: block;
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    height: calc(100% - 60px);
+    z-index: 3000;
+    pointer-events: none;
+}
+
+.building_property_modal_content{
+    border-top: 1px solid white;
+    font-family: 'Pretendard';
+    overflow-y: auto;
+    background-color: #141C26;
+    color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4), 0 0 50px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: all;
+    display: none;
+}
+.container-widget .col-sm-12 {
+    padding-right: -5px;
+    padding-left: -5px;
+}
+
+.control-label {
+    color: #26A65B;
+}
+.form-label {
+    height:30px;
+    line-height:30px;
+    font-weight: bold;
+    text-align:left;
+    margin:0;
+    padding:0;
+}

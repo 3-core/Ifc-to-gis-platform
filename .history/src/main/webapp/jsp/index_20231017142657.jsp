@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/uploadModal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/locationSelectBox.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminSelectBox.css">
         <!-- DitapJS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/DitapJS/Widgets/widgets.css">
 
@@ -30,7 +29,6 @@
     </head>
 
     <body>
-        <%@ include file="./nonspatial/buildingInfo.jsp" %>
         <%@ include file="./buildingPopup.jsp" %>
             <div class="wrap">
                 <div class="header-wrap">
@@ -116,12 +114,6 @@
                                     <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
                                 </div>
                             </div>
-
-                            <%-- 비공간 검색 --%>
-                            <div>
-                                <%@ include file="./nonspatial/nonspatialProperty.jsp" %>
-                            </div>
-
                         </div>
                     </div>
 
@@ -222,14 +214,6 @@
             <script src="${pageContext.request.contextPath}/js/modalEvent.js"></script>
             <!-- MoveFunction -->
             <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
-            <!-- search admin / rectagnle -->
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/SGI.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchAdmin.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchHospital.js"></script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchBuildingInfo.js"></script>
-
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/selectRectangle.js"></script>
-
             <!-- UploadJS -->
             <script src="${pageContext.request.contextPath}/js/UploadJS/closeUploadModal.js"></script>
             <script src="${pageContext.request.contextPath}/js/UploadJS/displayUploadModal.js"></script>
@@ -348,97 +332,6 @@
 
                 }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
 
-                const handlerBuildingInfo = new Ditap.ScreenSpaceEventHandler(viewer.canvas);
-                handlerBuildingInfo.setInputAction(async function (event) {
-                    const pickObject = viewer.scene.pick(event.position);
-
-                    //건물 정보 보기
-                    if (Cesium.defined(pickObject)) {
-                        displayBuildingPopup(event, viewer, pickObject);
-                    }
-                }, Ditap.ScreenSpaceEventType.RIGHT_CLICK);
-
-                // rectangle
-
-
-                var selector;
-                var rectangleSelector = new Cesium.Rectangle();
-                var screenSpaceRectEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-                var cartesian = new Cesium.Cartesian3();
-                var tempCartographic = new Cesium.Cartographic();
-                var center = new Cesium.Cartographic();
-                var firstPoint = new Cesium.Cartographic();
-                var firstPointSet = false;
-                var mouseDown = false;
-                var camera = viewer.camera;
-
-                screenSpaceRectEventHandler.setInputAction(function drawSelector(movement) {
-                    if (!mouseDown || !rectrangleSearch) {
-                        return;
-                    }
-
-                    cartesian = camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid, cartesian);
-
-                    if (cartesian) {
-                        //mouse cartographic
-                        tempCartographic = Cesium.Cartographic.fromCartesian(cartesian, Cesium.Ellipsoid.WGS84, tempCartographic);
-
-                        if (!firstPointSet) {
-                            Cesium.Cartographic.clone(tempCartographic, firstPoint);
-                            firstPointSet = true;
-                        }
-                        else {
-                            rectangleSelector.east = Math.max(tempCartographic.longitude, firstPoint.longitude);
-                            rectangleSelector.west = Math.min(tempCartographic.longitude, firstPoint.longitude);
-                            rectangleSelector.north = Math.max(tempCartographic.latitude, firstPoint.latitude);
-                            rectangleSelector.south = Math.min(tempCartographic.latitude, firstPoint.latitude);
-                            selector.show = true;
-                        }
-                    }
-                }, Cesium.ScreenSpaceEventType.MOUSE_MOVE, Cesium.KeyboardEventModifier.SHIFT);
-
-                var getSelectorLocation = new Cesium.CallbackProperty(function getSelectorLocation(time, result) {
-                    return Cesium.Rectangle.clone(rectangleSelector, result);
-                }, false);
-
-                screenSpaceRectEventHandler.setInputAction(function startClickShift() {
-                    if(!rectrangleSearch) {
-                        return;
-                    }
-                    mouseDown = true;
-                    selector.rectangle.coordinates = getSelectorLocation;
-                }, Cesium.ScreenSpaceEventType.LEFT_DOWN, Cesium.KeyboardEventModifier.SHIFT);
-
-                screenSpaceRectEventHandler.setInputAction(function endClickShift() {
-                    if(!rectrangleSearch) {
-                        return;
-                    }
-                    mouseDown = false;
-                    firstPointSet = false;
-                    selector.rectangle.coordinates = rectangleSelector;
-                    setROI(Cesium.Math.toDegrees(rectangleSelector.east),
-                        Cesium.Math.toDegrees(rectangleSelector.west),
-                        Cesium.Math.toDegrees(rectangleSelector.north),
-                        Cesium.Math.toDegrees(rectangleSelector.south));
-                    resetRectangleSearch();
-                }, Cesium.ScreenSpaceEventType.LEFT_UP, Cesium.KeyboardEventModifier.SHIFT);
-
-
-                //Hide the selector by clicking anywhere
-                screenSpaceRectEventHandler.setInputAction(function hideSelector() {
-                    selector.show = false;
-                }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
-
-                selector = viewer.entities.add({
-                    selectable: false,
-                    show: false,
-                    rectangle: {
-                        coordinates: getSelectorLocation,
-                        material: Cesium.Color.BLACK.withAlpha(0.5)
-                    }
-                });
-
                 // GLB Models
                 // viewer.scene.primitives.add(siheung_model);
                 viewer.scene.primitives.add(siheung_floor_model);
@@ -489,7 +382,6 @@
                 });
 
             </script>
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/searchAdmin.js"/>
     </body>
 
     </html>
