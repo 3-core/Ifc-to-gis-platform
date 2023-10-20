@@ -17,9 +17,9 @@
 
 const siheung_floor_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
     new Ditap.Cartesian3.fromDegrees(
-        127.058968,
-        35.835169,
-        34.97499999999889
+        127.058999,
+        35.835152,
+        70.98499999999889
     ),
     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(18), 0, 0),
     Ditap.Ellipsoid.WGS84,
@@ -34,9 +34,9 @@ const siheung_floor_model = Ditap.Model.fromGltf({
 
 const siheung_wrong_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
     new Ditap.Cartesian3.fromDegrees(
-        127.058968,
-        35.835169,
-        34.97499999999889
+        127.059999,
+        35.836152,
+        37.98499999999889
     ),
     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(228), 0, 0),
     Ditap.Ellipsoid.WGS84,
@@ -67,5 +67,22 @@ const lx_model = Ditap.Model.fromGltf({
     modelMatrix: lx_model_matrix,
 });
 
+
+const siheung_station_location_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+    new Ditap.Cartesian3.fromDegrees(
+        127.058999,
+        35.835152,
+        0
+    ),
+    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(0), 0, 0),
+    Ditap.Ellipsoid.WGS84,
+    Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
+);
+
+const siheung_station_location_model = Ditap.Model.fromGltf({
+    id: "siheung_station_location",
+    url: "public/glb/siheung/siheung_background.glb",
+    modelMatrix: siheung_station_location_matrix,
+});
 
 

@@ -46,7 +46,7 @@
             <div id="ditapContainer" class="container-viewer">
                 <ul class="ditap-toolbar-top-wrap top-left">
                     <li class="ditap-toolbar-item">
-                        <button class="ditap-toolbar-btn ditap-upload-btn">
+                        <button class="ditap-toolbar-btn ditap-upload-btn" onclick="openUploadModal()">
                             <p class="ditap-function-btn-img js-basemap-btn"></p>
                             <p class="ditap-btn-tooltip">업로드</p>
                         </button>
@@ -180,7 +180,7 @@
                 </div>
                 <div id="uploading-overlay" style="display: none; z-index: 6000">
                     <div id="spinner" class="loader"></div>
-                    <div id="uploading-text">UPLOADING</div>
+                    <div style="margin-top: 5px" id="uploading-text"></div>
                 </div>
             </div>
             </div>
@@ -240,6 +240,7 @@
             <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
             <script src="${pageContext.request.contextPath}/js/rotateModel.js"></script>
             <script src="${pageContext.request.contextPath}/js/changeModel.js"></script>
+            <script src="${pageContext.request.contextPath}/js/uploadingProcess.js"></script>
 
             <!-- Heliosen Event -->
             <script src="${pageContext.request.contextPath}/js/keyboard.js"></script>
@@ -450,6 +451,7 @@
                 viewer.scene.primitives.add(siheung_floor_model);
                 siheung_floor_model.show = false
                 viewer.scene.primitives.add(siheung_wrong_model);
+                viewer.scene.primitives.add(siheung_station_location_model);
 
                 //전주
                 var model = viewer.scene.primitives.add(lx_model);

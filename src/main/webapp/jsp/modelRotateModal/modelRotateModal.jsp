@@ -55,7 +55,7 @@
         const angleElement = document.querySelector("#model-rotate-angle > div:last-child");
         const modelClosenessElement = document.querySelector("#model-rotate-closeness > div:last-child");
 
-		document.getElementById('rotate_model_button').addEventListener('click', function() {
+		document.getElementById('building_rotation_btn_button').addEventListener('click', function() {
             let intervalId = setInterval(() => {
                 headingValue += 18.75;
                 if (headingValue >= 360) {
@@ -64,9 +64,9 @@
 
                 const siheung_rotate_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
                     new Ditap.Cartesian3.fromDegrees(
-                        127.058968,
-                        35.835169,
-                        34.97499999999889
+                        127.058999,
+                        35.835152,
+                        37.98499999999889
                     ),
                     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(headingValue), 0, 0),
                     Ditap.Ellipsoid.WGS84,
