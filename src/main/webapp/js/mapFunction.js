@@ -47,8 +47,7 @@
             var cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
             var surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
             var offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, heightOffset);
-            offset.X = offset.X-10
-            offset.Z = offset.Z-0.2
+
             var translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
 
             globalTileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
@@ -101,7 +100,7 @@
 
             //glb가 위치할 기본 tileset 투명화 적용
             for (let i = 0; i < modelList.length; i++){
-                let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                let obj = ["${feature['id']} === '"+modelList[i]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
                 conditions.push(obj)
             }
 
@@ -148,7 +147,7 @@
             tileset = viewer.scene.primitives.add(tile);
 
             tileset.style = new Cesium.Cesium3DTileStyle({
-                color: 'color("gray", 0.5)'
+                color: 'color("White", 0.7)'
             });
         }else if(tileName == "pointCloudFull" ){
 
@@ -172,10 +171,11 @@
             tileset.style = new Ditap.Cesium3DTileStyle({
                 pointSize: 3 // 포인트 크기 설정
             });
+            viewer.zoomTo(tileset);
         }
 
         tilesetList.push(tileset)
-        viewer.zoomTo(tileset);
+
 
         return tileset;
     }

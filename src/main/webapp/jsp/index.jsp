@@ -284,19 +284,25 @@
                     terrainProviderViewModels: createCustomTerrainProviderViewModels(),
                 });
 
+                const initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(
+                  21.27879878293835,
+                  -21.34390550872461,
+                  0.0716951918898415
+                );
+
+
+                //lx위치 지정 > 변경하셔도 됩니다.
                 viewer.camera.setView({
                     destination: new Cesium.Cartesian3.fromDegrees(
-                    127.06546589276200,
-                    35.83808503357750,
-                    34.97499999999889
+                        127.06538207261136,
+                        35.83600908939431,
+                        120.00
                     ),
-                    //장성 군청
-                    //destination: new Cesium.Cartesian3.fromDegrees(126.784803957, 35.301957320,500),
-                    orientation: {
-                        heading: Cesium.Math.toRadians(90.0),
-                        pitch: Cesium.Math.toRadians(-90),
-                        roll: 0.0
-                    }
+                    orientation: new Cesium.HeadingPitchRoll(
+                        6.3,
+                        -0.276607153839886,
+                        6.281110875400085
+                    )
                 });
 
                 addTilesetToCesium();
