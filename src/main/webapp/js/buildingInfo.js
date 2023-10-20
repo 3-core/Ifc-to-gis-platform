@@ -14,6 +14,23 @@
 
    });
 
+   //LAS버튼 클릭시
+   $(document).on('click', '.ditap-weather-btn', function(){
+
+       const classes = document.getElementById("ditap-weather").classList;
+       if (classes.contains('on')) {
+
+           document.getElementById("ditap-weather").classList.remove('on');
+           removeTilesetToCesium()
+
+       }else{
+           document.getElementById("ditap-weather").classList.add('on');
+           addTilesetListToCesium(viewer, "pointCloudFull", tilesetURLList["pointCloudFull"]);
+           //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
+           addTilesetChangLocation();
+       }
+   });
+
    //클릭한 이전 건물을 저장하기 위해 사용
    let previousModel;
 
@@ -25,7 +42,7 @@
         if (classes.contains('on')) {
 
             //투명화 모델 id 수정
-            let modelList = ["34002"];
+            let modelList = ["29000137"];
 
             if (pickObject._batchId == undefined) {
             //glb클릭
@@ -128,7 +145,6 @@
             }
         }
    }
-
 
     //getBuildingInfo
     // 1. 좌표 조회 -> 2. pnu값 조회 -> 3.건물 정보 조회 -> 4. 팝업 표출
@@ -480,7 +496,7 @@
    //부동산 팝업 닫기 및 색상 원복 함수
    function closePopup() {
         //투명화 모델 id 수정
-        let modelList = ["34002"];
+        let modelList = ["29000137"];
 
         if (previousModel?.tileset) {
 

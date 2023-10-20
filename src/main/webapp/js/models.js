@@ -49,5 +49,23 @@ const siheung_wrong_model = Ditap.Model.fromGltf({
     modelMatrix: siheung_wrong_model_matrix,
 });
 
+//전주
+const lx_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+    new Ditap.Cartesian3.fromDegrees(
+        127.06538207261136,
+        35.83800908939431,
+        51.00
+    ),
+    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(0), 0, 0),
+    Ditap.Ellipsoid.WGS84,
+    Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
+);
+
+const lx_model = Ditap.Model.fromGltf({
+    id: "lx_model",
+    url: "public/glb/lx_jeonju/lx_jeonju.glb",
+    modelMatrix: lx_model_matrix,
+});
+
 
 

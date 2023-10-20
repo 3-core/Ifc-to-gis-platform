@@ -2,11 +2,15 @@
     var globalTileset = undefined;
 
     //tileset 요청
-    const tilesetList = {
+    const tilesetURLList = {
         //아파치 타일 경로 - 장성 내부
-        "jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
-        //"pointCloud":`http://43.201.125.240:8081/3dtiles/etri/etri_3dtiles_11g/tileset.json`,
-        //"pointCloud":` http://43.201.125.240:8081/3dtiles/tongyeong_market/tileset.json`,
+        //"jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
+        "pointCloudFull":`http://server.heliosen.co.kr:38090/lx_pc/3d_full/tileset.json`,
+
+        "LOD":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/LOD/tileset.json`,
+        "Deokjin":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/Deokjin/tileset.json `,
+        "Wansan":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/Wansan/tileset.json`,
+
     }
 
     // 포인트 클라우드, 행정정보 버튼 생성
@@ -28,43 +32,71 @@
 
     function addTilesetToCesium(){
 
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
+        //기본 타일셋 부르기
+        addTilesetListToCesium(viewer, "LOD", tilesetURLList["LOD"]);
+        addTilesetListToCesium(viewer, "Deokjin", tilesetURLList["Deokjin"]);
+        addTilesetListToCesium(viewer, "Wansan", tilesetURLList["Wansan"]);
 
     }
+    function addTilesetChangLocation(){
 
-    function removeTilesetListToCesium(){
+        globalTileset.readyPromise.then(function(globalTileset) {
+            var heightOffset = 0.5; //고도값 셋팅
 
+            var boundingSphere = globalTileset.boundingSphere;
+            var cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
+            var surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
+            var offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, heightOffset);
+            offset.X = offset.X-10
+            offset.Z = offset.Z-0.2
+            var translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
+
+            globalTileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+        });
+    }
+
+
+    function removeTilesetToCesium(){
+
+        //globalTileset에는 가장 늦게 추가가 타일셋 경로가 들어있음(포인트 클라우드).
         viewer.scene.primitives.remove(globalTileset);
-        addTilesetListToCesium(viewer, "jangseongTileset", tilesetList["jangseongTileset"]);
-
     }
 
     //타일셋 호출 함수
+
+    var tilesetList = [];
     function addTilesetListToCesium(viewer, tileName, tileUrl){
 
-        const tile = new Ditap.Cesium3DTileset({
-            url: tileUrl,
-            debugShowBoundingVolume: false,
-            preferLeaves: true,
-            skipLevelOfDetail: true,
-            dynamicScreenSpaceError: true,
-            dynamicScreenSpaceErrorDensity : 0.00278,
-            dynamicScreenSpaceErrorFactor : 4.0,
-            dynamicScreenSpaceErrorHeightFalloff : 0.25,
-            maximumMemoryUsage: 1024,
-            shadows: Ditap.ShadowMode.ENABLED,
-        });
+        //타일셋 색상 밝게 변경 위해 타임라인 고정
+        var afternoonTime = Cesium.JulianDate.fromIso8601("2023-10-19T08:27:11.7899999999935972Z");
+        viewer.clock.currentTime = afternoonTime;
+        viewer.clock.shouldAnimate = false;
 
-        let tileset = viewer.scene.primitives.add(tile);
-        globalTileset = tileset;
-
-        //타일셋 위치로 이동
-        viewer.zoomTo(tileset);
+        var tile = undefined;
+        var tileset = undefined;
 
         //타일셋 데이터 타입에 따라 스타일 분기
-        if(tileName == "jangseongTileset"){
+        if(tileName == "Wansan"){
+
+            tile = new Ditap.Cesium3DTileset({
+                    url: tileUrl,
+                    debugShowBoundingVolume: false,
+                    preferLeaves: true,
+                    skipLevelOfDetail: true,
+                    dynamicScreenSpaceError: true,
+                    dynamicScreenSpaceErrorDensity : 0.00278,
+                    dynamicScreenSpaceErrorFactor : 20,
+                    dynamicScreenSpaceErrorHeightFalloff : 0.25,
+                    maximumMemoryUsage: 1024,
+                    shadows: Ditap.ShadowMode.ENABLED,
+                    maximumScreenSpaceError :70
+                });
+
+            tileset = viewer.scene.primitives.add(tile);
+
             //투명화 모델 id 수정
-            let modelList = ["34002"];
+            //LX위치 삭제
+            let modelList = ["29000137"];
             let conditions = [];
 
             //glb가 위치할 기본 tileset 투명화 적용
@@ -73,14 +105,79 @@
                 conditions.push(obj)
             }
 
-            tileset.style  = new Cesium.Cesium3DTileStyle({
+            tileset.style = new Cesium.Cesium3DTileStyle({
                 color: {conditions: conditions},
-                //color: "rgba(255, 0, 0, 0.5)",
+            });
+
+        }else if(tileName == "Deokjin"){
+
+            tile = new Ditap.Cesium3DTileset({
+                    url: tileUrl,
+                    debugShowBoundingVolume: false,
+                    preferLeaves: true,
+                    skipLevelOfDetail: true,
+                    dynamicScreenSpaceError: true,
+                    dynamicScreenSpaceErrorDensity : 0.00278,
+                    dynamicScreenSpaceErrorFactor : 20,
+                    dynamicScreenSpaceErrorHeightFalloff : 0.25,
+                    maximumMemoryUsage: 1024,
+                    shadows: Ditap.ShadowMode.ENABLED,
+                    maximumScreenSpaceError :70
+                });
+
+            tileset = viewer.scene.primitives.add(tile);
+
+
+        }else if(tileName == "LOD"){
+
+            tile = new Ditap.Cesium3DTileset({
+                    url: tileUrl,
+                    debugShowBoundingVolume: false,
+                    preferLeaves: true,
+                    skipLevelOfDetail: true,
+                    dynamicScreenSpaceError: true,
+                    dynamicScreenSpaceErrorDensity : 0.00278,
+                    dynamicScreenSpaceErrorFactor : 20,
+                    dynamicScreenSpaceErrorHeightFalloff : 0.25,
+                    maximumMemoryUsage: 1024,
+                    shadows: Ditap.ShadowMode.ENABLED,
+                    maximumScreenSpaceError :40
+                });
+
+
+            tileset = viewer.scene.primitives.add(tile);
+
+            tileset.style = new Cesium.Cesium3DTileStyle({
+                color: 'color("gray", 0.5)'
+            });
+        }else if(tileName == "pointCloudFull" ){
+
+            tile = new Ditap.Cesium3DTileset({
+                    url: tileUrl,
+                    debugShowBoundingVolume: false,
+                    preferLeaves: true,
+                    skipLevelOfDetail: true,
+                    dynamicScreenSpaceError: true,
+                    dynamicScreenSpaceErrorDensity : 0.00278,
+                    dynamicScreenSpaceErrorFactor : 20,
+                    dynamicScreenSpaceErrorHeightFalloff : 0.25,
+                    maximumMemoryUsage: 1024,
+                    shadows: Ditap.ShadowMode.ENABLED,
+
+                });
+
+            tileset = viewer.scene.primitives.add(tile);
+            globalTileset=tileset
+
+            tileset.style = new Ditap.Cesium3DTileStyle({
+                pointSize: 3 // 포인트 크기 설정
             });
         }
 
+        tilesetList.push(tileset)
+        viewer.zoomTo(tileset);
 
-      return tileset;
+        return tileset;
     }
 
 
