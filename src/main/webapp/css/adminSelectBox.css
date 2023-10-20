@@ -1,0 +1,119 @@
+#sido,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#sido {
+    width: 100px;
+    margin: 10px 10px 10px 0;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}
+
+#sgg,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#sgg {
+    width: 100px;
+    margin: 10px 10px 10px 0;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}
+
+#emd,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#emd {
+    width: 100px;
+    margin: 10px 10px 10px 0;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}
+
+#buildingKind,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#buildingKind {
+    width: 100px;
+    margin: 10px 10px 10px 0;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}
+
+#buildingField,
+#custom_button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#buildingField {
+    width: 100px;
+    margin: 10px 10px 10px 0;
+}
+
+#custom_button {
+    background-color: #dbe0e2;
+    cursor: pointer;
+}
+
+#custom_button:hover {
+    background-color: #efeded;
+}

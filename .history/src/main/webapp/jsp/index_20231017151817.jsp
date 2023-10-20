@@ -445,9 +445,6 @@
                 siheung_floor_model.show = false
                 viewer.scene.primitives.add(siheung_wrong_model);
 
-                //전주
-                var model = viewer.scene.primitives.add(lx_model);
-
                 // keyboard Event
                 Heliosen.keyboard.initKeyboard(viewer);
 
