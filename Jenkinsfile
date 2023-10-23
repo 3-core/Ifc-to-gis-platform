@@ -10,18 +10,12 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
-            when {
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-            }
-            agent {
-                docker {
-                    image 'maven:3.8.3-openjdk-17-slim'
-                }
-            }
+        stage('Docker Login') {
             steps {
                 script {
-                    sh 'mvn clean package'
+                    withCredentials([string(credentialsId: 'CI_REGISTRY_PSW', variable: 'CI_REGISTRY_PSW')]) {
+                        sh 'echo "$CI_REGISTRY_PSW" | docker login --username "$CI_REGISTRY_USR" --password-stdin $CI_REGISTRY'
+                    }
                 }
             }
         }
@@ -30,17 +24,15 @@ pipeline {
             when {
                 expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
-            agent {
-                docker {
-                    image 'docker:latest'
-                }
-            }
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'CI_REGISTRY_PSW', variable: 'CI_REGISTRY_PSW')]) {
-                        sh 'echo "$CI_REGISTRY_PSW" | docker login --username "$CI_REGISTRY_USR" --password-stdin $CI_REGISTRY'
+                    try {
                         sh 'docker build -t $CI_REGISTRY_IMAGE:$IMAGE_TAG -f Dockerfile .'
                         sh 'docker push $CI_REGISTRY_IMAGE:$IMAGE_TAG'
+                    } catch (Exception err) {
+                        echo "Dockerize failed with error: ${err}"
+                        currentBuild.result = 'FAILURE'
+                        throw err
                     }
                 }
             }
@@ -50,15 +42,9 @@ pipeline {
             when {
                 expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
-            agent {
-                docker {
-                    image 'docker:latest'
-                }
-            }
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'CI_REGISTRY_PSW', variable: 'CI_REGISTRY_PSW')]) {
-                        sh 'echo "$CI_REGISTRY_PSW" | docker login --username "$CI_REGISTRY_USR" --password-stdin $CI_REGISTRY'
+                    try {
                         sh 'docker pull $CI_REGISTRY_IMAGE:$IMAGE_TAG'
                         sh ''' 
                             if docker ps -a | grep -q 'Ifc-to-gis-platform'; then 
@@ -66,6 +52,10 @@ pipeline {
                             fi
                             docker run -d --name Ifc-to-gis-platform --restart=unless-stopped -p 18089:8080 $CI_REGISTRY_IMAGE:$IMAGE_TAG
                         '''
+                    } catch (Exception err) {
+                        echo "Deploy failed with error: ${err}"
+                        currentBuild.result = 'FAILURE'
+                        throw err
                     }
                 }
             }
