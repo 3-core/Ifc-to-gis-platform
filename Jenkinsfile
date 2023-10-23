@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+// 배포테스트
     environment {
         IMAGE_NAME = 'ahci/lfc-to-gis-platform'
         IMAGE_TAG = 'latest'
