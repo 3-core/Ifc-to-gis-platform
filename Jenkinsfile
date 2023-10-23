@@ -2,7 +2,7 @@ pipeline {
     agent any
 // 배포테스트
     environment {
-        IMAGE_NAME = 'ghcr.io/kjis256/lfc-to-gis-platform:latest'
+        IMAGE_NAME = 'ghcr.io/kjis256/lfc-to-gis-platform'
         IMAGE_TAG = 'latest'
         GITHUB_REGISTRY_CREDENTIAL = credentials('GIT_REPO_CRED')
 
