@@ -7,9 +7,11 @@ function fileSelect() {
             const file = fileInput.files[0];
             const extension = file.name.split('.').pop().toLowerCase();
 
-            if (extension !== 'ifc') {
-                alert("ifc 파일만 선택이 가능합니다. 다시 파일을 선택해 주세요")
-                return;
+            if (extension !== 'ifc')  {
+                if(extension !== 'las'){
+                    alert("IFC, LAS 파일만 선택이 가능합니다. 다시 파일을 선택해 주세요")
+                    return;
+                }
             }
 
             fileName.textContent = file.name;
