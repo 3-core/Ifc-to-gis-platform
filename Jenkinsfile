@@ -4,8 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'ahci/lfc-to-gis-platform'
         IMAGE_TAG = 'latest'
-        DOCKERHUB_REGISTRY_CREDENTIAL = credentials('DOCKERHUB_CRED')
-        TEST_CREDENTIAL = credentials('CI_REGISTRY')
+        DOCKERHUB_REGISTRY_CREDENTIAL = credentials('CI_REGISTRY')
     }
 
     stages {
