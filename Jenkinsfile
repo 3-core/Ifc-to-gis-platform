@@ -2,9 +2,10 @@ pipeline {
     agent any
 // 배포테스트
     environment {
-        IMAGE_NAME = 'ahci/lfc-to-gis-platform'
+        IMAGE_NAME = 'ghcr.io/kjis256/lfc-to-gis-platform:latest'
         IMAGE_TAG = 'latest'
-        DOCKERHUB_REGISTRY_CREDENTIAL = credentials('CI_REGISTRY')
+        GITHUB_REGISTRY_CREDENTIAL = credentials('GIT_REPO_CRED')
+
     }
 
     stages {
@@ -20,7 +21,7 @@ pipeline {
         stage('Docker Login') {
             steps {
             script {
-                     sh "docker login -u $DOCKERHUB_REGISTRY_CREDENTIAL_USR -p $DOCKERHUB_REGISTRY_CREDENTIAL_PSW"
+                     sh "docker login -u $GITHUB_REGISTRY_CREDENTIAL_USR -p $GITHUB_REGISTRY_CREDENTIAL_PSW"
                 }
             }
         }
