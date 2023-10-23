@@ -2,11 +2,10 @@ pipeline {
     agent any
 
     environment {
-        CI = 'false'
         IMAGE_NAME = 'ahci/lfc-to-gis-platform'
         IMAGE_TAG = 'latest'
-        TAR_FILE_NAME = 'Ifc-to-gis-platform.tar'
         DOCKERHUB_REGISTRY_CREDENTIAL = credentials('DOCKERHUB_CRED')
+        TEST_CREDENTIAL = credentials('CI_REGISTRY')
     }
 
     stages {
