@@ -126,6 +126,21 @@
 
             tileset = viewer.scene.primitives.add(tile);
 
+            let modelList = ["J01_743"];
+            let conditions = [];
+
+            //glb가 위치할 기본 tileset 투명화 적용
+            for (let i = 0; i < modelList.length; i++){
+                let obj = ["${feature['id']} === '"+modelList[i]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                conditions.push(obj)
+            }
+
+            tileset.style = new Cesium.Cesium3DTileStyle({
+                color: {conditions: conditions},
+            });
+
+
+
 
         }else if(tileName == "LOD"){
 
