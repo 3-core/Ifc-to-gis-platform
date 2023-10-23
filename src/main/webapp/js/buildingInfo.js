@@ -42,13 +42,50 @@
         if (classes.contains('on')) {
 
             //투명화 모델 id 수정
-            let modelList = ["29000137"];
+            let modelList = ["29000137","J01_743"];
 
             if (pickObject._batchId == undefined) {
-            //glb클릭
+                //이전 모델 지우기
+                if (previousModel) {
+                    previousModel.color = new Cesium.Color(1, 1, 1, 1);
+                }
+                // 이전 모델과 선택모델 동일한
+                if (previousModel === pickObject.primitive) {
+
+                        previousModel.color = new Cesium.Color(1, 1, 1, 1);
+                        previousModel = undefined;
+
+                        //팝업 닫기
+                        $(".desc-popup").css("display", "none");
+                        $(".desc-popup-none").css("display", "none");
+                }else{
+
+                    // 새로 선택된 모델에 색상 입히기
+                    previousModel = pickObject.primitive;
+                    previousModel.color = Cesium.Color.LIGHTCORAL;
+
+                    //Remove browser right-click context menu
+                    window.addEventListener("contextmenu", (e) => e.preventDefault());
+
+                    //dim
+                    $("#loadingDim").css("display", "block");
+
+                    //getCoordinates 함수 호출
+                    try {
+                        setTimeout(() => {
+                            getBuildingInfo(event,viewer,"29000137");
+                            $("#loadingDim").hide();
+                        }, 2);
+                    } catch(e) {
+
+                        $(".desc-popup-none").css("display", "block");
+                        $("#loadingDim").hide();
+                    }
+
+                }
+
             }else{
             //타일셋 클릭
-
                 //클릭시 tileset 색상 변경
                 // 이전에 선택된 모델과 현재 선택 모델이 같음
                 // 부동산 종합정보 닫기
@@ -65,7 +102,7 @@
 
                     //glb가 위치할 기본 tileset 투명화 적용
                     for (let i = 0; i < modelList.length; i++){
-                        let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                        let obj = ["${feature['id']} === '"+modelList[i]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
                         conditions.push(obj)
                     }
 
@@ -116,12 +153,13 @@
 
                     //glb가 위치할 기본 tileset 투명화 적용
                     for (let i = 0; i < modelList.length; i++){
-                        let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                        let obj = ["${feature['id']} === '"+modelList[i]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
                         conditions.push(obj)
                     }
 
+
                     pickObject.tileset.style = new Cesium.Cesium3DTileStyle({
-                        color: {    conditions: conditions},
+                        color: {conditions: conditions},
                     });
 
                     //Remove browser right-click context menu
@@ -496,7 +534,8 @@
    //부동산 팝업 닫기 및 색상 원복 함수
    function closePopup() {
         //투명화 모델 id 수정
-        let modelList = ["29000137"];
+
+        let modelList = ["29000137","J01_743"];
 
         if (previousModel?.tileset) {
 
@@ -510,21 +549,26 @@
 
              //투명도 적용
               for (let i = 0; i < modelList.length; i++){
-                let obj = ["${feature['id']} === '"+modelList[0]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
+                let obj = ["${feature['id']} === '"+modelList[i]+"'", 'rgba(${COLOR}.r, ${COLOR}.g, ${COLOR}.b, 0)']
                 conditions.push(obj)
               }
-
 
               previousModel.tileset.style = new Cesium.Cesium3DTileStyle({
                 color: {
                   conditions: conditions
                 },
               });
+        }else{
+
+            if (previousModel) {
+                previousModel.color = new Cesium.Color(1, 1, 1, 1);
             }
 
-         previousModel = undefined;
-         $(".desc-popup").css("display", "none");
-         $(".desc-popup-none").css("display", "none");
+        }
+
+        previousModel = undefined;
+        $(".desc-popup").css("display", "none");
+        $(".desc-popup-none").css("display", "none");
    }
 
 
