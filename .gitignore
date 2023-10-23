@@ -28,10 +28,10 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-#build/
-#!**/src/main/**/build/
-#!**/src/test/**/build/
-
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+/src/main/webapp/public/glb
 
 ### VS Code ###
 .vscode/
