@@ -9,16 +9,16 @@ pipeline {
         CI_REGISTRY = credentials('CI_REGISTRY')
     }
 
-    // stages {
-    //     stage('Docker Login') {
-    //         steps {
-    //             script {
-    //                 withCredentials([string(credentialsId: 'CI_REGISTRY_PSW', variable: 'CI_REGISTRY_PSW')]) {
-    //                     sh 'echo "$CI_REGISTRY_PSW" | docker login --username "$CI_REGISTRY_USR" --password-stdin $CI_REGISTRY'
-    //                 }
-    //             }
-    //         }
-    //     }
+    stages {
+        // stage('Docker Login') {
+        //     steps {
+        //         script {
+        //             withCredentials([string(credentialsId: 'CI_REGISTRY_PSW', variable: 'CI_REGISTRY_PSW')]) {
+        //                 sh 'echo "$CI_REGISTRY_PSW" | docker login --username "$CI_REGISTRY_USR" --password-stdin $CI_REGISTRY'
+        //             }
+        //         }
+        //     }
+        // }
         stage('Docker Login') {
             steps {
             script {
