@@ -21,7 +21,7 @@ function lasActivate() {
         document.getElementById("ditap-weather").classList.remove('on');
         removeTilesetToCesium()
 
-    }else{
+    } else {
         document.getElementById("ditap-weather").classList.add('on');
         addTilesetListToCesium(viewer, "pointCloudFull", tilesetURLList["pointCloudFull"]);
         addTilesetChangLocation();
@@ -38,15 +38,15 @@ function fileUpload() {
     //확장자 추출
     const extension = fileInput.value.split('.').pop().toLowerCase();
 
-    if(extension == "las"){
+    if (extension == "las") {
 
         overlay.style.display = "block";
 
         var timer;
         clearTimeout(timer);
-        timer= setTimeout("lasActivate()",7000);  //7초 뒤 함수 실행
+        timer = setTimeout("lasActivate()", 7000); //7초 뒤 함수 실행
 
-    }else{
+    } else {
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
             const formData = new FormData();
@@ -54,26 +54,25 @@ function fileUpload() {
 
             overlay.style.display = "block";
 
-        axios.post('http://localhost:8000/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(function(response) {
-            console.log('File uploaded successfully');
-        }).catch(function(error) {
-            console.error('File upload failed:', error);
-        }).finally(function() {
-            setTimeout(function() {
-                uploadModal.style.display = "none";
-                overlay.style.display = "none";
-                fileInput.value = '';
-                fileNameDiv.innerText = '선택된 IFC 파일이 없습니다.';
-            }, 1500);
-        });
-    } else {
-        alert("선택된 파일이 없습니다.")
-        console.error('No file selected');
+            axios.post('http://localhost:8000/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log('File uploaded successfully');
+            }).catch(function (error) {
+                console.error('File upload failed:', error);
+            }).finally(function () {
+                setTimeout(function () {
+                    uploadModal.style.display = "none";
+                    overlay.style.display = "none";
+                    fileInput.value = '';
+                    fileNameDiv.innerText = '선택된 IFC 파일이 없습니다.';
+                }, 1500);
+            });
+        } else {
+            alert("선택된 파일이 없습니다.")
+            console.error('No file selected');
+        }
     }
-}
-
 }
