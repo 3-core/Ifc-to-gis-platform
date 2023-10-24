@@ -46,69 +46,101 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-		const modelClosenessData = [461.49297095574445, 332.1309522125708, 199.3679065185259, 185.57968155973555, 123.09585257082607, 59.58904585006059, 31.24583812847083, 7.85130191128515]
-        let headingValue = 228;
-        let rotateCount = 0;
-		let angleValue = 0;
+        const modelClosenessData = [461.49297095574445, 332.1309522125708, 199.3679065185259, 185.57968155973555, 123.09585257082607, 59.58904585006059, 31.24583812847083, 7.85130191128515];
+        const initialHeadingValue = 48;
+        let headingValue = initialHeadingValue;
+        let angleValue = 0;
         let index = 0;
 
         const angleElement = document.querySelector("#model-rotate-angle > div:last-child");
         const modelClosenessElement = document.querySelector("#model-rotate-closeness > div:last-child");
+        const footerElement = document.getElementById('model-rotate-footer');
+        const modalElement = document.getElementById('model-rotate-modal');
 
-		document.getElementById('building_rotation_btn_button').addEventListener('click', function() {
+        const initialModelMatrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+            new Ditap.Cartesian3.fromDegrees(
+                127.105482702949,
+                35.8198364247799,
+                34.98499999999889
+            ),
+            new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(initialHeadingValue), 0, 0),
+            Ditap.Ellipsoid.WGS84,
+            Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
+        );
+
+        document.getElementById('building_rotation_btn_button').addEventListener('click', function() {
+            viewer.camera.setView({
+                destination: new Cesium.Cartesian3.fromDegrees(
+                    127.105482702949,
+                    35.8198364247799,
+                    300),
+                orientation: {
+                    heading: Cesium.Math.toRadians(0),
+                    pitch: Cesium.Math.toRadians(-90.0),
+                    roll: 0.0
+                }
+            });
+
+            headingValue = initialHeadingValue;
+            angleValue = 0;
+            index = 0;
+
+            angleElement.textContent = '';
+            modelClosenessElement.textContent = '';
+            footerElement.style.display = 'none';
+            modalElement.style.display = 'block';
+
+            let rotateCount = 0;
             let intervalId = setInterval(() => {
                 headingValue += 18.75;
                 if (headingValue >= 360) {
                     headingValue -= 360;
                 }
 
-                const siheung_rotate_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+                const rotatedModelMatrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
                     new Ditap.Cartesian3.fromDegrees(
-                        127.058999,
-                        35.835152,
-                        37.98499999999889
+                        127.105482702949,
+                        35.8198364247799,
+                        34.98499999999889
                     ),
                     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(headingValue), 0, 0),
                     Ditap.Ellipsoid.WGS84,
                     Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
                 );
-                rotateCount++;
+                siheung_wrong_model.modelMatrix = rotatedModelMatrix;
 
+                rotateCount++;
                 if (rotateCount >= 8) {
                     clearInterval(intervalId);
                 }
-                siheung_wrong_model.modelMatrix = siheung_rotate_model_matrix;
             }, 1000);
 
             let updateIntervalId = setInterval(() => {
-                    angleValue += 18.75;
-                    if (angleValue > 150) {
-                        angleValue = 150;
-                        clearInterval(updateIntervalId);
-                    }
-                    angleElement.textContent = angleValue;
+                angleValue += 18.75;
+                if (angleValue > 150) {
+                    angleValue = 150;
+                    clearInterval(updateIntervalId);
+                }
+                angleElement.textContent = angleValue;
 
-                    if (index < modelClosenessData.length) {
-                        modelClosenessElement.textContent = modelClosenessData[index];
-                        index++;
-                    } else {
-                        clearInterval(updateIntervalId);
-                    }
-                }, 1000);
+                if (index < modelClosenessData.length) {
+                    modelClosenessElement.textContent = modelClosenessData[index];
+                    index++;
+                } else {
+                    clearInterval(updateIntervalId);
+                }
+            }, 1000);
 
             setTimeout(() => {
                 clearInterval(intervalId);
-                document.getElementById('model-rotate-footer').style.display = "block";
+                footerElement.style.display = 'block';
             }, 9000);
 
-            document.getElementById('model-rotate-modal').style.display = "block";
-
             setTimeout(() => {
-                document.getElementById('model-rotate-modal').style.display = "none";
+                modalElement.style.display = 'none';
             }, 13000);
         });
-	})
-
+    });
 </script>
 
 <div id="model-rotate-modal">
