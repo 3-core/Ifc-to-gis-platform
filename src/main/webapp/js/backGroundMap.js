@@ -18,44 +18,25 @@
     const createCustomImageryProviderViewModels = () => {
     const providerViewModels = [];
 
-
-  // 지도(정사영상) 추가
-  providerViewModels.push(
-    new Ditap.ProviderViewModel({
-        name: "Ditap New Korea Map",
-        //iconUrl: getUrlFromBase64(Ditap.IconBase64UrlStream.NEW_MAP_IMG_URL),
-        iconUrl: getUrlFromBase64(Ditap.IconBase64UrlStream.NGII_MAP_IMG_URL),
-        tooltip: "Ditap New Korea Map",
-        category: "Other",
-        creationFunction: function () {
-            return new Cesium.UrlTemplateImageryProvider({
-            //헬리오센 전국 정사영상
-                url : `http://121.135.139.45:9090/geoserver/ortho_map/gwc/service/wmts?layer=ortho_map%3A51cm_korea&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A{z}&TileCol={x}&TileRow={y}`,
-                //tilingScheme : new Ditap.DitapEpsg5179TilingSchema(),
-                tilingScheme: new Ditap.GeographicTilingScheme(),
-                maximumLevel: 18,
-            });
-        },
-    })
-  );
-
-    //  // OSM 지도
-      providerViewModels.push(
+    // OSM 지도
+    providerViewModels.push(
         new Ditap.ProviderViewModel({
-          name: "Open\u00adStreet\u00adMap",
-          iconUrl: getUrlFromBase64(
+            name: "Open\u00adStreet\u00adMap",
+            iconUrl: getUrlFromBase64(
             Ditap.IconBase64UrlStream.OSM_MAP_IMG_URL
-          ),
-          tooltip: "",
-          category: "Other",
-          creationFunction: function () {
+            ),
+            tooltip: "",
+            category: "Other",
+            creationFunction: function () {
             return new Ditap.OpenStreetMapImageryProvider({
               url: "https://a.tile.openstreetmap.org/",
             });
           },
         })
-      );
+    );
 
+
+      // 지도(정사영상) 추가
       providerViewModels.push(
         new Ditap.ProviderViewModel({
             name: "Ditap New Korea Map",
@@ -143,6 +124,20 @@
     const createCustomTerrainProviderViewModels = () => {
       const providerViewModels = [];
 
+      providerViewModels.push(
+        new Ditap.ProviderViewModel({
+          name: "WGS84 Ellipsoid",
+          iconUrl: getUrlFromBase64(
+            Ditap.IconBase64UrlStream.ELLIPSOIDE_TERRAIN_IMG_URL
+          ),
+          tooltip: "WGS84 standard ellipsoid, also known as EPSG:4326",
+          category: "Ditap",
+          creationFunction: function () {
+            return new Ditap.EllipsoidTerrainProvider();
+          },
+        })
+      );
+
       // 지형(터레인) 추가
       providerViewModels.push(
         new Ditap.ProviderViewModel({
@@ -157,20 +152,6 @@
                 //헬리오센 - 전북 원주
                 url :"http://server.heliosen.co.kr:18092/tilesets/duckjinwansan",
             });
-          },
-        })
-      );
-
-      providerViewModels.push(
-        new Ditap.ProviderViewModel({
-          name: "WGS84 Ellipsoid",
-          iconUrl: getUrlFromBase64(
-            Ditap.IconBase64UrlStream.ELLIPSOIDE_TERRAIN_IMG_URL
-          ),
-          tooltip: "WGS84 standard ellipsoid, also known as EPSG:4326",
-          category: "Ditap",
-          creationFunction: function () {
-            return new Ditap.EllipsoidTerrainProvider();
           },
         })
       );
