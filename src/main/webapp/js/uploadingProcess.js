@@ -6,18 +6,19 @@ document.addEventListener("DOMContentLoaded", function() {
         '속성정보 저장중'
     ];
 
-    let currentIndex = 0;
-    let uploadTextElement = document.getElementById('uploading-text');
-    let uploadButton = document.getElementById('upload_button');
+    const uploadTextElement = document.getElementById('uploading-text');
+    const uploadButton = document.getElementById('upload_button');
 
-    function displayText() {
-        if (currentIndex < textArray.length) {
-            uploadTextElement.innerHTML = textArray[currentIndex];
-            currentIndex++;
-
-            setTimeout(displayText, 3000);
+    function displayText(index = 0) {
+        if (index < textArray.length) {
+            uploadTextElement.innerHTML = textArray[index];
+            setTimeout(function() {
+                displayText(index + 1);
+            }, 3500);
         }
     }
 
-    uploadButton.addEventListener('click', displayText);
+    uploadButton.addEventListener('click', function() {
+        displayText();
+    });
 });

@@ -93,7 +93,7 @@
                                     <div style="display: flex; justify-content: space-between; margin-top: 10px">
                                         <select id="citySelect" style="flex-grow: 7">
                                             <option value="blank"></option>
-                                            <option value="jeonju">전북 완주군 이서면 갈산리 690</option>
+                                            <option value="jeonju">전북 전주시 완산구 효자로 185</option>
                                         </select>
                                         <div style="margin: 18px 0 0 11px">
                                             <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="location_search" onclick="moveLocation()">
@@ -178,10 +178,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="uploading-overlay" style="display: none; z-index: 6000">
-                    <div id="spinner" class="loader"></div>
-                    <div style="margin-top: 5px" id="uploading-text"></div>
                 </div>
             </div>
             </div>
