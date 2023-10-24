@@ -54,26 +54,26 @@ function fileUpload() {
 
             overlay.style.display = "block";
 
-            axios.post('http://localhost:8000/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(function(response) {
-                console.log('File uploaded successfully');
-            }).catch(function(error) {
-                console.error('File upload failed:', error);
-            }).finally(function() {
-                setTimeout(function() {
-                    uploadModal.style.display = "none";
-                    overlay.style.display = "none";
-                    fileInput.value = '';
-                    fileNameDiv.innerText = '선택된 IFC 파일이 없습니다.';
-                }, 20000);
-            });
-        } else {
-            alert("선택된 파일이 없습니다.")
-            console.error('No file selected');
-        }
+        axios.post('http://localhost:8000/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function(response) {
+            console.log('File uploaded successfully');
+        }).catch(function(error) {
+            console.error('File upload failed:', error);
+        }).finally(function() {
+            setTimeout(function() {
+                uploadModal.style.display = "none";
+                overlay.style.display = "none";
+                fileInput.value = '';
+                fileNameDiv.innerText = '선택된 IFC 파일이 없습니다.';
+            }, 1500);
+        });
+    } else {
+        alert("선택된 파일이 없습니다.")
+        console.error('No file selected');
     }
+}
 
 }
