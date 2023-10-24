@@ -4,7 +4,11 @@ function moveLocation() {
 
     if (seletedCity === "jeonju") {
         viewer.camera.flyTo({
-            destination: new Cesium.Cartesian3.fromDegrees(127.059468, 35.835569 ,580.0),
+            destination: new Cesium.Cartesian3.fromDegrees(
+            127.105982702949,
+            35.8191364247799,
+            500.0
+            ),
         });
     }
 }
