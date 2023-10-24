@@ -325,7 +325,7 @@
 
                             //const URL = "http://localhost:8000/ifc/properties/" + guid;
 
-                            const URL = "http://ifc-to-gis-platform:8000/ifc/properties/" + guid;
+                            const URL = "http://soosung_server:8000/ifc/properties/" + guid;
                            
                             axios.get(URL)
                                 .then(function (response) {
