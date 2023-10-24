@@ -235,7 +235,6 @@
 
 			<!-- Soosung Event -->
             <script src="${pageContext.request.contextPath}/js/changeNode.js"></script>
-            <script src="${pageContext.request.contextPath}/js/rotateModel.js"></script>
             <script src="${pageContext.request.contextPath}/js/changeModel.js"></script>
             <script src="${pageContext.request.contextPath}/js/uploadingProcess.js"></script>
 
