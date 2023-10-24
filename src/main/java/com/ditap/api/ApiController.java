@@ -94,7 +94,7 @@ public class ApiController {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
 
-        System.out.println("Response code: " + conn.getResponseCode());
+        //System.out.println("Response code: " + conn.getResponseCode());
 
         BufferedReader rd;
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -116,7 +116,7 @@ public class ApiController {
         JSONParser jsonParser = new JSONParser();
         JSONObject response = (JSONObject) jsonParser.parse(sb.toString());
 
-        System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
+        //System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
 
         return (JSONArray) ((JSONObject) response.get(getKey)).get("field");
     }
@@ -149,7 +149,7 @@ public class ApiController {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
 
-        System.out.println("Response code: " + conn.getResponseCode());
+        //System.out.println("Response code: " + conn.getResponseCode());
 
         BufferedReader rd;
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -195,7 +195,7 @@ public class ApiController {
             bungieNum = addrA[addrA.length - 1];
 
             // make pnu code
-            File file = new File(ApiController.class.getResource("").getPath() + "pnu.txt");
+            File file = new File("/usr/local/tomcat/webapps/ROOT/pnu.txt");
 
             //read file
             BufferedReader br = null;
@@ -240,7 +240,7 @@ public class ApiController {
         //System.out.println(keyword);
         //System.out.println(bungieNum);
 
-        System.out.println(pnu);
+        //System.out.println(pnu);
 
         return pnu;
     }

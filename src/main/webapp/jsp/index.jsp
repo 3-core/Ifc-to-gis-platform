@@ -292,12 +292,11 @@
                   0.0716951918898415
                 );
 
-
-                //lx위치 지정 > 변경하셔도 됩니다.
+                //속성 관련 시연 위치
                 viewer.camera.setView({
                     destination: new Cesium.Cartesian3.fromDegrees(
-                        127.06538207261136,
-                        35.83600908939431,
+                        127.105982702949,
+                        35.8191364247799,
                         120.00
                     ),
                     orientation: new Cesium.HeadingPitchRoll(
@@ -307,7 +306,7 @@
                     )
                 });
 
-                addTilesetToCesium();
+               addTilesetToCesium();
 
                 let previousNode;
                 let previousColor;
@@ -325,33 +324,36 @@
                         const guid = pickObject.detail.node._name;
                         const node = pickObject.detail.node;
 
-                        handleNodeFocus(node);
+                        if(pickObject.id != "lx_model"){
 
-                        const URL = "http://localhost:8000/ifc/properties/" + guid;
-                        axios.get(URL)
-                            .then(function (response) {
-                                const propertyData = {
-                                    property: response.data.element_property,
-                                    pset: response.data.pset_property
-                                };
+                            handleNodeFocus(node);
 
-                                document.getElementById('property-section').innerHTML = '';
-                                document.getElementById('pset-section').innerHTML = '';
+                            const URL = "http://localhost:8000/ifc/properties/" + guid;
+                            axios.get(URL)
+                                .then(function (response) {
+                                    const propertyData = {
+                                        property: response.data.element_property,
+                                        pset: response.data.pset_property
+                                    };
 
-                                document.getElementById('h2-property').style.display = "block";
-                                document.getElementById('h2-pset').style.display = "block";
+                                    document.getElementById('property-section').innerHTML = '';
+                                    document.getElementById('pset-section').innerHTML = '';
 
-                                document.getElementById('tree-container').style.display = "block";
-                                document.getElementById('floor-tree-container').style.display = "block";
-                                displaySectionData(propertyData.property, "property-section");
-                                displaySectionData(propertyData.pset, "pset-section");
+                                    document.getElementById('h2-property').style.display = "block";
+                                    document.getElementById('h2-pset').style.display = "block";
 
-                                highlightNodeByGuid(guid);
-                                showPropertyModal();
-                            })
-                            .catch(function (error) {
-                                console.error(error);
-                            });
+                                    document.getElementById('tree-container').style.display = "block";
+                                    document.getElementById('floor-tree-container').style.display = "block";
+                                    displaySectionData(propertyData.property, "property-section");
+                                    displaySectionData(propertyData.pset, "pset-section");
+
+                                    highlightNodeByGuid(guid);
+                                    showPropertyModal();
+                                })
+                                .catch(function (error) {
+                                    console.error(error);
+                                });
+                            }
                     }
 
                 }, Ditap.ScreenSpaceEventType.LEFT_CLICK);
