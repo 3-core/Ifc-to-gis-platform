@@ -17,36 +17,53 @@
 
 const siheung_floor_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
     new Ditap.Cartesian3.fromDegrees(
-        127.058999,
-        35.835152,
-        70.98499999999889
+        127.105482702949,
+        35.8198364247799,
+        100
     ),
-    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(18), 0, 0),
+    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(198), 0, 0),
     Ditap.Ellipsoid.WGS84,
     Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
 );
 
 const siheung_floor_model = Ditap.Model.fromGltf({
     id: "siheung_floor_model",
-    url: "public/glb/siheung/siheung_demonstration_floor.glb",
+    url: "public/glb/siheung/siheung_station_length.glb",
     modelMatrix: siheung_floor_model_matrix,
 });
 
 const siheung_wrong_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
     new Ditap.Cartesian3.fromDegrees(
-        127.059999,
-        35.836152,
-        37.98499999999889
+        127.105982702949,
+        35.8191364247799,
+        34.98499999999889
     ),
-    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(228), 0, 0),
+    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(48), 0, 0),
     Ditap.Ellipsoid.WGS84,
     Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
 );
 
 const siheung_wrong_model = Ditap.Model.fromGltf({
     id: "siheung_wrong_model",
-    url: "public/glb/siheung/siheung_demonstration.glb",
+    url: "public/glb/siheung/siheung_station.glb",
     modelMatrix: siheung_wrong_model_matrix,
+});
+
+const siheung_station_background_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
+    new Ditap.Cartesian3.fromDegrees(
+        127.105482702949,
+        35.8198364247799,
+        0
+    ),
+    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(180), 0, 0),
+    Ditap.Ellipsoid.WGS84,
+    Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
+);
+
+const siheung_station_location_model = Ditap.Model.fromGltf({
+    id: "siheung_station_location",
+    url: "public/glb/siheung/siheung.glb",
+    modelMatrix: siheung_station_background_matrix,
 });
 
 //전주
@@ -65,24 +82,6 @@ const lx_model = Ditap.Model.fromGltf({
     id: "lx_model",
     url: "public/glb/lx_jeonju/lx_jeonju.glb",
     modelMatrix: lx_model_matrix,
-});
-
-
-const siheung_station_location_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
-    new Ditap.Cartesian3.fromDegrees(
-        127.058999,
-        35.835152,
-        0
-    ),
-    new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(0), 0, 0),
-    Ditap.Ellipsoid.WGS84,
-    Ditap.Transforms.localFrameToFixedFrameGenerator("south", "east")
-);
-
-const siheung_station_location_model = Ditap.Model.fromGltf({
-    id: "siheung_station_location",
-    url: "public/glb/siheung/siheung_background.glb",
-    modelMatrix: siheung_station_location_matrix,
 });
 
 
