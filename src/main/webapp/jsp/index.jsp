@@ -293,7 +293,7 @@
                 );
 
                 //속성 관련 시연 위치
-                viewer.camera.setView({
+                /*viewer.camera.setView({
                     destination: new Cesium.Cartesian3.fromDegrees(
                         127.105982702949,
                         35.8191364247799,
@@ -304,7 +304,7 @@
                         -0.276607153839886,
                         6.281110875400085
                     )
-                });
+                });*/
 
                addTilesetToCesium();
 
