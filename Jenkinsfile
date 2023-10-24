@@ -56,7 +56,7 @@ pipeline {
                             if docker ps -a | grep -q 'ifc-to-gis-platform'; then 
                                 docker stop ifc-to-gis-platform && docker rm ifc-to-gis-platform; 
                             fi
-                            docker run -d --name ifc-to-gis-platform --restart=unless-stopped -p 18089:8080 $IMAGE_NAME:$IMAGE_TAG
+                            docker run -d --network=lxnetwork --name ifc-to-gis-platform --restart=unless-stopped -p 18089:8080 $IMAGE_NAME:$IMAGE_TAG
                         '''
                     } catch (Exception err) {
                         echo "Deploy failed with error: ${err}"
