@@ -220,11 +220,9 @@
             <!-- MoveFunction -->
             <script src="${pageContext.request.contextPath}/js/moveLocation.js"></script>
             <!-- search admin / rectagnle -->
-            <script src="${pageContext.request.contextPath}/js/NonSpatial/SGI.js"></script>
             <script src="${pageContext.request.contextPath}/js/NonSpatial/searchAdmin.js"></script>
             <script src="${pageContext.request.contextPath}/js/NonSpatial/searchHospital.js"></script>
             <script src="${pageContext.request.contextPath}/js/NonSpatial/searchBuildingInfo.js"></script>
-
             <script src="${pageContext.request.contextPath}/js/NonSpatial/selectRectangle.js"></script>
 
             <!-- UploadJS -->
@@ -325,11 +323,7 @@
 
                             //const URL = "http://localhost:8000/ifc/properties/" + guid;
 
-                            //외부 접근
-                            const URL = "http://office.heliosen.co.kr:8000/ifc/properties/" + guid;
-                            //내부 접근
-                            //const URL = "http://soosung_server:8000/ifc/properties/" + guid;
-
+                            const URL = "http://ifc-to-gis-platform:8000/ifc/properties/" + guid;
                            
                             axios.get(URL)
                                 .then(function (response) {
@@ -385,7 +379,7 @@
                 var camera = viewer.camera;
 
                 screenSpaceRectEventHandler.setInputAction(function drawSelector(movement) {
-                    if (!mouseDown || !rectrangleSearch) {
+                    if (!mouseDown || !rectangleSearch) {
                         return;
                     }
 
@@ -414,7 +408,7 @@
                 }, false);
 
                 screenSpaceRectEventHandler.setInputAction(function startClickShift() {
-                    if(!rectrangleSearch) {
+                    if(!rectangleSearch) {
                         return;
                     }
                     mouseDown = true;
@@ -422,7 +416,7 @@
                 }, Cesium.ScreenSpaceEventType.LEFT_DOWN, Cesium.KeyboardEventModifier.SHIFT);
 
                 screenSpaceRectEventHandler.setInputAction(function endClickShift() {
-                    if(!rectrangleSearch) {
+                    if(!rectangleSearch) {
                         return;
                     }
                     mouseDown = false;
@@ -447,7 +441,7 @@
                     show: false,
                     rectangle: {
                         coordinates: getSelectorLocation,
-                        material: Cesium.Color.BLACK.withAlpha(0.5)
+                        material: new Cesium.ColorMaterialProperty(Cesium.Color.RED.withAlpha(0.3))
                     }
                 });
 

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
 <div>
     <div>
         <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
@@ -55,25 +58,33 @@
             </div>
         </div>
     </div>
-    <div>
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
-            속성으로 검색합니다.
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 10px">
-            <select id="buildingKind" style="flex-grow: 7">
-                <option value="00">종류</option>
-                <option value="01">병원</option>
-            </select>
-            <select id="buildingField" style="flex-grow: 7">
-                <option value="00">검색필드</option>
-                <option value="01">병상수</option>
-            </select>
-            <input type="text" id="number_of_bed" style="width: 80px; flex-grow: 7; margin: 10px 10px 10px 0px">
-            <div style="margin: 18px 0 0 11px">
-                <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchHospital()">
+     <script type="text/javascript" src="${pageContext.request.contextPath}/js/NonSpatial/selectKind.js"></script>
+    </head>
+    <body>
+        <div>
+            <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
+                속성으로 검색합니다.
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px">
+                <select id="buildingKind" style="flex-grow: 7">
+                    <option value="00">종류</option>
+                    <option value="01">병원</option>
+                    <option value="02">약국</option>
+                    <option value="03">어린이집</option>
+                    <option value="04">음식점</option>
+                    <option value="05">태양광발전소</option>
+                </select>
+                <select id="buildingField" style="flex-grow: 7">
+                    <option value="00">검색필드</option>
+                </select>
+                <input type="text" id="number_of_bed" style="width: 80px; flex-grow: 7; margin: 10px 10px 10px 0px">
+                <div style="margin: 18px 0 0 11px">
+                    <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchHospital()">
+                </div>
             </div>
         </div>
-    </div>
+    </body>
+    </html>
 
     <%-- 검색 결과 --%>
     <div>
@@ -183,12 +194,3 @@
         </script>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
