@@ -324,7 +324,10 @@
                             handleNodeFocus(node);
 
                             //const URL = "http://localhost:8000/ifc/properties/" + guid;
+                            //외부 접근
+                            //const URL = "http://office.heliosen.co.kr:8000/ifc/properties/" + guid;
 
+                            //내부 접근
                             const URL = "http://soosung_server:8000/ifc/properties/" + guid;
                            
                             axios.get(URL)
