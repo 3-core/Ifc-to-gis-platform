@@ -2,7 +2,7 @@ let previousBuildingModel;
 
 function displayBuildingPopup(event, viewer, pickObject) {
     console.log(pickObject.getProperty("id"));
-    let modelList = ["34002"];
+    let modelList = ["id"];
     if (!(pickObject._batchId == undefined)) {
         if (previousBuildingModel) {
             if (previousBuildingModel?.tileset) {
@@ -43,9 +43,14 @@ function displayBuildingPopup(event, viewer, pickObject) {
             color: {    conditions: conditions},
         });
     }
-
+    if (pickObject && pickObject.getProperty("id")) {
+        displayBuildingInfo(pickObject.getProperty("id"));
+        }
+        else {
+        displayBuildingInfo(1)
+        }
     // displayBuildingInfo(pickObject.getProperty("id"));
-    displayBuildingInfo(5);
+    //displayBuildingInfo(5);
 
 }
 function displayBuildingInfo(id) {

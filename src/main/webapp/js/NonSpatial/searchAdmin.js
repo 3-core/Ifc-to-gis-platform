@@ -24,7 +24,7 @@ function searchAdmin() {
     }
 }
 
-var selectRectagnle = null;
+var selectRectangle = null;
 
 function queryRectangle()
 {

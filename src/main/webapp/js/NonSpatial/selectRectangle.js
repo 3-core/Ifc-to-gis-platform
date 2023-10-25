@@ -1,6 +1,6 @@
-let rectrangleSearch = false;
+let rectangleSearch = false;
 function searchRectangle() {
-    rectrangleSearch = true;
+    rectangleSearch = true;
 
     viewer.scene.debugShowFramesPerSecond = true;
     viewer.scene.screenSpaceCameraController.enableTranslate = false;
@@ -10,13 +10,13 @@ function searchRectangle() {
 
 }
 
-function setROI(east, west, north, sourth) {
+function setROI(east, west, north, south) {
     $('#roi_min_x').val(east);
     $('#roi_max_y').val(north);
     $('#roi_max_x').val(west);
-    $('#roi_min_y').val(sourth);
+    $('#roi_min_y').val(south);
 
-    fetch("../../public/buildings/output_hospital.json")
+    fetch("../../public/buildings/output_RectangleBox.json")
         .then(function(response) {
             return response.json();
         })
@@ -34,5 +34,5 @@ function resetRectangleSearch() {
     viewer.scene.screenSpaceCameraController.enableLook = true;
     viewer.scene.screenSpaceCameraController.enableCollisionDetection = true;
 
-    rectrangleSearch = false;
+    rectangleSearch = false;
 }
