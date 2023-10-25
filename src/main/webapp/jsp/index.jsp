@@ -36,10 +36,10 @@
                 <div class="header-wrap">
                     <div class="header-logo">
                         <div class="header-logo-img">
-                            <img src="${pageContext.request.contextPath}/public/img/logo.png" alt="lx_logo" />
+                            <img src="${pageContext.request.contextPath}/public/img/top_logo_fin_lx.png" alt="lx_logo" />
                         </div>
-                        <div class="header-logo-txt">
-                            공간정보연구원
+                        <div class="header-logo-img" style="margin-left: auto">
+                             <img src="${pageContext.request.contextPath}/public/img/top_logo_fin.png" alt="lx_logo" />
                         </div>
                     </div>
                 </div>

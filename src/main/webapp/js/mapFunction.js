@@ -20,6 +20,12 @@
                         <p id ="ditap-weather" class="ditap-function-btn-img"></p>
                         <p class="ditap-btn-tooltip">LAS</p>
                     </button>
+
+                    <button class="ditap-toolbar-btn ditap-box-btn" id="ditap-box-btn-id" style = "display : none">
+                        <p id ="ditap-box" class="ditap-function-btn-img"></p>
+                        <p class="ditap-btn-tooltip">Bounding Volumes</p>
+                    </button>
+
                     <button class="ditap-toolbar-btn ditap-building-btn">
                         <p id ="ditap-building" class="ditap-function-btn-img"></p>
                         <p class="ditap-btn-tooltip">행정정보</p>

@@ -231,6 +231,10 @@
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAAABHNCSVQICAgIfAhkiAAAAXlJREFUaEPtl49tglAQxn0wEO0E2g3qJO0G1Q3qJO0IsIEOBK+HPhPTKO/gjt6VfCYkGu7f9/1AuLBa6CcsVNcKwv4bWRADMScO4FJ0AoI9BoixrXISCGJOQLDHADG2VU4CQcwJCPYYasRijK90vFHnTep+LIrieWiSruuOdL5KMXUI4UDHN3v6gUAVYUnU168+JxL2NELYOZSEbTXEqQi7Ok8C92VZ7qY43rbtjgR9UG5DhlypTyl1MWhy5k0iCYv9TxpIVE+rDoTlqKZLsSc2eE/9VR01YrmBLc6L7gmLgbk9IYzrlJc4EPNCgjsHiHGd8hKnQiw9oGPubT4nWquO2gNa6x1Pqw6EMS+hitaOfvXY5+LvnXe5tjxYNMdu0Jc9KoQXOuop5tzmqPx59AWTuHf6uk4Nxm7QDQn61Nie1e4xqbtz5KsRm2M4SU0Ik7hnkQtiFq5LeoKYxD2LXBCzcF3SE8Qk7lnkgpiF65KeICZxzyJ3scR+AIo5fzdTzLjnAAAAAElFTkSuQmCC);
 }
 
+.ditap-box-btn .ditap-function-btn-img {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAABvSURBVDhPY/z//78DAwPDfCBWAGJKwAOg5kRGoIEghjwlJiHpfQAy8D9IgBEIkA3FJY7LYrj6EWwglSKFAR4pVDcQPZbRLSAU6wRjedRAhtEwxEi2QyvZfAC6n59KWe8hKC+DqoAFVCi1HwLNSAAAkATECFjWk6sAAAAASUVORK5CYII=')
+}
+
 .ditap-weather-btn .ditap-function-btn-img {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAWhJREFUOE+9lIFRwzAMReMJKBPQbkA3KBMAE1AmgE5AOgEwAWECygSwQWGDMgHZwLzvk3MmOLi54/Cdzkn89SV9S3HVwPLeTzi6ws6wY4O9sTfYo3Ouzbm63EfIRPCETQfiifgSUu3f1g9Cy2xrZB/s19ireS3Y77AjbIfN+5nmCGuAN9g7tug7WEBlJtI158J3K0eoyAKfA97kSoZUukqSHZhZlhCQyomXUAHM6hudwXt7VtB74EGW4MRZLDPidYvLXHYJYcPzRYKp8Vk7y+zFDlbsGw5UdnHhOwWk8m8NfCJCpXyKrSDSDY5eSYXPIlSDHmCHQ81aimA3/wmuFWEUtyPkk9rCE2BuGpfeNVUirLIlG6FuOozcHu9qfukYSo49JV+NU1MqMT3Hf8n7Q3cplkHNruko9l8/WCJZmJqueS3TVg06RkNru0mcqqG/TfiL7KthmvWv4zVGy4j9H8IxGvar+HMNvwD5iNvRP5QpCAAAAABJRU5ErkJggg==');
 }
@@ -239,12 +243,18 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAGlJREFUOE9jZICC////XwAy9WF8EukLjIyMhiA9jEgG/ifREBTlQAPBZmEYCJPAZjjQF2BLkdWgi9HPQKDNDUDH1ANxI9BFIDYDRS6kuoGjYUh5pIyG4UgIw8ETyxSW1OgeucBIZQMvAgAy1/Cu3ZB1IwAAAABJRU5ErkJggg==');
 }
 
+.ditap-box-btn .ditap-function-btn-img,
 .ditap-weather-btn .ditap-function-btn-img,
 .ditap-building-btn .ditap-function-btn-img{
     background-position: 50%;
 }
 
 .ditap-building-btn{
+    display : block;
+    margin : 20px 0;
+}
+
+.ditap-box-btn{
     display : block;
     margin : 20px 0;
 }

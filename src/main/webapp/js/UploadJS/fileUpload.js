@@ -19,10 +19,17 @@ function lasActivate() {
     if (classes.contains('on')) {
 
         document.getElementById("ditap-weather").classList.remove('on');
+        //바운딩 박스 버튼 안보이게
+        $("#ditap-box-btn-id").css("display", "none");
+        document.getElementById("ditap-box").classList.remove('on');
+        globalTileset.debugShowBoundingVolume = false;
+
         removeTilesetToCesium()
 
     } else {
         document.getElementById("ditap-weather").classList.add('on');
+        //바운딩 박스 버튼 보이게
+        $("#ditap-box-btn-id").css("display", "block");
         addTilesetListToCesium(viewer, "pointCloudFull", tilesetURLList["pointCloudFull"]);
         addTilesetChangLocation();
     }

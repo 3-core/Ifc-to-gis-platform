@@ -70,8 +70,8 @@ const siheung_station_location_model = Ditap.Model.fromGltf({
 const lx_model_matrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
     new Ditap.Cartesian3.fromDegrees(
         127.06538207261136,
-        35.83800908939431,
-        51.00
+        35.83801008939431,
+        52.24
     ),
     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(0), 0, 0),
     Ditap.Ellipsoid.WGS84,

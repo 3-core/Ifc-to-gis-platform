@@ -21,15 +21,49 @@
        if (classes.contains('on')) {
 
            document.getElementById("ditap-weather").classList.remove('on');
+
+           //바운딩 박스 버튼 안보이게
+            $("#ditap-box-btn-id").css("display", "none");
+            document.getElementById("ditap-box").classList.remove('on');
+            globalTileset.debugShowBoundingVolume = false;
+
            removeTilesetToCesium()
 
        }else{
            document.getElementById("ditap-weather").classList.add('on');
+           //바운딩 박스 버튼 보이게
+            $("#ditap-box-btn-id").css("display", "block");
            addTilesetListToCesium(viewer, "pointCloudFull", tilesetURLList["pointCloudFull"]);
            //addTilesetListToCesium(viewer, "pointCloud", tilesetList["pointCloud"]);
            addTilesetChangLocation();
        }
    });
+
+   //바운딩 볼륨 버튼
+   $(document).on('click', '.ditap-box-btn', function(){
+      const classes = document.getElementById("ditap-box").classList;
+
+      globalTileset.debugShowBoundingVolume = true;
+
+
+       if (classes.contains('on')) {
+
+
+           document.getElementById("ditap-box").classList.remove('on');
+
+           globalTileset.debugShowBoundingVolume = false;
+
+
+
+       }else{
+           document.getElementById("ditap-box").classList.add('on');
+
+           globalTileset.debugShowBoundingVolume = true;
+
+       }
+   });
+
+
 
    //클릭한 이전 건물을 저장하기 위해 사용
    let previousModel;
