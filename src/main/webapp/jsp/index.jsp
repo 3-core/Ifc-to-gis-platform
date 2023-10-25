@@ -329,6 +329,7 @@
 
                             //내부 접근
                             const URL = "http://soosung_server:8000/ifc/properties/" + guid;
+
                            
                             axios.get(URL)
                                 .then(function (response) {
