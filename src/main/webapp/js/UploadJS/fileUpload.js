@@ -61,7 +61,10 @@ function fileUpload() {
 
             overlay.style.display = "block";
 
-            axios.post('http://localhost:8000/upload', formData, {
+            //const URL = "http://localhost:8000/upload";
+             const URL = "http://office.heliosen.co.kr:8000/upload"
+
+            axios.post(URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
