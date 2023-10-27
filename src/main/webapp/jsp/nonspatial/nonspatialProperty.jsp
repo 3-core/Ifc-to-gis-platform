@@ -97,12 +97,12 @@
         <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
             검색 결과를 표시합니다.
         </div>
-        <div id="building-list" class="building-list" style="max-height: 200px; min-height: 100px; margin-top: 10px"></div>
+        <div id="building-list" class="building-list" style="max-height: 200px; min-height: 100px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
 
         <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
             상세 검색 결과를 표시합니다.
         </div>
-        <div id="selected-building-result" class="selected-building-result" style="max-height: 200px; min-height: 100px;  margin-top: 10px"></div>
+        <div id="selected-building-result" class="selected-building-result" style="max-height: 200px; min-height: 100px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jstree-3.3.16-0/jstree.js"></script>
@@ -136,7 +136,7 @@
                 'core': {
                     'data': [{
                         "id": 1,
-                        "text": "검색결과 없음",
+                        "text": "검색 결과 없음",
                     }]
                 }
             });

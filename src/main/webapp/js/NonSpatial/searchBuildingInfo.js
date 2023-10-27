@@ -49,38 +49,43 @@ function displayBuildingPopup(event, viewer, pickObject) {
         else {
         displayBuildingInfo(1)
         }
-    // displayBuildingInfo(pickObject.getProperty("id"));
-    //displayBuildingInfo(5);
-
 }
 function displayBuildingInfo(id) {
-    const selectedInfo = all_data.filter(function (e) {
-        return e.id == id;
+    const selectedInfo = all_data.filter(function (element) {
+        return element.tid == id;
     });
 
     var JsonData = new Object();
-    if(selectedInfo.length > 0 ) {
-        for(idx = 0; idx < selectedInfo.length; idx++) {
-            var element = selectedInfo[idx];
-            JsonData["text"] = "검색결과"
-            JsonData["children"] = new Array();
-            for(var key in element) {
+
+    if (selectedInfo.length > 0) {
+        JsonData["text"] = "검색 결과";
+        JsonData["children"] = new Array();
+
+        for (var i = 0; i < selectedInfo.length; i++) {
+            var element = selectedInfo[i];
+            var businessNode = new Object();
+            businessNode["text"] = element["사업장명"] || element["병원명"] || element["공장명"] || element["어린이집명"] || element["발전소명"];
+            businessNode["children"] = new Array();
+
+            for (var key in element) {
                 var value = element[key];
                 var attribute = new Object();
                 attribute["text"] = key + " : " + value;
-                JsonData["children"].push(attribute);
+                businessNode["children"].push(attribute);
             }
-            break;
+
+            JsonData["children"].push(businessNode);
         }
     } else {
-        JsonData["text"] = "검색결과 없음";
+        JsonData["text"] = "검색 결과 없음";
     }
 
-    jstreeBuildingInfoInstance.settings.core.data=JsonData;
+    jstreeBuildingInfoInstance.settings.core.data = JsonData;
     jstreeBuildingInfoInstance.refresh(false);
 
     $(".building-info-popup").css("display", "block");
 }
+
 
 function closeBuildingPopup() {
     console.log("closePopup called")
