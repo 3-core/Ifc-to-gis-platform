@@ -1549,26 +1549,32 @@
         "text": "실내객체",
         "children": [
             {
-                "id": 414,
-                "text": "IfcStaire",
+                "id": 419,
+                "text": "시흥",
                 "children": [
                     {
-                        "id": 418,
-                        "text": "에스컬레이터"
-                    }
-                ]
-            },
-            {
-                "id": 417,
-                "text": "IfcElement",
-                "children": [
-                    {
-                        "id": 415,
-                        "text": "비상사다리"
+                        "id": 414,
+                        "text": "IfcStaire",
+                        "children": [
+                            {
+                                "id": 418,
+                                "text": "에스컬레이터"
+                            }
+                        ]
                     },
                     {
-                        "id": 416,
-                        "text": "비상사다리"
+                        "id": 417,
+                        "text": "IfcElement",
+                        "children": [
+                            {
+                                "id": 415,
+                                "text": "비상사다리A"
+                            },
+                            {
+                                "id": 416,
+                                "text": "비상사다리B"
+                            }
+                        ]
                     }
                 ]
             }
