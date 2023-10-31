@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         buildingFieldSelect.innerHTML = "<option value='00'>검색필드</option>";
 
         if (selectedValue === "01") { // 병원 선택
-            buildingFieldSelect.innerHTML += "<option value='01'>병상수</option>";
+            buildingFieldSelect.innerHTML += "<option value='01'>의료인수</option>";
         } else if (selectedValue === "02") { // 약국 선택
             buildingFieldSelect.innerHTML += "<option value='02'>면적</option>";
         } else if (selectedValue === "03") { // 어린이집 선택

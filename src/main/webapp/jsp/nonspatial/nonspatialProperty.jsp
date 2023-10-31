@@ -159,12 +159,14 @@
                 var JsonData = new Object();
                 var x = -1.0;
                 var y = -1.0;
+                var height = 200.0;
+
                 if(selectedInfo.length > 0 ) {
                     for(idx = 0; idx < selectedInfo.length; idx++) {
                         var element = selectedInfo[idx];
                         JsonData["text"] = selectedData.text;
                         JsonData["children"] = new Array();
-                        for(var key in element) {
+                        for(var key in element) {41
                             var value = element[key];
                             var attribute = new Object();
                             attribute["text"] = key + " : " + value;
@@ -177,12 +179,50 @@
                                 x = value;
                             }
                         }
+                        if (selectedData.id === "415") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.10557974395417, 35.82025770895747, 148),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-170),
+                                 pitch: Cesium.Math.toRadians(-30),
+                                 roll: 0,
+                              },
+                           });
+                        }
+                        else if (selectedData.id === "416") {
+                        function onFileTreeNodeClick(event) {
+                                    const guid = event.currentTarget.dataset.guid;
+                                    const node = findNodeByGuid(guid);
+                                    if (node) {
+                                        handleNodeFocus(node);
+                                    }
+                                }
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.1054651824028, 35.820340537283485, 148),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-170),
+                                 pitch: Cesium.Math.toRadians(-30),
+                                 roll: 0,
+                              },
+                           });
+                        }
+                        else if (selectedData.id === "418") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.1058202884375, 35.81937088431648, 95),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-85),
+                                 pitch: Cesium.Math.toRadians(-30),
+                                 roll: 0,
+                              },
+                           });
+                        }
 
                         if( x > 0.0 && y > 0.0) {
                             viewer.camera.flyTo({
-                                destination: new Cesium.Cartesian3.fromDegrees(x, y ,200.0),
+                                destination: new Cesium.Cartesian3.fromDegrees(x, y ,height),
                             });
                         }
+
 
                         break;
                     }
