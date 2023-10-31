@@ -60,7 +60,7 @@
         const initialModelMatrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
             new Ditap.Cartesian3.fromDegrees(
                 127.105482702949,
-                35.8198364247799,
+                35.8197964247799,
                 34.98499999999889
             ),
             new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(initialHeadingValue), 0, 0),
@@ -72,7 +72,7 @@
             viewer.camera.setView({
                 destination: new Cesium.Cartesian3.fromDegrees(
                     127.105482702949,
-                    35.8198364247799,
+                    35.8197964247799,
                     300),
                 orientation: {
                     heading: Cesium.Math.toRadians(0),
@@ -100,7 +100,7 @@
                 const rotatedModelMatrix = new Ditap.Transforms.headingPitchRollToFixedFrame(
                     new Ditap.Cartesian3.fromDegrees(
                         127.105482702949,
-                        35.8198364247799,
+                        35.8197964247799,
                         34.98499999999889
                     ),
                     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(headingValue), 0, 0),
