@@ -53,7 +53,7 @@ const siheung_station_background_matrix = new Ditap.Transforms.headingPitchRollT
     new Ditap.Cartesian3.fromDegrees(
         127.105482702949,
         35.8198364247799,
-        0
+        26.39499999999889
     ),
     new Ditap.HeadingPitchRoll(Ditap.Math.toRadians(180), 0, 0),
     Ditap.Ellipsoid.WGS84,
