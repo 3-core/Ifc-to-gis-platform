@@ -94,7 +94,7 @@
                     dynamicScreenSpaceErrorHeightFalloff : 0.25,
                     maximumMemoryUsage: 1024,
                     shadows: Ditap.ShadowMode.ENABLED,
-                    maximumScreenSpaceError :70
+                    maximumScreenSpaceError :100
                 });
 
             tileset = viewer.scene.primitives.add(tile);
@@ -127,7 +127,7 @@
                     dynamicScreenSpaceErrorHeightFalloff : 0.25,
                     maximumMemoryUsage: 1024,
                     shadows: Ditap.ShadowMode.ENABLED,
-                    maximumScreenSpaceError :70
+                    maximumScreenSpaceError :100
                 });
 
             tileset = viewer.scene.primitives.add(tile);
@@ -161,7 +161,7 @@
                     dynamicScreenSpaceErrorHeightFalloff : 0.25,
                     maximumMemoryUsage: 1024,
                     shadows: Ditap.ShadowMode.ENABLED,
-                    maximumScreenSpaceError :40
+                    maximumScreenSpaceError :70
                 });
 
 
