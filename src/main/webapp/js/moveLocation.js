@@ -7,7 +7,7 @@ function moveLocation() {
             destination: new Cesium.Cartesian3.fromDegrees(
             127.105982702949,
             35.8191364247799,
-            500.0
+            300.0
             ),
         });
     }

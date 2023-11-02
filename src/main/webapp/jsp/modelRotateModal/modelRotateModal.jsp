@@ -73,7 +73,7 @@
                 destination: new Cesium.Cartesian3.fromDegrees(
                     127.105482702949,
                     35.8197964247799,
-                    300),
+                    140),
                 orientation: {
                     heading: Cesium.Math.toRadians(0),
                     pitch: Cesium.Math.toRadians(-90.0),

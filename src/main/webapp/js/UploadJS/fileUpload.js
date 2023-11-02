@@ -78,7 +78,7 @@ function fileUpload() {
                     overlay.style.display = "none";
                     fileInput.value = '';
                     fileNameDiv.innerText = '선택된 IFC 파일이 없습니다.';
-                }, 1500);
+                }, 100);
             });
         } else {
             alert("선택된 파일이 없습니다.")

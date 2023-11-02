@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             uploadTextElement.innerHTML = textArray[index];
             setTimeout(function() {
                 displayText(index + 1);
-            }, 3500);
+            }, 1500);
         }
     }
 
