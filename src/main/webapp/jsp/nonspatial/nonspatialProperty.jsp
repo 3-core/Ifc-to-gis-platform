@@ -189,6 +189,17 @@
                               },
                            });
                         }
+                        if (selectedData.id === "415") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.10557974395417, 35.82025770895747, 148),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-170),
+                                 pitch: Cesium.Math.toRadians(-30),
+                                 roll: 0,
+                              },
+                           });
+                        }
+
                         else if (selectedData.id === "416") {
                         function onFileTreeNodeClick(event) {
                                     const guid = event.currentTarget.dataset.guid;
@@ -216,7 +227,47 @@
                               },
                            });
                         }
+                        else if (selectedData.id === "419") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.10704661763644, 35.818941002785856, 243),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-60),
+                                 pitch: Cesium.Math.toRadians(-40),
+                                 roll: 0,
+                              },
+                           });
+                        }
 
+                        else if (selectedData.id === "420") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.10554214979808, 35.819940181601226, 117.1335),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-160),
+                                 pitch: Cesium.Math.toRadians(-10),
+                                 roll: 0,
+                              },
+                           });
+                        }
+                        else if (selectedData.id === "421") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.1055837974335, 35.82014632802126, 117.0408),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(10),
+                                 pitch: Cesium.Math.toRadians(-10),
+                                 roll: 0,
+                              },
+                           });
+                        }
+                        else if (selectedData.id === "422") {
+                        viewer.camera.flyTo({
+                              destination: Cesium.Cartesian3.fromDegrees(127.1055980031395, 35.8200109800217, 116),
+                              orientation: {
+                                 heading: Cesium.Math.toRadians(-110),
+                                 pitch: Cesium.Math.toRadians(-5),
+                                 roll: 0,
+                              },
+                           });
+                        }
                         if( x > 0.0 && y > 0.0) {
                             viewer.camera.flyTo({
                                 destination: new Cesium.Cartesian3.fromDegrees(x, y ,height),

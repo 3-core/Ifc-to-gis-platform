@@ -1550,7 +1550,7 @@
         "children": [
             {
                 "id": 419,
-                "text": "시흥",
+                "text": "정류장",
                 "children": [
                     {
                         "id": 414,
@@ -1566,6 +1566,18 @@
                         "id": 417,
                         "text": "IfcElement",
                         "children": [
+                            {
+                                "id": 420,
+                                "text": "소화기A"
+                            },
+                            {
+                                "id": 421,
+                                "text": "소화기B"
+                            },
+                            {
+                                "id": 422,
+                                "text": "소화전"
+                            },
                             {
                                 "id": 415,
                                 "text": "비상사다리A"
