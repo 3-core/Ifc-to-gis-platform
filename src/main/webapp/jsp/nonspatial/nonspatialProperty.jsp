@@ -260,10 +260,10 @@
                         }
                         else if (selectedData.id === "422") {
                         viewer.camera.flyTo({
-                              destination: Cesium.Cartesian3.fromDegrees(127.1055980031395, 35.8200109800217, 116),
+                              destination: Cesium.Cartesian3.fromDegrees(127.10548202369445, 35.820014155739855, 116.24382858394807),
                               orientation: {
-                                 heading: Cesium.Math.toRadians(-110),
-                                 pitch: Cesium.Math.toRadians(-5),
+                                 heading: Cesium.Math.toRadians(110),
+                                 pitch: Cesium.Math.toRadians(-13),
                                  roll: 0,
                               },
                            });
