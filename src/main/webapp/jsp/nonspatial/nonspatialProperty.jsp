@@ -4,10 +4,10 @@
 <head>
 <div>
     <div>
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
-            행정명으로 검색합니다.
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 10px">
+        <div style="font-size:15px; margin-top: 10px"> 검색
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px"> 행정명으로 검색합니다.
+    </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 0px">
             <select id="sido" style="flex-grow: 7">
                 <option value="00">시도</option>
                 <option value="01">전라북도</option>
@@ -21,35 +21,33 @@
                 <option value="01">완산구</option>
                 <option value="02">덕진구</option>
             </select>
-            <div style="margin: 18px 0 0 11px">
+            <div style="margin: 10px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchAdmin()">
             </div>
         </div>
     </div>
     <%-- mbr 검색 --%>
     <div>
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
-            사용자 정의 영역으로 검색합니다.
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 10px"> 사용자 정의 영역으로 검색합니다.
         </div>
-        <div style="display: flex; justify-content: space-between; margin-top: -5px">
+        <div style="display: flex; justify-content: space-between;">
             <div>
-                <div style="font-size:13px; color: #7A7A7A; flex-grow: 7">
-                    <label style="font-size:13px; color: #7A7A7A; margin-top: 20px">ULX</label>
-                    <input type="text" id="roi_min_x" style="width: 120px; flex-grow: 7 ">
-
-                    <label style="font-size:13px; color: #7A7A7A; margin-left: 10px; margin-top: 20px">ULY</label>
+                <div style="font-size:13px; color: #7A7A7A; margin-top: 13px">
+                    <label style="font-size:13px; color: #7A7A7A;">ULX</label>
+                    <input type="text" id="roi_min_x" style="width: 120px;">
+                    <label style="font-size:13px; color: #7A7A7A; margin-left: 10px;">ULY</label>
                     <input type="text" id="roi_max_y" style="width: 120px">
                 </div>
 
-                <div style="font-size:13px; color: #7A7A7A; margin-top: -5px">
-                    <label style="font-size:13px; color: #7A7A7A; margin-top: 20px">LRX</label>
+                <div style="font-size:13px; color: #7A7A7A; margin-top: 13px">
+                    <label style="font-size:13px; color: #7A7A7A;margin-right:1.28px">LRX</label>
                     <input type="text" id="roi_max_x" style="width: 120px">
 
-                    <label style="font-size:13px; color: #7A7A7A; margin-left:10px; margin-top: 30px">LRY</label>
+                    <label style="font-size:13px; color: #7A7A7A; margin-left:10px; margin-right:1.28px;">LRY</label>
                     <input type="text" id="roi_min_y" style="width: 120px">
                 </div>
                 <div style="text-align:center; padding:10px 0;font-size:13px; color: #7A7A7A;">
-                    <a href="#" onclick="searchRectangle();" class="btn btn-info roi" style="background-color: #51B7A3;  color: #fff;"><i class="fas fa-mouse-pointer m-r-5"></i>사용자 정의 ROI</a>
+                    <a href="#" onclick="searchRectangle();" class="btn btn-info roi" style="background-color: #51B7A3;  color: #fff; font-size: 13px"><i class="fas fa-mouse-pointer m-r-5"></i>사용자 정의 ROI</a>
                 </div>
             </div>
 
@@ -62,10 +60,10 @@
     </head>
     <body>
         <div>
-            <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
+            <div style="font-size:13px; color: #7A7A7A; margin-top: 3px">
                 속성으로 검색합니다.
             </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 10px">
+            <div style="display: flex; justify-content: space-between; margin-top: 0px">
                 <select id="buildingKind" style="flex-grow: 7">
                     <option value="00">종류</option>
                     <option value="01">병원</option>
@@ -77,7 +75,7 @@
                 <select id="buildingField" style="flex-grow: 7">
                     <option value="00">검색필드</option>
                 </select>
-                <input type="text" id="number_of_bed" style="width: 80px; flex-grow: 7; margin: 10px 10px 10px 0px">
+                <input type="text" id="number_of_bed" style="width: 80px; border-radius: 5px; flex-grow: 7; margin: 10px 10px 10px 0px">
                 <div style="margin: 18px 0 0 11px">
                     <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchHospital()">
                 </div>
@@ -90,19 +88,44 @@
     <div>
 
         <style>
-            .building-list { overflow:auto; border:1px solid silver; min-height:100px; }
-            .selected-building-result { overflow:auto; border:1px solid silver; min-height:100px; }
+            .building-list { overflow:auto;}
+            .building-list::-webkit-scrollbar {
+                width: 12px;
+                }
+            .building-list::-webkit-scrollbar-thumb {
+                background-color: #00b8a3;
+                border-radius: 6px;
+                border: 3px solid white;
+                }
+
+            .building-list::-webkit-scrollbar-track {
+                border-radius: 6px;
+                }
+            .selected-building-result { overflow:auto;}
+            .selected-building-result::-webkit-scrollbar {
+                width: 12px;
+                }
+            .selected-building-result::-webkit-scrollbar-thumb {
+                background-color: #00b8a3;
+                border-radius: 6px;
+                border: 3px solid white;
+                }
+
+            .selected-building-result::-webkit-scrollbar-track {
+                border-radius: 6px;
+                }
+
+
         </style>
-
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
-            검색 결과를 표시합니다.
+        <div style="font-size:15px;margin-top: 10px">결과리스트
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px">검색 결과를 표시합니다.
         </div>
-        <div id="building-list" class="building-list" style="max-height: 200px; min-height: 100px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
+        <div id="building-list" class="building-list" style="max-height: 200px; min-height: 150px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
 
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 20px">
-            상세 검색 결과를 표시합니다.
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 10px">
+            비공간 속성 정보를 표시합니다.
         </div>
-        <div id="selected-building-result" class="selected-building-result" style="max-height: 200px; min-height: 100px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
+        <div id="selected-building-result" class="selected-building-result" style="max-height: 200px; min-height: 150px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jstree-3.3.16-0/jstree.js"></script>
@@ -110,7 +133,6 @@
         <script>
             var all_tree_data;
             var all_data;
-
             var jstreeBuildingsInstance = $.jstree.create('#building-list', {
                 'plugins' : ["types"],
                 'types': {

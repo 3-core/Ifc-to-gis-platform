@@ -36,7 +36,7 @@
                 <div class="header-wrap">
                     <div class="header-logo">
                         <div class="header-logo-img">
-                            <img src="${pageContext.request.contextPath}/public/img/logo_digital.png" alt="lx_logo" />
+                            <img src="${pageContext.request.contextPath}/public/img/top_logo_fin.png" alt="lx_logo" />
                         </div>
                         <!--<div class="header-logo-img">
                             <img src="${pageContext.request.contextPath}/public/img/top_logo_fin_lx.png" alt="lx_logo" />
@@ -114,7 +114,7 @@
                         </div>
                         <div id="non_property_modal_content" class="non_property_modal_content">
                             <div style="display: flex; justify-content: space-between;">
-                                <div>비공간</div>
+                                <div>비공간 정보</div>
                                 <div id="non_property_modal_close" onclick="closeNonPropertyModal()">
                                     <img src="${pageContext.request.contextPath}/public/img/close.png" alt="non_property_modal_close" style="margin-left:10px; width: auto; height: 20px">
                                 </div>
