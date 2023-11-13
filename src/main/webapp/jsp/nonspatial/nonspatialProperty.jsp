@@ -21,7 +21,7 @@
                 <option value="01">완산구</option>
                 <option value="02">덕진구</option>
             </select>
-            <div style="margin: 10px 0 0 11px">
+            <div style="margin: 20px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchAdmin()">
             </div>
         </div>
@@ -47,11 +47,12 @@
                     <input type="text" id="roi_min_y" style="width: 120px">
                 </div>
                 <div style="text-align:center; padding:10px 0;font-size:13px; color: #7A7A7A;">
-                    <a href="#" onclick="searchRectangle();" class="btn btn-info roi" style="background-color: #51B7A3;  color: #fff; font-size: 13px"><i class="fas fa-mouse-pointer m-r-5"></i>사용자 정의 ROI</a>
+                    <a href="#" onclick="searchRectangle();" class="btn btn-info roi" style="background-color: #51B7A3;  color: #fff; font-size: 13px"><i class="fas fa-mouse-pointer m-r-5">
+                    </i>사용자 정의 ROI</a>
                 </div>
             </div>
 
-            <div style="margin: 30px 0 0 11px">
+            <div style="margin: 80px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="location_search" onclick="moveLocation()">
             </div>
         </div>
@@ -126,7 +127,6 @@
             비공간 속성 정보를 표시합니다.
         </div>
         <div id="selected-building-result" class="selected-building-result" style="max-height: 200px; min-height: 150px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
-
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/libs/jstree-3.3.16-0/jstree.js"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/js/libs/jstree-3.3.16-0/themes/default/style.css"/>

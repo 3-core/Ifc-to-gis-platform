@@ -33,17 +33,39 @@
     }
 
     .building-info-container{
-        padding-top: 20px;
+        padding-top: 0px;
+    }
+    .building-info-popup::-webkit-scrollbar {
+    width: 12px;
+    }
+    .building-info-popup::-webkit-scrollbar-thumb {
+    background-color: #00b8a3;
+    border-radius: 6px;
+    border: 3px solid white;
+    }
+    .building-info-popup::-webkit-scrollbar-track {
+    border-radius: 6px;
+    }
+    .building-info-container::-webkit-scrollbar {
+    width: 12px;
+    }
+    .building-info-container::-webkit-scrollbar-thumb {
+    background-color: #00b8a3;
+    border-radius: 6px;
+    border: 3px solid white;
+    }
+    .building-info-container::-webkit-scrollbar-track {
+    border-radius: 6px;
     }
 
 </style>
-<div class="building-info-popup" style="display : none;overflow:auto; ">
-    <div class="desc-top" >
+<div class="building-info-popup" style="display: none;overflow: auto; border: 1px solid #00b8a3 ">
+    <div class="desc-top" style="padding-bottom: 0px;">
         <h2 class="title">건물 정보</h2>
         <button class="close-building-info-btn"></button>
     </div>
 
-    <div id="building-info-container" class="building-info-container" style="overflow:auto; border:1px solid silver; margin-top: 10px" ></div>
+    <div id="building-info-container" class="building-info-container" style="overflow:auto;" ></div>
     <script>
         var jstreeBuildingInfoInstance = $.jstree.create('#building-info-container', {
             'plugins' : ["types"],
