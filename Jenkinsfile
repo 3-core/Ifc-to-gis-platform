@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'ghcr.io/kjis256/ifc-to-gis-platform'
         IMAGE_TAG = 'latest'
-        GITHUB_REGISTRY_CREDENTIAL = credentials('GIT_REPO_CRED')
+        GITHUB_REGISTRY_CREDENTIAL = credentials('GIT_REPO_CRED2')
 
     }
 
