@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Login') {
             steps {
             script {
-                     sh "docker login ghcr.io -u $GITHUB_REGISTRY_CREDENTIAL_USR -p $GITHUB_REGISTRY_CREDENTIAL_PSW"
+                     sh "docker login ghcr.io -u $GITHUB_REGISTRY_CREDENTIAL2_USR -p $GITHUB_REGISTRY_CREDENTIAL2_PSW"
                 }
             }
         }
