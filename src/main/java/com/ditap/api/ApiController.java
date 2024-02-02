@@ -32,58 +32,107 @@ public class ApiController {
     @ResponseBody
     public JSONArray getBuildingInfo(String apiType,String pnu) throws IOException, ParseException {
 
-        //http://localhost:8080/api/getBuildingInfo.do?apiType=BPrice&pnu=4688025024116610000
 
-        String serviceKey = "V0ZAvitWQ9YxxtM7yba29hXvkveSCQO7RxPUIOgUd9I4nWNpQUeQNERapifNZA04qsl%2F3OvrWaUGMqc4KC0Q3Q%3D%3D";
+        String serviceKey = "E99780D1-B2F5-36EA-9A19-DEA8939BA43B";
+        String domainKey = "http://office.heliosen.co.kr:18089/";
+
         StringBuilder urlBuilder = null;
         String getKey = "";
 
         //apiType : Base(건물 기본 정보),Land(토지대장), 공시지가(PPrice), 공동 주택가격(BPrice)
         if ("Base".equals(apiType)){
 
+
+
             getKey = "buildingUses";
 
-            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/BuildingUseService/attr/getBuildingUse"); /*URL*/
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
-            urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /*한 페이지 결과 수*/
-            urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*응답결과 형식(xml 또는 json)*/
-            urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /*고유번호(8자리 이상)*/
+            //urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/BuildingUseService/attr/getBuildingUse"); /*URL*/
+            //urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + serviceKey); /*Service Key*/
+            //urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+            //urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /*한 페이지 결과 수*/
+            //urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*응답결과 형식(xml 또는 json)*/
+            //urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /*고유번호(8자리 이상)*/
+
+
+            urlBuilder = new StringBuilder("http://api.vworld.kr/ned/data/getBuildingUse"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("key","UTF-8") + "=" + serviceKey); /*key*/
+            urlBuilder.append("&" + URLEncoder.encode("domain","UTF-8") + "=" + domainKey); /*domain*/
+            urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("mainPrposCode","UTF-8") + "=" + URLEncoder.encode("02000", "UTF-8")); /* 주요용도코드 */
+            urlBuilder.append("&" + URLEncoder.encode("detailPrposCode","UTF-8") + "=" + URLEncoder.encode("02001", "UTF-8")); /* 세부용도코드 */
+            urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 (최대 1000) */
+            urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
 
 
         }else if("Land".equals(apiType)){
 
             getKey = "possessions";
 
-            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/PossessionService/attr/getPossessionAttr"); /* URL */
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
-            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
-            urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode("202009", "UTF-8")); /* 기준연월 시작일 (YYYYMM: 6자리) */
-            urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode("209909", "UTF-8")); /* 기준연월 종료일 (YYYYMM: 6자리) */
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
-            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            //urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/PossessionService/attr/getPossessionAttr"); /* URL */
+            //urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            //urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            //urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode("202009", "UTF-8")); /* 기준연월 시작일 (YYYYMM: 6자리) */
+            //urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode("209909", "UTF-8")); /* 기준연월 종료일 (YYYYMM: 6자리) */
+            //urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+            //urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+            //urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+
+            urlBuilder = new StringBuilder("http://api.vworld.kr/ned/data/getPossessionAttr"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=" + serviceKey); /* Service Key */
+            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "="
+                    + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append(
+                    "&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+            urlBuilder.append(
+                    "&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
+            urlBuilder.append(
+                    "&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("domain","UTF-8") + "=" + domainKey); /*domain*/
+
 
         }else if("PPrice".equals(apiType)){
 
-            getKey = "indvdLandPrices";
+            getKey = "landCharacteristicss";
 
-            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/IndvdLandPriceService/attr/getIndvdLandPriceAttr"); /* URL */
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
-            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
-            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("80", "UTF-8")); /* 검색건수 */
-            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+            //urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/IndvdLandPriceService/attr/getIndvdLandPriceAttr"); /* URL */
+            //urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            //urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            //urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            //urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("80", "UTF-8")); /* 검색건수 */
+            //urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
+
+            urlBuilder = new StringBuilder("http://api.vworld.kr/ned/data/getLandCharacteristics"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("key","UTF-8") + "=" + serviceKey); /*key*/
+            urlBuilder.append("&" + URLEncoder.encode("domain","UTF-8") + "=" + domainKey); /*domain*/
+            urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("80", "UTF-8")); /* 검색건수 (최대 1000) */
+            urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
 
         }else if("BPrice".equals(apiType)){
 
             getKey = "apartHousingPrices";
 
-            urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/ApartHousingPriceService/attr/getApartHousingPriceAttr"); /* URL */
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
-            urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
-            urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+            //urlBuilder = new StringBuilder("http://apis.data.go.kr/1611000/nsdi/ApartHousingPriceService/attr/getApartHousingPriceAttr"); /* URL */
+            //urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey); /* Service Key */
+            //urlBuilder.append("&" + URLEncoder.encode("pnu", "UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유번호(8자리 이상) */
+            //urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            //urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 */
+
+
+            urlBuilder = new StringBuilder("http://api.vworld.kr/ned/data/getApartHousingPriceAttr"); /* URL */
+            urlBuilder.append("?" + URLEncoder.encode("key","UTF-8") + "=" + serviceKey); /*key*/
+            urlBuilder.append("&" + URLEncoder.encode("domain","UTF-8") + "=" + domainKey); /*domain*/
+            urlBuilder.append("&" + URLEncoder.encode("pnu","UTF-8") + "=" + URLEncoder.encode(pnu, "UTF-8")); /* 고유변호(8자리 이상) */
+            urlBuilder.append("&" + URLEncoder.encode("format","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /* 응답결과 형식(xml 또는 json) */
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /* 검색건수 (최대 1000) */
+            urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /* 페이지 번호 */
+
 
         }
 
@@ -116,9 +165,16 @@ public class ApiController {
         JSONParser jsonParser = new JSONParser();
         JSONObject response = (JSONObject) jsonParser.parse(sb.toString());
 
-        //System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
 
-        return (JSONArray) ((JSONObject) response.get(getKey)).get("field");
+        if(response.get("response") != null) {
+            return null;
+        }else {
+
+            System.out.println((JSONArray) ((JSONObject) response.get(getKey)).get("field"));
+
+            return (JSONArray) ((JSONObject) response.get(getKey)).get("field");
+        }
+
     }
     /**
      * coordinate2address2Pnu  api
@@ -132,7 +188,7 @@ public class ApiController {
     @ResponseBody
     public String getAddress(String coords) throws IOException, ParseException {
 
-        String serviceKey = "38B13303-F3F4-38AA-AE9E-D1503CE3A75B";  //인증키 만기(2023.12)
+        String serviceKey = "E99780D1-B2F5-36EA-9A19-DEA8939BA43B";  //인증키 만기(2023.12)
         StringBuilder urlBuilder = null;
 
         urlBuilder = new StringBuilder("https://apis.vworld.kr/coord2jibun.do"); /*URL*/
@@ -196,6 +252,8 @@ public class ApiController {
 
             // make pnu code
             File file = new File("/usr/local/tomcat/webapps/ROOT/pnu.txt");
+
+            //File file = new File("C:/Users/USER/Desktop/pnu.txt");
 
             //read file
             BufferedReader br = null;

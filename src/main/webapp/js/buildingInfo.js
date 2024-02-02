@@ -275,7 +275,7 @@
     function getPopup(data) {
        //토지대장
        let landUl = `<table class="desc-table">`;
-       if (data?.Base) {
+       if (data?.Land) {
             let tr = undefined;
             if (data.Land.length > 0) {
                  tr = `
