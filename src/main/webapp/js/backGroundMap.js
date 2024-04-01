@@ -47,7 +47,10 @@
           creationFunction: function () {
             return new Cesium.UrlTemplateImageryProvider({
               //헬리오센 전국 정사영상
-              url : `http://121.135.139.45:9090/geoserver/ortho_map/gwc/service/wmts?layer=ortho_map%3A51cm_korea&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A{z}&TileCol={x}&TileRow={y}`,
+              //이사전 url : `http://121.135.139.45:9090/geoserver/ortho_map/gwc/service/wmts?layer=ortho_map%3A51cm_korea&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A{z}&TileCol={x}&TileRow={y}`,
+
+              url : `http://server.heliosen.co.kr:9090/geoserver/ortho_map/gwc/service/wmts?layer=ortho_map%3A51cm_korea&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A{z}&TileCol={x}&TileRow={y}`,
+
               //tilingScheme : new Ditap.DitapEpsg5179TilingSchema(),
               tilingScheme: new Ditap.GeographicTilingScheme(),
               maximumLevel: 18,
