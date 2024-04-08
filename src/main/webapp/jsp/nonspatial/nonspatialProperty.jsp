@@ -5,6 +5,7 @@
 <div>
     <div>
         <div style="font-size:15px; margin-top: 10px"> 검색
+    </div>
         <div style="font-size:13px; color: #7A7A7A; margin-top: 3px"> 행정명으로 검색합니다.
     </div>
         <div style="display: flex; justify-content: space-between; margin-top: 0px">
