@@ -24,6 +24,7 @@
             </select>
             <div style="margin: 20px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchAdmin()">
+              </div>
             </div>
         </div>
     </div>
