@@ -6,7 +6,6 @@
         //아파치 타일 경로 - 장성 내부
         //"jangseongTileset":`http://103.55.189.14/jsdt/model/3dtiles/jangseong/all/tileset.json`,
         "pointCloudFull":`http://server.heliosen.co.kr:38090/lx_pc/3d_full/tileset.json`,
-
         "LOD":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/LOD/tileset.json`,
         "Deokjin":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/Deokjin/tileset.json `,
         "Wansan":`http://server.heliosen.co.kr:38090/3dtileset/Jeonbuk/Wansan/tileset.json`,
