@@ -1,6 +1,6 @@
 stages:
   - dockerize
-#   - deploy
+  - deploy
 
 dockerize:
   stage: dockerize
