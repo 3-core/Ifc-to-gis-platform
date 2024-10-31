@@ -324,9 +324,9 @@
 
                             handleNodeFocus(node);
 
-                            const URL = "http://localhost:8000/ifc/properties/" + guid;
+                            //const URL = "http://localhost:8000/ifc/properties/" + guid;
 
-                            //const URL = "http://office.heliosen.co.kr:8000/ifc/properties/" + guid;
+                            const URL = "http://office.heliosen.co.kr:18089/ifc/properties/" + guid;
                            
                             axios.get(URL)
                                 .then(function (response) {
