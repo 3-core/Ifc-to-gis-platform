@@ -1,0 +1,31 @@
+stages:
+  - dockerize
+#   - deploy
+
+dockerize:
+  stage: dockerize
+  only:
+    - develop
+  tags:
+    - ditapbuilder
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest -f Dockerfile .
+    - docker push $CI_REGISTRY_IMAGE:latest
+    # - echo "KPAAS_HARBOR_PW" | docker login -u "KPAAS_HARBOR_ID" --password-stdin harbor.211.47.56.138.nip.io/lx-3-heliosen
+    # - docker tag $CI_REGISTRY_IMAGE:latest harbor.211.47.56.138.nip.io/lx-3-heliosen/ifc-to-gis-platform:latest
+    # - docker push harbor.211.47.56.138.nip.io/lx-3-heliosen/ifc-to-gis-platform:latest
+deploy:
+  stage: deploy
+  only:
+    - develop
+  tags:
+    - ditapbuilder
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest
+    - >
+      if docker ps -a | grep -q 'ifc-to-gis-platform'; then
+        docker stop ifc-to-gis-platform && docker rm ifc-to-gis-platform;
+      fi
+    - docker run -d --network=lxnetwork --name ifc-to-gis-platform --restart=unless-stopped -p 18089:8080 $CI_REGISTRY_IMAGE:latest
