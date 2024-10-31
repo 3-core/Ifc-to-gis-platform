@@ -4,10 +4,8 @@
 <head>
 <div>
     <div>
-        <div style="font-size:15px; margin-top: 10px"> 검색
-    </div>
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px"> 행정명으로 검색합니다.
-    </div>
+        <div style="font-size:15px; margin-top: 10px"> 검색</div>
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px"> 행정명으로 검색합니다.</div>
         <div style="display: flex; justify-content: space-between; margin-top: 0px">
             <select id="sido" style="flex-grow: 7">
                 <option value="00">시도</option>
@@ -24,14 +22,12 @@
             </select>
             <div style="margin: 20px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="admin_search" onclick="searchAdmin()">
-              </div>
             </div>
         </div>
     </div>
     <%-- mbr 검색 --%>
     <div>
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 10px"> 사용자 정의 영역으로 검색합니다.
-        </div>
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 10px"> 사용자 정의 영역으로 검색합니다.</div>
         <div style="display: flex; justify-content: space-between;">
             <div>
                 <div style="font-size:13px; color: #7A7A7A; margin-top: 13px">
@@ -53,7 +49,6 @@
                     </i>사용자 정의 ROI</a>
                 </div>
             </div>
-
             <div style="margin: 80px 0 0 11px">
                 <img src="${pageContext.request.contextPath}/public/img/search3.png" alt="location_search" onclick="moveLocation()">
             </div>
@@ -120,9 +115,8 @@
 
 
         </style>
-        <div style="font-size:15px;margin-top: 10px">결과리스트
-        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px">검색 결과를 표시합니다.
-        </div>
+        <div style="font-size:15px;margin-top: 10px">결과리스트</div>
+        <div style="font-size:13px; color: #7A7A7A; margin-top: 3px">검색 결과를 표시합니다.</div>
         <div id="building-list" class="building-list" style="max-height: 200px; min-height: 150px; margin-top: 10px; color: black; background-color:white ;border-radius: 10px; border: 1px solid #00b8a3"></div>
 
         <div style="font-size:13px; color: #7A7A7A; margin-top: 10px">
