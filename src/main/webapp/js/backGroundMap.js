@@ -94,7 +94,7 @@
           category: "Other",
           creationFunction: function () {
             return new Ditap.VWorldImageryProvider({
-              apiKey: "E0868E25-5CEF-3D22-8302-6707C223B244",
+              apiKey: "8009AD34-9E73-324A-B82A-5E246601CC78",
               mapType: "base",
             });
           },
