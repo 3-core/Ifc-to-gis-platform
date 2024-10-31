@@ -24,8 +24,5 @@ deploy:
     - ditapbuilder
   script:
     - docker pull $CI_REGISTRY_IMAGE:latest
-    - >
-      if docker ps -a | grep -q 'ifc-to-gis-platform'; then
-        docker stop ifc-to-gis-platform && docker rm ifc-to-gis-platform;
-      fi
+    - docker stop ifc-to-gis-platform && docker rm ifc-to-gis-platform ||true;
     - docker run -d --network=lxnetwork --name ifc-to-gis-platform --restart=unless-stopped -p 18089:8080 $CI_REGISTRY_IMAGE:latest
